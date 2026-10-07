@@ -1,69 +1,64 @@
-import Image from "next/image";
+import React from "react";
+import Link from "next/link";
+import { UnicornCanvas } from "@/components/home/UnicornCanvas";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
+    <section id="world" className={styles.heroSection} aria-labelledby="hero-heading">
+      {/* Left Column: Typography & CTAs */}
+      <div className={styles.leftCol}>
+        {/* Kicker badge */}
+        <p className={styles.kicker}>
+          <span className={styles.kickerBar} aria-hidden="true" />
+          <span>GLOBAL FELLOWSHIP — CLASS &apos;26 REGISTRATIONS OPEN</span>
+        </p>
+
+        {/* SEO Single H1 */}
+        <h1 id="hero-heading" className={styles.heading}>
+          <span className={styles.headingLine}>Changing</span>
+          <span className={styles.headingLine}>
+            the <em className={styles.faceEm}>face</em>
+          </span>
+          <span className={styles.headingLine}>of venture</span>
+          <span className={styles.headingLine}>capital.</span>
+        </h1>
+
+        {/* Subtitle */}
+        <p className={styles.subheading}>
+          A fully funded fellowship, launchpad and lifelong community for
+          exceptional people from overlooked backgrounds — breaking into VC and
+          deciding what gets built next.
+        </p>
+
+        {/* Action Buttons */}
+        <div className={styles.ctaGroup}>
           <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="https://form.typeform.com/to/bALnGEQ7"
             target="_blank"
             rel="noopener noreferrer"
+            className={styles.primaryBtn}
+            id="cta-apply-fellowship"
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
+            Apply to the Fellowship
           </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          <Link href="#voices" className={styles.secondaryLink} id="cta-see-fellows">
+            See where Fellows land →
+          </Link>
         </div>
-      </main>
-    </div>
+
+        {/* Fact highlights */}
+        <p className={styles.factsLine}>
+          FULLY FUNDED <span className={styles.sparkle}>✦</span> PART-TIME{" "}
+          <span className={styles.sparkle}>✦</span> 40+ NATIONALITIES{" "}
+          <span className={styles.sparkle}>✦</span> SIX CONTINENTS
+        </p>
+      </div>
+
+      {/* Right Column: Interactive Spectrum Dot-Matrix Unicorn */}
+      <div className={styles.rightCol} aria-hidden="true">
+        <UnicornCanvas />
+      </div>
+    </section>
   );
 }

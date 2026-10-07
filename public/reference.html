@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+// Fallback for DCLogic if support.js is not present
+if (typeof DCLogic === 'undefined') {
+  window.DCLogic = class DCLogic {
+    constructor() { this.props = { palette: 'global', orbAutoRotate: true, dotScale: 1 }; }
+  };
+}
+// Dismiss preloader if script takes too long
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const pre = document.getElementById('ivc-pre');
+    if (pre && pre.style.display !== 'none') {
+      pre.style.transition = 'opacity 0.5s ease';
+      pre.style.opacity = '0';
+      setTimeout(() => { pre.style.display = 'none'; }, 500);
+    }
+  }, 2000);
+});
+</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Included VC — Changing the face of venture capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400..900;1,400..900&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<style>
+html{background:#F7F5EE}
+body{margin:0;background:#F7F5EE;color:#0F0F0F;font-family:'Hanken Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:#0F0F0F;text-decoration:none}
+a:hover{color:var(--a1,#5533EB)}
+::selection{background:#B0FF05;color:#0F0F0F}
+:focus-visible{outline:2px solid var(--a1,#5533EB);outline-offset:3px}
+#ivc-em::placeholder{color:rgba(247,245,238,.45)}
+@keyframes ivcMq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ivcSpin{to{transform:rotate(360deg)}}
+@keyframes ivcPing{0%{box-shadow:0 0 0 0 rgba(176,255,5,.6)}100%{box-shadow:0 0 0 12px rgba(176,255,5,0)}}
+#ivc-facts8 [data-hov]:hover > span:first-child{transform:scaleX(1) !important}
+#ivc-facts8 [data-hov]:hover h3, #ivc-facts8 [data-hov]:hover ol{color:#F7F5EE !important}
+#ivc-facts8 [data-hov]:hover p{color:rgba(247,245,238,.7) !important}
+#ivc-facts8 [data-hov]:hover > span:nth-child(2){color:#B0FF05 !important}
+@keyframes ivcDrop{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}56%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:900px){#ivc-links{display:none}}
+@media (pointer:coarse){#ivc-curR{display:none !important}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}}
+</style>
+</helmet>
+<div id="ivc-pre" role="presentation" aria-hidden="true" style="position:fixed;inset:0;z-index:90;background:#F7F5EE;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;clip-path:inset(0% 0% 0% 0%)">
+  <span style="font-size:30px;display:inline-block;animation:ivcSpin 7s linear infinite;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span>
+  <span style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:15px;letter-spacing:.3em">INCLUDED VC</span>
+  <span id="ivc-preN" style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:44px;color:#0F0F0F">000</span>
+  <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.38em;color:#8A8677">OPENING THE DOORS</span>
+</div>
+<div id="ivc-wipe2" aria-hidden="true" style="position:fixed;inset:0;z-index:96;background:#111111;transform:translateY(101%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;pointer-events:none">
+  <span style="font-size:26px;display:inline-block;animation:ivcSpin 7s linear infinite;color:#FFC400">✦</span>
+  <span style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(34px,6vw,72px);letter-spacing:.1em;background:linear-gradient(92deg,#31B44B,#7ED321,#FFC400);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(126,211,33,.3))">INVESTOR</span>
+  <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.38em;color:rgba(253,251,242,.6)">REGION 03 — EVENING EXPOSURE</span>
+</div>
+<div id="ivc-wipe" aria-hidden="true" style="position:fixed;inset:0;z-index:96;background:#F2D500;transform:translateY(101%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;pointer-events:none">
+  <span style="font-size:26px;color:#0A0A0A;display:inline-block;animation:ivcSpin 7s linear infinite">✦</span>
+  <span style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(34px,6vw,72px);letter-spacing:-.02em;color:#0A0A0A">AFRICA</span>
+  <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.38em;color:rgba(10,10,10,.6)">REGION 02 — DAYLIGHT, RISING</span>
+</div>
+
+<nav id="ivc-nav" aria-label="Main" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px clamp(20px,4vw,48px);background:rgba(247,245,238,.85);backdrop-filter:blur(12px);border-bottom:1px solid #E6E2D4">
+  <a href="#world" style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:16px;letter-spacing:.04em;display:inline-flex;align-items:center;gap:6px">INCLUDED<span style="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span>VC</a>
+  <div id="ivc-links" style="display:flex;align-items:center;gap:26px">
+    <a href="#world" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:#55534B;transition:color .3s">WORLD</a>
+    <a href="#manifesto" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:#55534B;transition:color .3s">WHY</a>
+    <a href="#network" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:#55534B;transition:color .3s">NETWORK</a>
+    <a href="#fellowship" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:#55534B;transition:color .3s">FELLOWSHIP</a>
+    <a href="#voices" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:#55534B;transition:color .3s">VOICES</a>
+    <a href="#regions" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:#55534B;transition:color .3s">REGIONS</a>
+  </div>
+  <a data-mag="1" href="https://form.typeform.com/to/bALnGEQ7" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;background:#0F0F0F;color:#F7F5EE;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;transition:box-shadow .3s" style-hover="box-shadow:0 8px 26px rgba(85,51,235,.28);color:#F7F5EE">APPLY — 21s</a>
+</nav>
+<main style="position:relative">
+  <section id="world" data-screen-label="01 Hero — The Unicorn" style="position:relative;min-height:100vh;box-sizing:border-box;padding:150px clamp(20px,5vw,72px) 40px;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(24px,4vw,60px);max-width:1440px;margin:0 auto">
+    <div style="flex:1 1 520px;min-width:300px">
+      <p id="ivc-kick" style="margin:0 0 26px;display:flex;align-items:center;gap:12px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.26em;color:#8A8677"><span style="display:inline-block;width:34px;height:3px;border-radius:2px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>GLOBAL FELLOWSHIP — CLASS '26 REGISTRATIONS OPEN</p>
+      <h1 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(46px,7.2vw,110px);line-height:.98;letter-spacing:-.035em">
+        <span id="ivc-h1a" style="display:block;overflow:hidden;padding:0.16em 0.08em;margin:-0.16em -0.08em"><span style="display:inline-block">Changing the <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-.01em;background:var(--gradText,linear-gradient(92deg,#5533EB,#0033FF,#0095B8,#0FA958,#5F8F00,#B98A00));-webkit-background-clip:text;background-clip:text;color:transparent">face</em></span></span>
+        <span id="ivc-h1b" style="display:block;overflow:hidden;padding:0.16em 0.08em;margin:-0.16em -0.08em"><span style="display:inline-block">of venture capital.</span></span>
+      </h1>
+      <p id="ivc-sub" style="margin:30px 0 0;max-width:560px;font-size:17px;line-height:1.7;color:#55534B">A fully funded fellowship, launchpad and lifelong community for exceptional people from overlooked backgrounds — breaking into VC and deciding what gets built next.</p>
+      <div id="ivc-ctas" style="display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:36px">
+        <a data-mag="1" href="https://form.typeform.com/to/bALnGEQ7" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:17px 32px;border-radius:999px;background:#0F0F0F;color:#F7F5EE;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:14px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 34px rgba(85,51,235,.3);color:#F7F5EE">Apply to the Fellowship</a>
+        <a href="#voices" style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:14px;color:#0F0F0F;transition:color .3s">See where Fellows land →</a>
+      </div>
+      <p id="ivc-facts" style="margin:44px 0 0;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.24em;color:#8A8677">FULLY FUNDED <span style="color:var(--a1,#5533EB)">✦</span> PART-TIME <span style="color:var(--a1,#5533EB)">✦</span> 40+ NATIONALITIES <span style="color:var(--a1,#5533EB)">✦</span> SIX CONTINENTS</p>
+    <div id="ivc-curR" aria-hidden="true" style="display: none; position: fixed; left: 345px; top: 545px; width: 28px; height: 28px; border: 1.5px solid rgba(15,15,15,.4); border-radius: 50%; z-index: 95; pointer-events: none"></div></div>
+    <div id="ivc-uniWrap" style="position:relative;flex:1 1 420px;min-width:280px;max-width:600px;margin:0 auto">
+      <canvas id="ivc-uniCv" aria-label="A unicorn drawn from hundreds of small spectrum-coloured dots" role="img" style="display:block;width:100%;height:auto;touch-action:pan-y"></canvas>
+    </div>
+    <div id="ivc-scroll" aria-hidden="true" style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px">
+      <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:9px;letter-spacing:.3em;color:#8A8677">SCROLL</span>
+      <span style="display:block;width:1.5px;height:38px;background:linear-gradient(#0F0F0F,transparent);animation:ivcDrop 1.9s ease-in-out infinite"></span>
+    </div>
+  </section>
+  <section data-screen-label="Partners strip" style="position:relative;border-top:1px solid #E6E2D4;border-bottom:1px solid #E6E2D4;background:#F2EFE5;padding:18px clamp(20px,6vw,96px);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 22px">
+    <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.3em;color:#8A8677">FULLY FUNDED BY THE FUNDS CHANGING WHO GETS TO INVEST</span>
+    <a href="#network" style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10px;letter-spacing:.3em;color:#0F0F0F;transition:color .3s">MEET THE NINE ↓</a>
+  </section>
+  <section id="manifesto" data-screen-label="02 Why we exist" style="position:relative;min-height:100vh;display:flex;align-items:center;padding:120px clamp(20px,6vw,96px);box-sizing:border-box;background:#ECE8DB">
+    <div style="max-width:1200px">
+      <p style="margin:0 0 34px;display:flex;align-items:center;gap:12px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.26em;color:#8A8677"><span style="display:inline-block;width:34px;height:3px;border-radius:2px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>WHY WE EXIST</p>
+      <p style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(26px,4.2vw,56px);line-height:1.22;letter-spacing:-.02em">
+        <span data-ph="1" style="opacity:.12">The people who decide what gets funded </span><span data-ph="1" style="opacity:.12"><em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;background:var(--gradText,linear-gradient(92deg,#5533EB,#0033FF,#0095B8,#0FA958,#5F8F00,#B98A00));-webkit-background-clip:text;background-clip:text;color:transparent">decide what gets built.</em> </span><span data-ph="1" style="opacity:.12">For decades, they've mostly looked the same. </span><span data-ph="1" style="opacity:.12">We exist to change that,&nbsp;</span><span data-ph="1" style="opacity:.12"><em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;background:var(--gradText,linear-gradient(92deg,#5533EB,#0033FF,#0095B8,#0FA958,#5F8F00,#B98A00));-webkit-background-clip:text;background-clip:text;color:transparent">permanently.</em> </span><span data-ph="1" style="opacity:.12">We find brilliant people the industry overlooked, </span><span data-ph="1" style="opacity:.12">hand them the insider playbook, </span><span data-ph="1" style="opacity:.12">and walk them into the room. </span><span data-ph="1" style="opacity:.12">Not charity. Not a course. </span><span data-ph="1" style="opacity:.12"><em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;background:var(--gradText,linear-gradient(92deg,#5533EB,#0033FF,#0095B8,#0FA958,#5F8F00,#B98A00));-webkit-background-clip:text;background-clip:text;color:transparent">A correction.</em></span>
+      </p>
+    </div>
+  </section>
+  <section data-screen-label="Stats" style="position:relative;border-bottom:1px solid #E6E2D4;padding:60px clamp(20px,6vw,96px);box-sizing:border-box;background:#F7F5EE">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:30px;max-width:1300px;margin:0 auto">
+      <div data-rev="1"><div style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(42px,5.5vw,80px);letter-spacing:-.02em;line-height:1"><span data-count="6" data-pad="2">00</span></div><p style="margin:10px 0 0;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.26em;color:#8A8677">MONTHS, FULLY IMMERSED</p></div>
+      <div data-rev="1"><div style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(42px,5.5vw,80px);letter-spacing:-.02em;line-height:1"><span data-count="40">0</span><span style="color:var(--a1,#5533EB)">+</span></div><p style="margin:10px 0 0;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.26em;color:#8A8677">NATIONALITIES</p></div>
+      <div data-rev="1"><div style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(42px,5.5vw,80px);letter-spacing:-.02em;line-height:1"><span data-count="6" data-pad="2">00</span></div><p style="margin:10px 0 0;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.26em;color:#8A8677">CONTINENTS OF FELLOWS</p></div>
+      <div data-rev="1"><div style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(42px,5.5vw,80px);letter-spacing:-.02em;line-height:1"><span data-count="100">0</span><span style="color:var(--a1,#5533EB)">%</span></div><p style="margin:10px 0 0;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.26em;color:#8A8677">FUNDED BY OUR PARTNERS</p></div>
+    </div>
+  </section>
+  <section id="network" data-screen-label="03 The Network — Orb" style="position:relative;padding:clamp(80px,12vh,140px) clamp(20px,6vw,96px);box-sizing:border-box;background:#F7F5EE">
+    <div style="max-width:1300px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:clamp(30px,5vw,60px)">
+      <div id="ivc-orbWrap" data-rev="1" style="position:relative;width:100%;max-width:900px;margin:0 auto;perspective:1200px">
+        <canvas id="ivc-orbCv" aria-label="An interactive globe of dots representing the global fellowship network" role="img" style="display:block;width:100%;height:auto;cursor:grab;touch-action:pan-y"></canvas>
+        <div id="ivc-moons" aria-label="Funding partners orbiting the network" role="list" style="position:absolute;inset:0;pointer-events:none;transform-style:preserve-3d">
+          <a data-moon="0" role="listitem" href="https://www.creandum.com" target="_blank" rel="noopener" aria-label="Creandum" style="position:absolute;left:50%;top:50%;width:210px;height:78px;margin:-39px 0 0 -105px;display:flex;align-items:center;justify-content:center;padding:16px 22px;box-sizing:border-box;background:#fff;border:1px solid #E6E2D4;border-radius:10px;pointer-events:auto;box-shadow:0 6px 18px rgba(15,15,15,.06);transition:box-shadow .3s,border-color .3s;will-change:transform" style-hover="box-shadow:0 14px 34px rgba(85,51,235,.18);border-color:#C9C2AC"><img src="assets/logos/creandum.png" alt="" style="max-width:100%;max-height:100%;display:block"></a>
+          <a data-moon="1" role="listitem" href="https://seedcamp.com" target="_blank" rel="noopener" aria-label="Seedcamp" style="position:absolute;left:50%;top:50%;width:210px;height:78px;margin:-39px 0 0 -105px;display:flex;align-items:center;justify-content:center;padding:16px 22px;box-sizing:border-box;background:#fff;border:1px solid #E6E2D4;border-radius:10px;pointer-events:auto;box-shadow:0 6px 18px rgba(15,15,15,.06);transition:box-shadow .3s,border-color .3s;will-change:transform" style-hover="box-shadow:0 14px 34px rgba(85,51,235,.18);border-color:#C9C2AC"><img src="assets/logos/seedcamp.png" alt="" style="max-width:100%;max-height:100%;display:block"></a>
+          <a data-moon="2" role="listitem" href="https://www.notion.vc" target="_blank" rel="noopener" aria-label="Notion Capital" style="position:absolute;left:50%;top:50%;width:210px;height:78px;margin:-39px 0 0 -105px;display:flex;align-items:center;justify-content:center;padding:16px 22px;box-sizing:border-box;background:#fff;border:1px solid #E6E2D4;border-radius:10px;pointer-events:auto;box-shadow:0 6px 18px rgba(15,15,15,.06);transition:box-shadow .3s,border-color .3s;will-change:transform" style-hover="box-shadow:0 14px 34px rgba(85,51,235,.18);border-color:#C9C2AC"><img src="assets/logos/notion.png" alt="" style="max-width:100%;max-height:100%;display:block"></a>
+          <a data-moon="3" role="listitem" href="https://www.mangrove.vc" target="_blank" rel="noopener" aria-label="Mangrove Capital Partners" style="position:absolute;left:50%;top:50%;width:210px;height:78px;margin:-39px 0 0 -105px;display:flex;align-items:center;justify-content:center;padding:16px 22px;box-sizing:border-box;background:#fff;border:1px solid #E6E2D4;border-radius:10px;pointer-events:auto;box-shadow:0 6px 18px rgba(15,15,15,.06);transition:box-shadow .3s,border-color .3s;will-change:transform" style-hover="box-shadow:0 14px 34px rgba(85,51,235,.18);border-color:#C9C2AC"><img src="assets/logos/mangrove.png" alt="" style="max-width:100%;max-height:100%;display:block"></a>
+          <a data-moon="4" role="listitem" href="https://mourocapital.com" target="_blank" rel="noopener" aria-label="Mouro Capital" style="position:absolute;left:50%;top:50%;width:210px;height:78px;margin:-39px 0 0 -105px;display:flex;align-items:center;justify-content:center;padding:16px 22px;box-sizing:border-box;background:#fff;border:1px solid #E6E2D4;border-radius:10px;pointer-events:auto;box-shadow:0 6px 18px rgba(15,15,15,.06);transition:box-shadow .3s,border-color .3s;will-change:transform" style-hover="box-shadow:0 14px 34px rgba(85,51,235,.18);border-color:#C9C2AC"><img src="assets/logos/mouro.png" alt="" style="max-width:100%;max-height:100%;display:block"></a>
+          <a data-moon="5" role="listitem" href="https://www.daphni.com" target="_blank" rel="noopener" aria-label="Daphni" style="position:absolute;left:50%;top:50%;width:210px;height:78px;margin:-39px 0 0 -105px;display:flex;align-items:center;justify-content:center;padding:12px 22px;box-sizing:border-box;background:#fff;border:1px solid #E6E2D4;border-radius:10px;pointer-events:auto;box-shadow:0 6px 18px rgba(15,15,15,.06);transition:box-shadow .3s,border-color .3s;will-change:transform" style-hover="box-shadow:0 14px 34px rgba(85,51,235,.18);border-color:#C9C2AC"><img src="assets/logos/daphni.svg" alt="" style="max-width:100%;max-height:100%;display:block"></a>
+          <a data-moon="6" role="listitem" href="https://www.eif.org" target="_blank" rel="noopener" aria-label="European Investment Fund" style="position:absolute;left:50%;top:50%;width:210px;height:78px;margin:-39px 0 0 -105px;display:flex;align-items:center;justify-content:center;padding:12px 22px;box-sizing:border-box;background:#fff;border:1px solid #E6E2D4;border-radius:10px;pointer-events:auto;box-shadow:0 6px 18px rgba(15,15,15,.06);transition:box-shadow .3s,border-color .3s;will-change:transform" style-hover="box-shadow:0 14px 34px rgba(85,51,235,.18);border-color:#C9C2AC"><img src="assets/logos/eif.png" alt="" style="max-width:100%;max-height:100%;display:block"></a>
+          <a data-moon="7" role="listitem" href="https://www.hsbcinnovationbanking.com" target="_blank" rel="noopener" aria-label="HSBC Ventures" style="position:absolute;left:50%;top:50%;width:210px;height:78px;margin:-39px 0 0 -105px;display:flex;align-items:center;justify-content:center;padding:16px 22px;box-sizing:border-box;background:#fff;border:1px solid #E6E2D4;border-radius:10px;pointer-events:auto;box-shadow:0 6px 18px rgba(15,15,15,.06);transition:box-shadow .3s,border-color .3s;will-change:transform" style-hover="box-shadow:0 14px 34px rgba(85,51,235,.18);border-color:#C9C2AC"><img src="assets/logos/hsbc.png" alt="" style="max-width:100%;max-height:100%;display:block"></a>
+          <a data-moon="8" role="listitem" href="https://www.wsgr.com" target="_blank" rel="noopener" aria-label="Wilson Sonsini" style="position:absolute;left:50%;top:50%;width:210px;height:78px;margin:-39px 0 0 -105px;display:flex;align-items:center;justify-content:center;padding:12px 22px;box-sizing:border-box;background:#fff;border:1px solid #E6E2D4;border-radius:10px;pointer-events:auto;box-shadow:0 6px 18px rgba(15,15,15,.06);transition:box-shadow .3s,border-color .3s;will-change:transform" style-hover="box-shadow:0 14px 34px rgba(85,51,235,.18);border-color:#C9C2AC"><img src="assets/logos/wilson.png" alt="" style="max-width:100%;max-height:100%;display:block"></a>
+        </div>
+        <span id="ivc-moonName" aria-live="polite" style="position:absolute;left:50%;bottom:4px;transform:translateX(-50%);padding:8px 16px;border-radius:999px;background:#0F0F0F;color:#F7F5EE;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.18em;white-space:nowrap;opacity:0;pointer-events:none"></span>
+      </div>
+    </div>
+  </section>
+  <section id="regions" data-screen-label="10 Regions" style="position:relative;padding:clamp(90px,14vh,150px) clamp(20px,6vw,96px) 40px;box-sizing:border-box;background:#F7F5EE">
+    <div style="max-width:1300px;margin:0 auto">
+      <p data-rev="1" style="margin:0;display:flex;align-items:center;gap:12px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.26em;color:#8A8677"><span style="display:inline-block;width:34px;height:3px;border-radius:2px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>THE MAP</p>
+      <h2 data-rev="1" style="margin:18px 0 0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(34px,5vw,70px);line-height:1.02;letter-spacing:-.03em">One universe. Many worlds.</h2>
+      <p data-rev="1" style="margin:22px 0 0;max-width:600px;font-size:16.5px;line-height:1.7;color:#55534B">Every programme is a region of the same sky — same values, different light.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:54px">
+        <a data-tilt="1" data-rev="1" href="https://form.typeform.com/to/bALnGEQ7" target="_blank" rel="noopener" style="position:relative;overflow:hidden;min-height:360px;padding:34px 30px 30px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;gap:20px;border:1px solid #E6E2D4;border-radius:16px;background:linear-gradient(180deg,#FFFFFF,#F3F0FF);color:#0F0F0F;transition:box-shadow .35s" style-hover="box-shadow:0 18px 44px rgba(85,51,235,.14);color:#0F0F0F">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:5px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>
+          <div aria-hidden="true" style="position:absolute;top:32px;right:28px;width:104px;height:104px;border:1px solid #D9D3C2;border-radius:50%">
+            <div style="position:absolute;inset:0;animation:ivcSpin 11s linear infinite"><span style="position:absolute;top:-9px;left:50%;margin-left:-7px;color:#5533EB;font-size:14px">✦</span></div>
+            <div style="position:absolute;inset:17px;border:1px solid #E6E2D4;border-radius:50%"></div>
+          </div>
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10px;letter-spacing:.26em;color:#5533EB">REGION 01 — ORBITING EVERYWHERE</span>
+          <div>
+            <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(30px,3.4vw,46px);letter-spacing:-.02em;line-height:1.04">The Global<br>Fellowship</h3>
+            <p style="margin:16px 0 0;max-width:400px;font-size:14.5px;line-height:1.65;color:#55534B">Class '26 registrations are open. Six months, forty-plus nationalities, one family.</p>
+            <span style="display:inline-flex;align-items:center;gap:10px;margin-top:24px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;color:#5533EB">REGISTER — 21 SECONDS <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a data-tilt="1" data-rev="1" data-region="1" href="Included VC Africa.dc.html" style="position:relative;overflow:hidden;min-height:360px;padding:34px 30px 30px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;gap:20px;border:1px solid #E6E2D4;border-radius:16px;background:linear-gradient(180deg,#FFFFFF,#FBF8E2);color:#0F0F0F;transition:box-shadow .35s" style-hover="box-shadow:0 18px 44px rgba(6,176,78,.16);color:#0F0F0F">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(92deg,#F2D500,#EAD502,#BCD400,#33C405,#06B04E)"></span>
+          <div aria-hidden="true" style="position:absolute;top:32px;right:28px;width:104px;height:104px;border:1px solid #D9D3C2;border-radius:50%">
+            <div style="position:absolute;inset:0;animation:ivcSpin 14s linear infinite reverse"><span style="position:absolute;top:-9px;left:50%;margin-left:-7px;color:#06B04E;font-size:14px">✦</span></div>
+            <div style="position:absolute;inset:17px;border:1px solid #E6E2D4;border-radius:50%"></div>
+          </div>
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10px;letter-spacing:.26em;color:#06B04E">REGION 02 — DAYLIGHT, RISING</span>
+          <div>
+            <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(30px,3.4vw,46px);letter-spacing:-.02em;line-height:1.04">Included VC<br>Africa</h3>
+            <p style="margin:16px 0 0;max-width:400px;font-size:14.5px;line-height:1.65;color:#55534B">Redefining the next generation of African investors — with FSD Africa, GIZ SAIS, Launch Africa, Enza Capital &amp; more.</p>
+            <span style="display:inline-flex;align-items:center;gap:10px;margin-top:24px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;color:#06B04E">EXPLORE AFRICA <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a data-tilt="1" data-rev="1" data-region="1" data-wipe="ivc-wipe2" href="Included VC Africa Investor.dc.html" style="position:relative;overflow:hidden;min-height:360px;padding:34px 30px 30px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;gap:20px;border:1px solid rgba(255,196,0,.4);border-radius:16px;background:#111111;color:#FDFBF2;transition:box-shadow .35s" style-hover="box-shadow:0 18px 44px rgba(255,196,0,.2);color:#FDFBF2">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(92deg,#128A38,#31B44B,#7ED321,#FFC400);box-shadow:0 0 14px rgba(126,211,33,.5)"></span>
+          <div aria-hidden="true" style="position:absolute;top:32px;right:28px;width:104px;height:104px;border:1px solid rgba(253,251,242,.2);border-radius:50%">
+            <div style="position:absolute;inset:0;animation:ivcSpin 17s linear infinite"><span style="position:absolute;top:-9px;left:50%;margin-left:-7px;color:#FFC400;font-size:14px">✦</span></div>
+            <div style="position:absolute;inset:17px;border:1px solid rgba(253,251,242,.12);border-radius:50%"></div>
+          </div>
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10px;letter-spacing:.26em;background:linear-gradient(92deg,#31B44B,#7ED321,#FFC400);-webkit-background-clip:text;background-clip:text;color:transparent">REGION 03 — EVENING EXPOSURE</span>
+          <div>
+            <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(30px,3.4vw,46px);letter-spacing:-.02em;line-height:1.04;color:#FDFBF2">Africa<br>Investor</h3>
+            <p style="margin:16px 0 0;max-width:400px;font-size:14.5px;line-height:1.65;color:rgba(253,251,242,.65)">The family's deeper tier — for those already writing cheques across the continent.</p>
+            <span style="display:inline-flex;align-items:center;gap:10px;margin-top:24px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;color:#FFC400">ENTER THE EVENING <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+      </div>
+      <div data-rev="1" style="margin-top:110px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:26px;padding-bottom:70px">
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.3em;color:#8A8677">THE DOOR IS OPEN</span>
+        <p style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(38px,6.8vw,100px);line-height:1;letter-spacing:-.035em">It takes <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;background:var(--gradText,linear-gradient(92deg,#5533EB,#0033FF,#0095B8,#0FA958,#5F8F00,#B98A00));-webkit-background-clip:text;background-clip:text;color:transparent">21 seconds.</em></p>
+        <a data-mag="1" href="https://form.typeform.com/to/bALnGEQ7" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;padding:20px 42px;border-radius:999px;background:#0F0F0F;color:#F7F5EE;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 16px 44px rgba(85,51,235,.32);color:#F7F5EE">Register for Class '26 <span aria-hidden="true" style="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span></a>
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.28em;color:#8A8677">FULLY FUNDED ✦ PART-TIME ✦ GLOBAL ✦ VIRTUAL</span>
+      </div>
+    </div>
+  </section>
+  <section data-screen-label="04 The Myth" style="position:relative;padding:clamp(90px,14vh,150px) clamp(20px,6vw,96px);box-sizing:border-box;background:#ECE8DB;border-top:1px solid #E0DBCB;border-bottom:1px solid #E0DBCB">
+    <div style="max-width:1100px;margin:0 auto;text-align:center">
+      <p data-rev="1" style="margin:0 0 26px;display:flex;align-items:center;justify-content:center;gap:12px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.26em;color:#8A8677"><span style="display:inline-block;width:34px;height:3px;border-radius:2px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>THE MYTH</p>
+      <h2 data-rev="1" style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(34px,5.4vw,76px);line-height:1.06;letter-spacing:-.03em">Every fund hunts unicorns.<br><em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;background:var(--gradText,linear-gradient(92deg,#5533EB,#0033FF,#0095B8,#0FA958,#5F8F00,#B98A00));-webkit-background-clip:text;background-clip:text;color:transparent">We raise the people who find them.</em></h2>
+      <p data-rev="1" style="margin:24px auto 0;max-width:520px;font-size:16px;line-height:1.7;color:#55534B">Rare, mythic, real if you know where to look — talent works exactly the same way.</p>
+    </div>
+  </section>
+  <section id="fellowship" data-screen-label="05 The Fellowship" style="position:relative;padding:clamp(90px,14vh,150px) clamp(20px,6vw,96px);box-sizing:border-box;background:#F7F5EE">
+    <div style="max-width:1300px;margin:0 auto">
+      <p data-rev="1" style="margin:0;display:flex;align-items:center;gap:12px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.26em;color:#8A8677"><span style="display:inline-block;width:34px;height:3px;border-radius:2px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>THE FELLOWSHIP</p>
+      <h2 data-rev="1" style="margin:18px 0 0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(34px,5vw,70px);line-height:1.02;letter-spacing:-.03em;max-width:900px">A VC education that exists <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;background:var(--gradText,linear-gradient(92deg,#5533EB,#0033FF,#0095B8,#0FA958,#5F8F00,#B98A00));-webkit-background-clip:text;background-clip:text;color:transparent">nowhere else.</em></h2>
+      <p data-rev="1" style="margin:22px 0 0;max-width:600px;font-size:16.5px;line-height:1.7;color:#55534B">Six months inside the rooms most people never reach — taught by the investors who sit in them. Think of it as a unique VC MBA, minus the tuition and the gatekeeping.</p>
+      <div id="ivc-facts8" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;margin-top:54px;background:#DFDACA;border:1px solid #DFDACA">
+        <div data-fact="1" data-hov="1" style="position:relative;overflow:hidden;padding:30px 28px 34px;min-height:340px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;background:#F2EFE5;transition:background .45s cubic-bezier(.2,.8,.2,1)" style-hover="background:#0F0F0F">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)"></span>
+          <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:#8A8677;transition:color .45s">01</span>
+          <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(26px,2.4vw,34px);line-height:1.02;letter-spacing:-.03em;color:#0F0F0F;transition:color .45s">Fully funded</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.7;color:#55534B;transition:color .45s">This is due to the generosity of our sponsors who want to help change the face of VC - Creandum, Daphni, European Investment Fund, VC, HSBC Ventures, Mouro Capital, Mangrove Capital, Notion Capital, Seedcamp and Wilson Sonsini.</p>
+          <p style="margin:auto 0 0;font-size:12.5px;font-weight:700;line-height:1.6;color:#55534B;transition:color .45s">Please note there is a application fee*</p>
+        </div>
+        <div data-fact="1" data-hov="1" style="position:relative;overflow:hidden;padding:30px 28px 34px;min-height:340px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;background:#F2EFE5;transition:background .45s cubic-bezier(.2,.8,.2,1)" style-hover="background:#0F0F0F">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)"></span>
+          <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:#8A8677;transition:color .45s">02</span>
+          <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(26px,2.4vw,34px);line-height:1.02;letter-spacing:-.03em;color:#0F0F0F;transition:color .45s">Our Values</h3>
+          <ol style="margin:4px 0 0;padding:0 0 0 22px;font-size:17px;line-height:1.85;font-weight:500;color:#0F0F0F;transition:color .45s">
+            <li>Kindness</li>
+            <li>Paying it forward</li>
+            <li>Don't compete</li>
+            <li>Sparkle (quite literally)</li>
+          </ol>
+          <p style="margin:auto 0 0;font-size:12.5px;line-height:1.6;color:#8A8677;transition:color .45s">The foundational pillars at Included VC</p>
+        </div>
+        <div data-fact="1" data-hov="1" style="position:relative;overflow:hidden;padding:30px 28px 34px;min-height:340px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;background:#F2EFE5;transition:background .45s cubic-bezier(.2,.8,.2,1)" style-hover="background:#0F0F0F">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)"></span>
+          <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:#8A8677;transition:color .45s">03</span>
+          <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(26px,2.4vw,34px);line-height:1.02;letter-spacing:-.03em;color:#0F0F0F;transition:color .45s">Part-time</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.7;color:#55534B;transition:color .45s">You can work and be a Fellow, but we do expect you to invest 15+ hours a week - this includes working on applications, taking financial modelling courses, personal branding, etc. <em style="font-family:'Instrument Serif',serif;font-style:italic;font-size:16px">Usually masterclasses &amp; workshops are 1-2 times a week from 17.00-20.00 UK Time.</em></p>
+        </div>
+        <div data-fact="1" data-hov="1" style="position:relative;overflow:hidden;padding:30px 28px 34px;min-height:340px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;background:#F2EFE5;transition:background .45s cubic-bezier(.2,.8,.2,1)" style-hover="background:#0F0F0F">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)"></span>
+          <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:#8A8677;transition:color .45s">04</span>
+          <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(26px,2.4vw,34px);line-height:1.02;letter-spacing:-.03em;color:#0F0F0F;transition:color .45s">Yes, you should apply!</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.7;color:#55534B;transition:color .45s">If any of these (or more) apply to you: 'I'm a mum', 'I'm a student', 'I'm not in tech', 'I'm not in investment banking'... we encourage you to apply!</p>
+        </div>
+        <div data-fact="1" data-hov="1" style="position:relative;overflow:hidden;padding:30px 28px 34px;min-height:340px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;background:#F2EFE5;transition:background .45s cubic-bezier(.2,.8,.2,1)" style-hover="background:#0F0F0F">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)"></span>
+          <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:#8A8677;transition:color .45s">05</span>
+          <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(26px,2.4vw,34px);line-height:1.02;letter-spacing:-.03em;color:#0F0F0F;transition:color .45s">Aspiring VC</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.7;color:#55534B;transition:color .45s">You must be serious about breaking into the Venture Capital industry. We want to hear about your experiences of trying to get into VC.</p>
+        </div>
+        <div data-fact="1" data-hov="1" style="position:relative;overflow:hidden;padding:30px 28px 34px;min-height:340px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;background:#F2EFE5;transition:background .45s cubic-bezier(.2,.8,.2,1)" style-hover="background:#0F0F0F">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)"></span>
+          <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:#8A8677;transition:color .45s">06</span>
+          <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(26px,2.4vw,34px);line-height:1.02;letter-spacing:-.03em;color:#0F0F0F;transition:color .45s">Format</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.7;color:#55534B;transition:color .45s">Masterclasses in-depth deep dives, foundational learning, investment committee simulations, mentoring with world-class investors, office hours, peer-to-peer learning, brand building, career coaching, AMAs and more!</p>
+        </div>
+        <div data-fact="1" data-hov="1" style="position:relative;overflow:hidden;padding:30px 28px 34px;min-height:340px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;background:#F2EFE5;transition:background .45s cubic-bezier(.2,.8,.2,1)" style-hover="background:#0F0F0F">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)"></span>
+          <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:#8A8677;transition:color .45s">07</span>
+          <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(26px,2.4vw,34px);line-height:1.02;letter-spacing:-.03em;color:#0F0F0F;transition:color .45s">Global &amp; Virtual</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.7;font-style:italic;color:#55534B;transition:color .45s">(there are some optional in-person Summits)</p>
+          <p style="margin:0;font-size:14.5px;line-height:1.7;color:#55534B;transition:color .45s">Included VC: LIVE — when the Fellows, Alumni and Venture Partners come together in person for learning, deal-making, life-long bonds and memories.</p>
+        </div>
+        <div data-fact="1" data-dates="1" style="position:relative;overflow:hidden;padding:30px 28px 34px;min-height:340px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;background:#0F0F0F;color:#F7F5EE">
+          <span aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>
+          <span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:rgba(247,245,238,.5)">08</span>
+          <h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(26px,2.4vw,34px);line-height:1.02;letter-spacing:-.03em;color:#F7F5EE">Dates to know</h3>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid rgba(247,245,238,.18)"><span style="font-size:14.5px;color:rgba(247,245,238,.65)">Application cycle</span><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:15px;color:#F7F5EE">Class '26</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid rgba(247,245,238,.18)"><span style="font-size:14.5px;color:rgba(247,245,238,.65)">Registrations</span><span style="display:inline-flex;align-items:center;gap:8px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:15px;color:#F7F5EE"><span aria-hidden="true" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#B0FF05;box-shadow:0 0 0 0 rgba(176,255,5,.6);animation:ivcPing 1.8s ease-out infinite"></span>Open</span></div>
+          <a data-mag="1" href="https://form.typeform.com/to/bALnGEQ7" target="_blank" rel="noopener" style="margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 22px;border-radius:999px;background:#F7F5EE;color:#0F0F0F;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:13px;transition:box-shadow .3s" style-hover="box-shadow:0 10px 30px rgba(176,255,5,.3);color:#0F0F0F">Register — 21 seconds</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="format" data-screen-label="06 The Format" style="position:relative;padding:clamp(90px,14vh,150px) clamp(20px,6vw,96px);box-sizing:border-box;background:#111111">
+    <div style="max-width:1300px;margin:0 auto">
+      <p data-rev="1" style="margin:0;display:flex;align-items:center;gap:12px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.26em;color:rgba(247,245,238,.55)"><span style="display:inline-block;width:34px;height:3px;border-radius:2px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>THE FORMAT</p>
+      <h2 data-rev="1" style="margin:18px 0 0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(34px,5vw,70px);line-height:1.02;letter-spacing:-.03em;max-width:900px;color:#F7F5EE">Learn it the way <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">VCs live it.</em></h2>
+      <p data-rev="1" style="margin:22px 0 0;max-width:600px;font-size:16.5px;line-height:1.7;color:rgba(247,245,238,.65)">Not lectures. The actual mechanics of the job, practised weekly.</p>
+      <div style="margin-top:56px">
+        <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:26px 12px;border-top:1px solid rgba(247,245,238,.16);transition:background .35s" style-hover="background:rgba(247,245,238,.05)">
+          <span style="flex:none;width:44px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:rgba(247,245,238,.45)">01</span>
+          <h3 style="flex:1 1 240px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em;color:#F7F5EE;transition:color .3s" style-hover="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">Masterclasses</h3>
+          <p style="flex:0 1 430px;margin:0;font-size:14.5px;line-height:1.65;color:rgba(247,245,238,.62)">In-depth deep dives with fund managers, angels, LPs and operators.</p>
+          <span style="flex:none;margin-left:auto;padding:7px 15px;border:1px solid rgba(247,245,238,.28);border-radius:999px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.22em;color:rgba(247,245,238,.75)">WEEKLY</span>
+        </div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:26px 12px;border-top:1px solid rgba(247,245,238,.16);transition:background .35s" style-hover="background:rgba(247,245,238,.05)">
+          <span style="flex:none;width:44px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:rgba(247,245,238,.45)">02</span>
+          <h3 style="flex:1 1 240px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em;color:#F7F5EE;transition:color .3s" style-hover="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">IC Simulations</h3>
+          <p style="flex:0 1 430px;margin:0;font-size:14.5px;line-height:1.65;color:rgba(247,245,238,.62)">Real investment committees — argue the deal, defend the thesis, take the vote.</p>
+          <span style="flex:none;margin-left:auto;padding:7px 15px;border:1px solid rgba(247,245,238,.28);border-radius:999px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.22em;color:rgba(247,245,238,.75)">LIVE</span>
+        </div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:26px 12px;border-top:1px solid rgba(247,245,238,.16);transition:background .35s" style-hover="background:rgba(247,245,238,.05)">
+          <span style="flex:none;width:44px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:rgba(247,245,238,.45)">03</span>
+          <h3 style="flex:1 1 240px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em;color:#F7F5EE;transition:color .3s" style-hover="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">Mentoring</h3>
+          <p style="flex:0 1 430px;margin:0;font-size:14.5px;line-height:1.65;color:rgba(247,245,238,.62)">World-class investors taking a personal stake in your success.</p>
+          <span style="flex:none;margin-left:auto;padding:7px 15px;border:1px solid rgba(247,245,238,.28);border-radius:999px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.22em;color:rgba(247,245,238,.75)">1:1</span>
+        </div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:26px 12px;border-top:1px solid rgba(247,245,238,.16);transition:background .35s" style-hover="background:rgba(247,245,238,.05)">
+          <span style="flex:none;width:44px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:rgba(247,245,238,.45)">04</span>
+          <h3 style="flex:1 1 240px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em;color:#F7F5EE;transition:color .3s" style-hover="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">Office Hours</h3>
+          <p style="flex:0 1 430px;margin:0;font-size:14.5px;line-height:1.65;color:rgba(247,245,238,.62)">Direct access to partners — no gatekeepers in between.</p>
+          <span style="flex:none;margin-left:auto;padding:7px 15px;border:1px solid rgba(247,245,238,.28);border-radius:999px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.22em;color:rgba(247,245,238,.75)">OPEN DOOR</span>
+        </div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:26px 12px;border-top:1px solid rgba(247,245,238,.16);transition:background .35s" style-hover="background:rgba(247,245,238,.05)">
+          <span style="flex:none;width:44px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:rgba(247,245,238,.45)">05</span>
+          <h3 style="flex:1 1 240px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em;color:#F7F5EE;transition:color .3s" style-hover="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">Brand Building</h3>
+          <p style="flex:0 1 430px;margin:0;font-size:14.5px;line-height:1.65;color:rgba(247,245,238,.62)">Your name in the ecosystem before your first day in it.</p>
+          <span style="flex:none;margin-left:auto;padding:7px 15px;border:1px solid rgba(247,245,238,.28);border-radius:999px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.22em;color:rgba(247,245,238,.75)">ONGOING</span>
+        </div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:26px 12px;border-top:1px solid rgba(247,245,238,.16);transition:background .35s" style-hover="background:rgba(247,245,238,.05)">
+          <span style="flex:none;width:44px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:rgba(247,245,238,.45)">06</span>
+          <h3 style="flex:1 1 240px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em;color:#F7F5EE;transition:color .3s" style-hover="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">Career Coaching</h3>
+          <p style="flex:0 1 430px;margin:0;font-size:14.5px;line-height:1.65;color:rgba(247,245,238,.62)">Real examples and live applications — not recycled LinkedIn tips.</p>
+          <span style="flex:none;margin-left:auto;padding:7px 15px;border:1px solid rgba(247,245,238,.28);border-radius:999px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.22em;color:rgba(247,245,238,.75)">PERSONAL</span>
+        </div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:26px 12px;border-top:1px solid rgba(247,245,238,.16);border-bottom:1px solid rgba(247,245,238,.16);transition:background .35s" style-hover="background:rgba(247,245,238,.05)">
+          <span style="flex:none;width:44px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:rgba(247,245,238,.45)">07</span>
+          <h3 style="flex:1 1 240px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em;color:#F7F5EE;transition:color .3s" style-hover="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">AMAs</h3>
+          <p style="flex:0 1 430px;margin:0;font-size:14.5px;line-height:1.65;color:rgba(247,245,238,.62)">The questions you can't ask anywhere else, answered straight.</p>
+          <span style="flex:none;margin-left:auto;padding:7px 15px;border:1px solid rgba(247,245,238,.28);border-radius:999px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.22em;color:rgba(247,245,238,.75)">NO FILTER</span>
+        </div>
+      </div>
+      <p data-rev="1" style="margin:34px 0 0;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.26em;color:rgba(247,245,238,.5)">EVENINGS 17:00–20:00 UK <span style="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span> 15+ HOURS A WEEK <span style="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span> SIX MONTHS</p>
+    </div>
+  </section>
+  <section id="curriculum" data-screen-label="07 The Curriculum" style="position:relative;padding:clamp(90px,14vh,150px) 0 0;box-sizing:border-box;background:#ECE8DB;border-top:1px solid #E0DBCB">
+    <div style="max-width:1300px;margin:0 auto;padding:0 clamp(20px,6vw,96px)">
+      <p data-rev="1" style="margin:0;display:flex;align-items:center;gap:12px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.26em;color:#8A8677"><span style="display:inline-block;width:34px;height:3px;border-radius:2px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>THE CURRICULUM</p>
+      <h2 data-rev="1" style="margin:18px 0 0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(34px,5vw,70px);line-height:1.02;letter-spacing:-.03em">Twelve modules. <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;background:var(--gradText,linear-gradient(92deg,#5533EB,#0033FF,#0095B8,#0FA958,#5F8F00,#B98A00));-webkit-background-clip:text;background-clip:text;color:transparent">Zero filler.</em></h2>
+      <p data-rev="1" style="margin:22px 0 0;max-width:600px;font-size:16.5px;line-height:1.7;color:#55534B">The complete anatomy of a fund — from the first sourcing call to the final exit.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:50px">
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">01</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Fund Structure &amp; Mechanics</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">02</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Financial Modelling</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">03</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Dealflow Sourcing</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">04</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Legals &amp; Beyond</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">05</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Cap Tables &amp; Term Sheets</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">06</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">History of VC</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">07</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Unit Economics</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">08</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Exits &amp; Acquisitions</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">09</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Investment Theses</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">10</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Models &amp; Trends</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">11</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Due Diligence</h3></div>
+        <div data-rev="1" data-hov="1" style="display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid #E6E2D4;border-radius:12px;padding:20px 22px;box-sizing:border-box;transition:box-shadow .35s,border-color .35s" style-hover="box-shadow:0 12px 28px rgba(15,15,15,.08);border-color:#C9C2AC"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.2em;color:var(--a1,#5533EB)">12</span><h3 style="margin:0;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Careers in VC</h3></div>
+      </div>
+    </div>
+    <div style="margin-top:60px;border-top:1px solid #E0DBCB;border-bottom:1px solid #E0DBCB;overflow:hidden;white-space:nowrap;background:#fff">
+      <div data-mq="1" style="display:inline-flex;white-space:nowrap;animation:ivcMq 46s linear infinite reverse;will-change:transform">
+        <span style="display:inline-flex;gap:34px;padding:16px 17px 16px 34px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:#55534B">FUND STRUCTURE &amp; MECHANICS <span style="color:var(--a1,#5533EB)">✦</span> FINANCIAL MODELLING <span style="color:var(--a1,#5533EB)">✦</span> DEALFLOW SOURCING <span style="color:var(--a1,#5533EB)">✦</span> LEGALS &amp; BEYOND <span style="color:var(--a1,#5533EB)">✦</span> CAP TABLES &amp; TERM SHEETS <span style="color:var(--a1,#5533EB)">✦</span> HISTORY OF VC <span style="color:var(--a1,#5533EB)">✦</span> UNIT ECONOMICS <span style="color:var(--a1,#5533EB)">✦</span> EXITS &amp; ACQUISITIONS <span style="color:var(--a1,#5533EB)">✦</span> INVESTMENT THESES <span style="color:var(--a1,#5533EB)">✦</span> MODELS &amp; TRENDS <span style="color:var(--a1,#5533EB)">✦</span> DUE DILIGENCE <span style="color:var(--a1,#5533EB)">✦</span> CAREERS IN VC <span style="color:var(--a1,#5533EB)">✦</span></span>
+        <span style="display:inline-flex;gap:34px;padding:16px 17px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;color:#55534B">FUND STRUCTURE &amp; MECHANICS <span style="color:var(--a1,#5533EB)">✦</span> FINANCIAL MODELLING <span style="color:var(--a1,#5533EB)">✦</span> DEALFLOW SOURCING <span style="color:var(--a1,#5533EB)">✦</span> LEGALS &amp; BEYOND <span style="color:var(--a1,#5533EB)">✦</span> CAP TABLES &amp; TERM SHEETS <span style="color:var(--a1,#5533EB)">✦</span> HISTORY OF VC <span style="color:var(--a1,#5533EB)">✦</span> UNIT ECONOMICS <span style="color:var(--a1,#5533EB)">✦</span> EXITS &amp; ACQUISITIONS <span style="color:var(--a1,#5533EB)">✦</span> INVESTMENT THESES <span style="color:var(--a1,#5533EB)">✦</span> MODELS &amp; TRENDS <span style="color:var(--a1,#5533EB)">✦</span> DUE DILIGENCE <span style="color:var(--a1,#5533EB)">✦</span> CAREERS IN VC <span style="color:var(--a1,#5533EB)">✦</span></span>
+      </div>
+    </div>
+  </section>
+  <section id="values" data-screen-label="08 The Code" style="position:relative;padding:clamp(90px,14vh,150px) clamp(20px,6vw,96px);box-sizing:border-box;background:#F7F5EE">
+    <div style="max-width:1300px;margin:0 auto">
+      <p data-rev="1" style="margin:0;display:flex;align-items:center;gap:12px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.26em;color:#8A8677"><span style="display:inline-block;width:34px;height:3px;border-radius:2px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>THE CODE</p>
+      <h2 data-rev="1" style="margin:18px 0 44px;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(34px,5vw,70px);line-height:1.02;letter-spacing:-.03em">Four laws of this universe.</h2>
+      <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:20px;padding:30px 18px;border-top:1px solid #DFDACA;transition:background .35s" style-hover="background:#fff">
+        <span style="flex:none;width:clamp(40px,6vw,90px);font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;color:#8A8677">01</span>
+        <h3 style="flex:1 1 220px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,54px);letter-spacing:-.02em;text-transform:uppercase;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Kindness</h3>
+        <p style="flex:0 1 380px;margin:0;font-size:14.5px;line-height:1.65;color:#55534B">The baseline, not a bonus. How you speak, respond and show up — every room, every time.</p>
+      </div>
+      <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:20px;padding:30px 18px;border-top:1px solid #DFDACA;transition:background .35s" style-hover="background:#fff">
+        <span style="flex:none;width:clamp(40px,6vw,90px);font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;color:#8A8677">02</span>
+        <h3 style="flex:1 1 220px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,54px);letter-spacing:-.02em;text-transform:uppercase;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Pay it forward</h3>
+        <p style="flex:0 1 380px;margin:0;font-size:14.5px;line-height:1.65;color:#55534B">Everything here was given freely. The assumption is that you'll pass it on — forwards and backwards.</p>
+      </div>
+      <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:20px;padding:30px 18px;border-top:1px solid #DFDACA;transition:background .35s" style-hover="background:#fff">
+        <span style="flex:none;width:clamp(40px,6vw,90px);font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;color:#8A8677">03</span>
+        <h3 style="flex:1 1 220px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,54px);letter-spacing:-.02em;text-transform:uppercase;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Don't compete</h3>
+        <p style="flex:0 1 380px;margin:0;font-size:14.5px;line-height:1.65;color:#55534B">Fifty ambitions, one direction. Nobody here wins alone.</p>
+      </div>
+      <div data-rev="1" data-hov="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:20px;padding:30px 18px;border-top:1px solid #DFDACA;border-bottom:1px solid #DFDACA;transition:background .35s" style-hover="background:#fff">
+        <span style="flex:none;width:clamp(40px,6vw,90px);font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;color:#8A8677">04</span>
+        <h3 style="flex:1 1 220px;margin:0;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,54px);letter-spacing:-.02em;text-transform:uppercase;transition:color .3s" style-hover="color:var(--a1,#5533EB)">Sparkle <span aria-hidden="true" style="font-size:.6em;vertical-align:middle;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span></h3>
+        <p style="flex:0 1 380px;margin:0;font-size:14.5px;line-height:1.65;color:#55534B">The extra ten percent nobody asked for. Quite literally the house style.</p>
+      </div>
+    </div>
+  </section>
+  <section id="voices" data-screen-label="09 Voices" style="position:relative;padding:clamp(90px,14vh,150px) clamp(20px,6vw,96px);box-sizing:border-box;background:#ECE8DB;border-top:1px solid #E0DBCB">
+    <div style="max-width:1300px;margin:0 auto">
+      <p data-rev="1" style="margin:0;display:flex;align-items:center;gap:12px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.26em;color:#8A8677"><span style="display:inline-block;width:34px;height:3px;border-radius:2px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></span>WHERE FELLOWS LAND</p>
+      <h2 data-rev="1" style="margin:18px 0 44px;font-family:'Inter Tight',sans-serif;font-weight:900;font-size:clamp(34px,5vw,70px);line-height:1.02;letter-spacing:-.03em">Signals from the family.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+        <figure data-tilt="1" data-rev="1" style="margin:0;padding:32px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;background:#fff;border:1px solid #E6E2D4;border-radius:14px;transition:box-shadow .35s" style-hover="box-shadow:0 14px 34px rgba(15,15,15,.08)">
+          <span aria-hidden="true" style="font-size:18px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span>
+          <blockquote style="margin:0;font-family:'Instrument Serif',serif;font-style:italic;font-size:23px;line-height:1.45;color:#0F0F0F">"It changed my life!"</blockquote>
+          <figcaption style="margin-top:auto;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.2em;line-height:2;color:#8A8677">SOO MIN HONG<br>ANALYST @ PALE BLUE DOT · CLASS '23</figcaption>
+        </figure>
+        <figure data-tilt="1" data-rev="1" style="margin:0;padding:32px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;background:#fff;border:1px solid #E6E2D4;border-radius:14px;transition:box-shadow .35s" style-hover="box-shadow:0 14px 34px rgba(15,15,15,.08)">
+          <span aria-hidden="true" style="font-size:18px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span>
+          <blockquote style="margin:0;font-family:'Instrument Serif',serif;font-style:italic;font-size:23px;line-height:1.45;color:#0F0F0F">"Included VC didn't just open doors; it unveiled entire galaxies."</blockquote>
+          <figcaption style="margin-top:auto;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.2em;line-height:2;color:#8A8677">ADITI MISHRA<br>CLASS '23</figcaption>
+        </figure>
+        <figure data-tilt="1" data-rev="1" style="margin:0;padding:32px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;background:#fff;border:1px solid #E6E2D4;border-radius:14px;transition:box-shadow .35s" style-hover="box-shadow:0 14px 34px rgba(15,15,15,.08)">
+          <span aria-hidden="true" style="font-size:18px;background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span>
+          <blockquote style="margin:0;font-family:'Instrument Serif',serif;font-style:italic;font-size:23px;line-height:1.45;color:#0F0F0F">"You're gaining a global family who will back you for LIFE."</blockquote>
+          <figcaption style="margin-top:auto;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;letter-spacing:.2em;line-height:2;color:#8A8677">ASHNA OUKABAY<br>CLASS '23</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+  <footer data-screen-label="Footer" style="position:relative;background:#111111;color:#F7F5EE;padding:0 clamp(20px,6vw,96px) 34px;box-sizing:border-box">
+    <div aria-hidden="true" style="height:4px;margin:0 calc(clamp(20px,6vw,96px) * -1);background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00))"></div>
+    <div style="max-width:1300px;margin:0 auto;padding-top:70px;display:flex;flex-wrap:wrap;gap:50px;justify-content:space-between">
+      <div style="flex:1 1 340px;max-width:480px;display:flex;flex-direction:column;gap:22px">
+        <span style="font-family:'Inter Tight',sans-serif;font-weight:900;font-size:18px;letter-spacing:.04em">INCLUDED<span style="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span>VC</span>
+        <p style="margin:0;font-size:14px;line-height:1.7;color:rgba(247,245,238,.65)">Join the Included VC family — hear about the open-access learning pathway and our work for representation in venture.</p>
+        <form id="ivc-form" style="display:flex;gap:0;border-bottom:1px solid rgba(247,245,238,.4)">
+          <input id="ivc-em" type="email" required="required" placeholder="your@email.com" aria-label="Email address" style="flex:1;min-width:120px;padding:13px 0;background:transparent;border:none;outline:none;color:#F7F5EE;font-family:'Hanken Grotesk',sans-serif;font-size:14px">
+          <button type="submit" data-hov="1" style="background:transparent;border:none;cursor:pointer;padding:13px 4px;color:#B0FF05;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:.2em;transition:letter-spacing .3s" style-hover="letter-spacing:.3em">SUBSCRIBE ✦</button>
+        </form>
+        <div id="ivc-fmsg" style="display:none;align-items:center;gap:10px;padding:13px 0;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;color:#B0FF05">✦ WELCOME TO THE FAMILY. WE'LL BE IN TOUCH.</div>
+      </div>
+      <div style="display:flex;gap:60px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:9.5px;letter-spacing:.28em;color:rgba(247,245,238,.45)">EXPLORE</span>
+          <a href="#world" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:rgba(247,245,238,.8);transition:color .3s" style-hover="color:#B0FF05">WORLD</a>
+          <a href="#manifesto" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:rgba(247,245,238,.8);transition:color .3s" style-hover="color:#B0FF05">WHY WE EXIST</a>
+          <a href="#fellowship" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:rgba(247,245,238,.8);transition:color .3s" style-hover="color:#B0FF05">FELLOWSHIP</a>
+          <a href="#voices" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:rgba(247,245,238,.8);transition:color .3s" style-hover="color:#B0FF05">VOICES</a>
+          <a href="#regions" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:rgba(247,245,238,.8);transition:color .3s" style-hover="color:#B0FF05">REGIONS</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:9.5px;letter-spacing:.28em;color:rgba(247,245,238,.45)">FOLLOW</span>
+          <a href="https://www.linkedin.com/company/includedvc" target="_blank" rel="noopener" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:rgba(247,245,238,.8);transition:color .3s" style-hover="color:#B0FF05">LINKEDIN</a>
+          <a href="https://twitter.com/INCLUDED_VC" target="_blank" rel="noopener" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:rgba(247,245,238,.8);transition:color .3s" style-hover="color:#B0FF05">TWITTER</a>
+          <a href="https://medium.com/included-vc" target="_blank" rel="noopener" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:rgba(247,245,238,.8);transition:color .3s" style-hover="color:#B0FF05">MEDIUM</a>
+          <a href="https://www.instagram.com/included.vc/" target="_blank" rel="noopener" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:rgba(247,245,238,.8);transition:color .3s" style-hover="color:#B0FF05">INSTAGRAM</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1300px;margin:60px auto 0;padding-top:22px;border-top:1px solid rgba(247,245,238,.15);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center">
+      <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:9.5px;letter-spacing:.2em;color:rgba(247,245,238,.5)">© INCLUDED VC 2026 — ALL RIGHTS RESERVED</span>
+      <div style="display:flex;gap:26px">
+        <a href="https://www.included.vc/termsofservice" target="_blank" rel="noopener" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:9.5px;letter-spacing:.2em;color:rgba(247,245,238,.5);transition:color .3s" style-hover="color:#B0FF05">TERMS</a>
+        <a href="https://www.included.vc/privacypolicy" target="_blank" rel="noopener" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:9.5px;letter-spacing:.2em;color:rgba(247,245,238,.5);transition:color .3s" style-hover="color:#B0FF05">PRIVACY</a>
+      </div>
+      <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:9.5px;letter-spacing:.2em;color:rgba(247,245,238,.5)">A UNIVERSE, HANDCRAFTED <span style="background:var(--grad,linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00));-webkit-background-clip:text;background-clip:text;color:transparent">✦</span></span>
+    </div>
+  </footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;global&quot;,&quot;options&quot;:[&quot;global&quot;,&quot;africa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Identity&quot;},&quot;orbAutoRotate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;dotScale&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.7,&quot;max&quot;:1.4,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Unicorn&quot;}}">
+class Component extends DCLogic {
+  renderVals() { return {}; }
+  componentDidMount() { this._dead = false; this._L = []; this._boot(); }
+  componentWillUnmount() {
+    this._dead = true;
+    (this._L || []).forEach(function(r) { try { r[0].removeEventListener(r[1], r[2], r[3]); } catch (e) {} });
+    try { if (this._ro) this._ro.disconnect(); } catch (e) {}
+    try { if (this._io) this._io.disconnect(); } catch (e) {}
+    try { if (this._io2) this._io2.disconnect(); } catch (e) {}
+    try { if (this._ctx) this._ctx.revert(); } catch (e) {}
+    try { if (window.ScrollTrigger) ScrollTrigger.getAll().forEach(function(t) { t.kill(); }); } catch (e) {}
+    try { if (window.gsap) gsap.killTweensOf('[data-mag], [data-tilt], #ivc-curR'); } catch (e) {}
+    try { if (this._orbApi) this._orbApi.dispose(); } catch (e) {}
+    if (this._raf1) cancelAnimationFrame(this._raf1);
+    if (this._raf2) cancelAnimationFrame(this._raf2);
+  }
+  _pal(name) {
+    const P = {
+      global: { stops: ['#5533EB', '#2062FF', '#00C2E8', '#1FBF4C', '#9CCB16', '#F0B90B'], grad: 'linear-gradient(92deg,#5533EB,#0033FF,#00F2FF,#00FF04,#B0FF05,#FFFF00)', gradText: 'linear-gradient(92deg,#5533EB,#0033FF,#0095B8,#0FA958,#5F8F00,#B98A00)', a1: '#5533EB' },
+      africa: { stops: ['#F2D500', '#EAD502', '#BCD400', '#33C405', '#06B04E', '#128A38'], grad: 'linear-gradient(92deg,#F2D500,#EAD502,#BCD400,#33C405,#06B04E)', gradText: 'linear-gradient(92deg,#A98A00,#7E9600,#2AA004,#069042)', a1: '#06B04E' }
+    };
+    return P[name] || P.global;
+  }
+  _applyPalette(name) {
+    const p = this._pal(name), r = document.documentElement.style;
+    r.setProperty('--grad', p.grad); r.setProperty('--gradText', p.gradText); r.setProperty('--a1', p.a1);
+    if (this._uniApi) this._uniApi.setPalette(p.stops);
+    if (this._orbApi) this._orbApi.setPalette(p.stops, p.a1);
+  }
+  componentDidUpdate(prev) {
+    const pal = this.props.palette ?? 'global';
+    if (!prev || prev.palette !== pal) this._applyPalette(pal);
+    if (this._orbApi) this._orbApi.state.autoRotate = this.props.orbAutoRotate ?? true;
+    const d = this.props.dotScale ?? 1;
+    if (this._uniApi && (!prev || prev.dotScale !== d)) this._uniApi.setScale(d);
+  }
+  _on(el, ev, fn, op) { el.addEventListener(ev, fn, op); this._L.push([el, ev, fn, op]); }
+  async _boot() {
+    const ready = await new Promise(res => {
+      const t0 = Date.now();
+      const iv = setInterval(() => {
+        if (window.gsap && window.ScrollTrigger && window.ScrollToPlugin) { clearInterval(iv); res(true); }
+        else if (Date.now() - t0 > 15000) { clearInterval(iv); res(false); }
+      }, 50);
+    });
+    if (this._dead) return;
+    this._applyPalette(this.props.palette ?? 'global');
+    if (!ready) { const p = document.getElementById('ivc-pre'); if (p) p.style.display = 'none'; return; }
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fine = matchMedia('(pointer: fine)').matches;
+    const stops = this._pal(this.props.palette ?? 'global').stops;
+    try { this._uniApi = this._unicorn(stops, this.props.dotScale ?? 1, reduced); } catch (e) { console.warn('unicorn failed', e); }
+    try { this._orbApi = this._orb(stops, this.props.orbAutoRotate ?? true, reduced); } catch (e) { console.warn('orb failed', e); }
+    const self = this;
+    this._ctx = gsap.context(function() { self._motion(reduced); });
+    this._ui(reduced, fine);
+  }
+
+  // ---- dot-matrix unicorn (2D canvas) ----
+  _unicorn(stops, dotScale, reduced) {
+    const wrap = document.getElementById('ivc-uniWrap'), cv = document.getElementById('ivc-uniCv');
+    if (!wrap || !cv) return null;
+    const ctx = cv.getContext('2d'), self = this;
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    // silhouette drawn on offscreen canvas (unit space 100 x 92, scaled x3)
+    const off = document.createElement('canvas'); off.width = 300; off.height = 276;
+    const o = off.getContext('2d'); o.scale(3, 3); o.fillStyle = '#000';
+    const ell = (x, y, rx, ry, rot) => { o.save(); o.translate(x, y); o.rotate(rot || 0); o.beginPath(); o.ellipse(0, 0, rx, ry, 0, 0, 7); o.fill(); o.restore(); };
+    const poly = (pts) => { o.beginPath(); o.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) o.lineTo(pts[i][0], pts[i][1]); o.closePath(); o.fill(); };
+    poly([[71.5, 14.5], [74.5, 15.5], [84, 1.5]]);                       // horn
+    poly([[66.5, 15], [68.5, 8.5], [70.5, 14]]); poly([[70.5, 14], [73, 7.5], [75.5, 14.5]]); // ears
+    ell(74.5, 20, 9.5, 6, 0.35); ell(84, 25, 5, 3.6, 0.3); ell(88, 27, 2.6, 2.4, 0); ell(70.5, 23.5, 5.5, 4.5, 0.2); // head
+    poly([[58, 46], [67, 23], [78, 27], [66, 50]]);                      // neck
+    ell(61, 47, 8.5, 7.5, 0);                                            // chest
+    ell(64, 17, 4.5, 4, 0); ell(59, 23, 5, 4.5, 0); ell(55, 30, 5.5, 4.8, 0); ell(51.5, 37, 5.5, 5, 0); ell(49, 44, 5, 4.6, 0); ell(68.5, 12.5, 3.6, 3, 0); // mane
+    ell(47, 53, 19, 12, -0.12); ell(33, 53, 10.5, 9.5, 0);               // body + rump
+    poly([[63, 56], [67.5, 57], [65.5, 68], [61.5, 67]]); poly([[61.5, 67], [65.5, 68], [63.5, 80], [60, 79.5]]); poly([[60, 79.5], [63.5, 80], [63, 84.5], [59.5, 84]]); // front leg A
+    poly([[55, 58], [59, 58.5], [56.5, 79], [53, 78.5]]); poly([[53, 78.5], [56.5, 79], [56, 83.5], [52.5, 83]]); // front leg B
+    poly([[28, 59], [32, 60], [28.5, 81], [25, 80.5]]); poly([[25, 80.5], [28.5, 81], [28, 85.5], [24.5, 85]]);   // back leg A
+    poly([[37, 60], [41, 61], [38.5, 80], [35, 79.5]]); poly([[35, 79.5], [38.5, 80], [38, 84.5], [34.5, 84]]);   // back leg B
+    ell(29, 55, 5, 4, 0);                                                // tail root
+    ell(25, 58, 5.5, 5, 0); ell(20.5, 64, 5, 4.6, 0); ell(17, 71, 4.5, 4.2, 0); ell(14.5, 78, 4, 3.8, 0); ell(13, 85, 3.2, 3, 0); // tail
+    ell(22, 68, 3, 2.8, 0); ell(19.5, 76, 2.8, 2.6, 0); ell(17.5, 84, 2.4, 2.2, 0); ell(16.5, 90, 1.8, 1.7, 0);   // tail wisp
+    ell(27, 64, 3, 2.8, 0); ell(25, 72, 2.6, 2.4, 0); ell(23.5, 79, 2.2, 2, 0);                                   // tail wisp 2
+    o.globalCompositeOperation = 'destination-out';
+    poly([[63.5, 22], [66, 23.2], [56.5, 46.5], [54, 45]]);              // mane/neck slit
+    o.globalCompositeOperation = 'source-over';
+    const data = o.getImageData(0, 0, 300, 276).data;
+    // sample every 4px -> dots
+    const dots = [];
+    for (let sy = 2; sy < 276; sy += 4) for (let sx = 2; sx < 300; sx += 4) {
+      if (data[(sy * 300 + sx) * 4 + 3] > 120) dots.push({ u: sx / 300, v: sy / 276, ph: rnd(0, 6.28), ox: 0, oy: 0, n: rnd(-0.02, 0.02), amb: false });
+    }
+    for (let i = 0; i < 42; i++) dots.push({ u: rnd(0.02, 0.98), v: rnd(0.02, 0.98), ph: rnd(0, 6.28), ox: 0, oy: 0, n: rnd(-0.02, 0.02), amb: true });
+    const hex2 = h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+    let ST = stops.map(hex2);
+    const samp = t => {
+      t = Math.max(0, Math.min(0.999, t));
+      const f = t * (ST.length - 1), i = Math.floor(f), k = f - i, a = ST[i], b = ST[i + 1];
+      return 'rgb(' + Math.round(a[0] + (b[0] - a[0]) * k) + ',' + Math.round(a[1] + (b[1] - a[1]) * k) + ',' + Math.round(a[2] + (b[2] - a[2]) * k) + ')';
+    };
+    const recolor = () => { dots.forEach(d => { d.col = samp(d.v + d.n); }); };
+    recolor();
+    let W = 0, H = 0, cx0 = 0, cy0 = 0, cw = 0, chh = 0, ds = 1, scaleK = dotScale;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const size = () => {
+      W = wrap.clientWidth; H = Math.round(W * 0.95);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const asp = 100 / 92;
+      cw = Math.min(W * 0.94, H * 0.94 * asp); chh = cw / asp;
+      cx0 = (W - cw) / 2; cy0 = (H - chh) / 2 - H * 0.02;
+      ds = (cw / 75) * 0.55;
+      dots.forEach(d => { d.bx = cx0 + d.u * cw; d.by = cy0 + d.v * chh; if (d.amb) { d.bx = d.u * W; d.by = d.v * H; } });
+    };
+    size();
+    this._ro = new ResizeObserver(size); this._ro.observe(wrap);
+    let mx = -9999, my = -9999, visible = true, t = 0, last = performance.now();
+    const setM = (x, y) => { const r = cv.getBoundingClientRect(); mx = x - r.left; my = y - r.top; };
+    this._on(wrap, 'pointermove', e => setM(e.clientX, e.clientY));
+    this._on(wrap, 'pointerleave', () => { mx = -9999; my = -9999; });
+    this._io = new IntersectionObserver(en => { visible = en[0].isIntersecting; });
+    this._io.observe(wrap);
+    const draw = (now) => {
+      if (self._dead) return;
+      self._raf1 = requestAnimationFrame(draw);
+      if (!visible || document.hidden) return;
+      const dt = Math.min((now - last) / 1000, 0.06); last = now; t += dt;
+      ctx.clearRect(0, 0, W, H);
+      const R = Math.max(56, W * 0.14), push = R * 0.34;
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        let tx = 0, ty = 0;
+        if (!reduced && mx > -999) {
+          const ddx = d.bx - mx, ddy = d.by - my, dist = Math.sqrt(ddx * ddx + ddy * ddy);
+          if (dist < R && dist > 0.001) { const f = (1 - dist / R); tx = ddx / dist * f * f * push; ty = ddy / dist * f * f * push; }
+        }
+        d.ox += (tx - d.ox) * 0.12; d.oy += (ty - d.oy) * 0.12;
+        const idle = reduced ? 0 : Math.sin(t * 1.4 + d.ph) * 0.6;
+        const s = d.amb ? ds * 0.6 : ds * scaleK;
+        ctx.globalAlpha = d.amb ? 0.3 : 0.86 + 0.14 * Math.sin(t * 2 + d.ph);
+        ctx.fillStyle = d.col;
+        ctx.fillRect(d.bx + d.ox - s / 2, d.by + d.oy + idle - s / 2, s, s);
+      }
+      ctx.globalAlpha = 1;
+    };
+    this._raf1 = requestAnimationFrame(draw);
+    return {
+      setPalette: (s) => { ST = s.map(hex2); recolor(); },
+      setScale: (k) => { scaleK = k; }
+    };
+  }
+
+  // ---- particle orb (three.js, contained) ----
+  _orb(stops, autoRotate, reduced) {
+    const wrap = document.getElementById('ivc-orbWrap'), cv = document.getElementById('ivc-orbCv');
+    if (!wrap || !cv || !window.THREE) return null;
+    const T = THREE, self = this;
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const renderer = new T.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const scene = new T.Scene();
+    const cam = new T.PerspectiveCamera(42, 1, 0.1, 200); cam.position.set(0, 1.5, 34);
+    const size = () => { const w = Math.min(wrap.clientWidth, 900); renderer.setSize(w, w, false); cv.style.height = w + 'px'; cam.aspect = 1; cam.updateProjectionMatrix(); };
+    cam.position.set(0, 1.5, 44);
+    size(); this._on(window, 'resize', size);
+    const mkTex = (draw, s) => { const c = document.createElement('canvas'); c.width = c.height = s; draw(c.getContext('2d'), s); return new T.CanvasTexture(c); };
+    const dotTex = mkTex((x, s) => { const h = s / 2, g = x.createRadialGradient(h, h, 0, h, h, h); g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.6, 'rgba(255,255,255,.85)'); g.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = g; x.fillRect(0, 0, s, s); }, 64);
+    const starTex = mkTex((x, s) => {
+      const h = s / 2; x.fillStyle = '#fff'; x.beginPath();
+      x.moveTo(h, s * 0.04); x.quadraticCurveTo(h + 3, h - 5, s * 0.96, h); x.quadraticCurveTo(h + 3, h + 5, h, s * 0.96); x.quadraticCurveTo(h - 3, h + 5, s * 0.04, h); x.quadraticCurveTo(h - 3, h - 5, h, s * 0.04); x.fill();
+    }, 64);
+    const world = new T.Group(); scene.add(world);
+    // ink sphere points
+    const ns = 620, pos = new Float32Array(ns * 3);
+    for (let i = 0; i < ns; i++) {
+      const k = i + 0.5, phi = Math.acos(1 - 2 * k / ns), th = Math.PI * (1 + Math.sqrt(5)) * k;
+      pos[i * 3] = 11 * Math.cos(th) * Math.sin(phi); pos[i * 3 + 1] = 11 * Math.sin(th) * Math.sin(phi) * 0.94; pos[i * 3 + 2] = 11 * Math.cos(phi);
+    }
+    const sg = new T.BufferGeometry(); sg.setAttribute('position', new T.BufferAttribute(pos, 3));
+    const sm = new T.PointsMaterial({ size: 0.32, map: dotTex, transparent: true, opacity: 0.85, depthWrite: false, sizeAttenuation: true });
+    sm.color.set('#17150F');
+    world.add(new T.Points(sg, sm));
+    // spectrum accent points (vertex colors)
+    const na = 80, ap = new Float32Array(na * 3), ac = new Float32Array(na * 3);
+    const ag = new T.BufferGeometry();
+    const fillAcc = (hexes) => {
+      const cs = hexes.map(h => new T.Color(h));
+      for (let i = 0; i < na; i++) {
+        const v = new T.Vector3(rnd(-1, 1), rnd(-1, 1), rnd(-1, 1)).normalize().multiplyScalar(11.05);
+        ap[i * 3] = v.x; ap[i * 3 + 1] = v.y * 0.94; ap[i * 3 + 2] = v.z;
+        const c = cs[i % cs.length]; ac[i * 3] = c.r; ac[i * 3 + 1] = c.g; ac[i * 3 + 2] = c.b;
+      }
+      ag.setAttribute('position', new T.BufferAttribute(ap, 3));
+      ag.setAttribute('color', new T.BufferAttribute(ac, 3));
+      ag.attributes.position.needsUpdate = true; ag.attributes.color.needsUpdate = true;
+    };
+    fillAcc(stops);
+    const am = new T.PointsMaterial({ size: 0.62, map: dotTex, transparent: true, opacity: 0.95, depthWrite: false, sizeAttenuation: true, vertexColors: true });
+    world.add(new T.Points(ag, am));
+    // rings
+    const mkRing = (r, hex, op) => {
+      const pts = []; for (let i = 0; i <= 128; i++) { const a = i / 128 * Math.PI * 2; pts.push(new T.Vector3(Math.cos(a) * r, 0, Math.sin(a) * r)); }
+      const m = new T.LineBasicMaterial({ transparent: true, opacity: op }); m.color.set(hex);
+      return new T.Line(new T.BufferGeometry().setFromPoints(pts), m);
+    };
+    const r1 = mkRing(14.2, '#17150F', 0.16); r1.rotation.set(1.15, 0.2, 0.3);
+    const r2 = mkRing(16.4, stops[0], 0.5); r2.rotation.set(1.45, -0.15, -0.5);
+    const r3 = mkRing(18.4, '#17150F', 0.12); r3.rotation.set(0.85, 0.5, 1.15);
+    world.add(r1); world.add(r2); world.add(r3);
+    // orbiting sparkles
+    const orbs = [];
+    for (let i = 0; i < 4; i++) {
+      const s = new T.Sprite(new T.SpriteMaterial({ map: starTex, transparent: true, opacity: 0.95, depthWrite: false }));
+      s.material.color.set(stops[(i * 2) % stops.length]);
+      const sc = rnd(0.7, 1.15); s.scale.set(sc, sc, 1);
+      s.userData = { r: rnd(13, 18.5), sp: rnd(0.15, 0.32) * (i % 2 ? 1 : -1), ph: rnd(0, 6.28), tilt: rnd(-0.4, 0.4) };
+      world.add(s); orbs.push(s);
+    }
+    // logo moons (DOM), three tilted rings, projected with the same camera
+    const moons = Array.from(document.querySelectorAll('#ivc-moons [data-moon]'));
+    const nameEl = document.getElementById('ivc-moonName');
+    const rings = [
+      { r: 12.6, tilt: 0.42, roll: 0.25, sp: 0.11 },
+      { r: 14.4, tilt: -0.55, roll: -0.35, sp: -0.085 },
+      { r: 16.2, tilt: 0.2, roll: 1.05, sp: 0.07 }
+    ];
+    const moonData = moons.map((el, i) => {
+      const ring = rings[i % 3], k = Math.floor(i / 3), n = Math.ceil(moons.length / 3);
+      return { el, ring, ph: (k / n) * Math.PI * 2 + (i % 3) * 0.7, hover: 0, focus: false };
+    });
+    const _v = new T.Vector3(), _q = new T.Quaternion(), _e = new T.Euler();
+    let anyFocus = false;
+    moonData.forEach(m => {
+      this._on(m.el, 'pointerenter', () => { m.focus = true; anyFocus = true; if (nameEl) { nameEl.textContent = m.el.getAttribute('aria-label').toUpperCase(); gsap.to(nameEl, { opacity: 1, duration: 0.3 }); } });
+      this._on(m.el, 'pointerleave', () => { m.focus = false; anyFocus = moonData.some(x => x.focus); if (!anyFocus && nameEl) gsap.to(nameEl, { opacity: 0, duration: 0.3 }); });
+    });
+    const placeMoons = (dt) => {
+      if (!moons.length) return;
+      const cw = cv.clientWidth, ch = cv.clientHeight; if (!cw) return;
+      cam.updateMatrixWorld(); world.updateMatrixWorld();
+      for (let i = 0; i < moonData.length; i++) {
+        const m = moonData[i], rg = m.ring;
+        m.hover += ((m.focus ? 1 : 0) - m.hover) * Math.min(1, dt * 9);
+        const a = m.ph + t * rg.sp * (1 - m.hover * 0.85);
+        _v.set(Math.cos(a) * rg.r, 0, Math.sin(a) * rg.r);
+        _e.set(rg.tilt, 0, rg.roll); _q.setFromEuler(_e); _v.applyQuaternion(_q);
+        _v.applyMatrix4(world.matrixWorld);
+        const depth = _v.z; // world z toward camera
+        _v.project(cam);
+        const sx = Math.max(90, Math.min(cw - 90, (_v.x * 0.5 + 0.5) * cw)), sy = Math.max(40, Math.min(ch - 40, (-_v.y * 0.5 + 0.5) * ch));
+        const dz = (depth + 22) / 44; // 0 back .. 1 front
+        const base = (0.8 + dz * 0.35) * Math.min(1.25, cw / 600);
+        const sc = base * (1 + m.hover * 0.55) + (anyFocus && !m.focus ? -0.08 : 0);
+        const op = (0.45 + dz * 0.55) * (anyFocus && !m.focus ? 0.45 : 1) + m.hover * 0.3;
+        m.el.style.transform = 'translate(' + sx.toFixed(1) + 'px,' + sy.toFixed(1) + 'px) translate(-50%,-50%) scale(' + sc.toFixed(3) + ')';
+        m.el.style.left = '0'; m.el.style.top = '0'; m.el.style.margin = '0';
+        m.el.style.opacity = Math.min(1, op).toFixed(3);
+        m.el.style.zIndex = String(Math.round(100 + depth * 4 + m.hover * 200));
+        m.el.style.filter = dz < 0.35 && !m.focus ? 'blur(' + ((0.35 - dz) * 3).toFixed(2) + 'px)' : 'none';
+      }
+    };
+    const st = { autoRotate: autoRotate, dragging: false, vx: 0, vy: 0, lx: 0, ly: 0 };
+    this._on(cv, 'pointerdown', e => { st.dragging = true; st.lx = e.clientX; st.ly = e.clientY; cv.style.cursor = 'grabbing'; });
+    this._on(window, 'pointerup', () => { st.dragging = false; cv.style.cursor = 'grab'; });
+    this._on(window, 'pointermove', e => {
+      if (!st.dragging) return;
+      const dx = e.clientX - st.lx, dy = e.clientY - st.ly; st.lx = e.clientX; st.ly = e.clientY;
+      world.rotation.y += dx * 0.006;
+      world.rotation.x = Math.max(-0.8, Math.min(0.8, world.rotation.x + dy * 0.004));
+      st.vx = dx * 0.006; st.vy = dy * 0.004;
+    });
+    let visible = true;
+    const io = new IntersectionObserver(en => { visible = en[0].isIntersecting; });
+    io.observe(wrap); this._io2 = io;
+    const clock = new T.Clock(); let t = 0;
+    const loop = () => {
+      if (self._dead) return;
+      self._raf2 = requestAnimationFrame(loop);
+      if (!visible || document.hidden) return;
+      const dt = Math.min(clock.getDelta(), 0.06); t += dt;
+      if (st.autoRotate && !st.dragging && !reduced && !anyFocus) world.rotation.y += dt * 0.14;
+      if (!st.dragging) { world.rotation.y += st.vx; world.rotation.x = Math.max(-0.8, Math.min(0.8, world.rotation.x + st.vy)); st.vx *= 0.94; st.vy *= 0.94; }
+      if (!reduced) world.rotation.z = Math.sin(t * 0.4) * 0.02;
+      orbs.forEach(o2 => {
+        const u = o2.userData, a = t * u.sp + u.ph;
+        o2.position.set(Math.cos(a) * u.r, Math.sin(a * 1.3) * u.r * u.tilt * 0.4, Math.sin(a) * u.r);
+      });
+      renderer.render(scene, cam);
+      placeMoons(reduced ? 0 : dt);
+    };
+    loop();
+    return {
+      state: st,
+      setPalette: (s, a1) => { fillAcc(s); r2.material.color.set(s[0]); orbs.forEach((o2, i) => o2.material.color.set(s[(i * 2) % s.length])); },
+      dispose: () => {
+        try { io.disconnect(); scene.traverse(o2 => { if (o2.geometry) o2.geometry.dispose(); if (o2.material) { if (o2.material.map) o2.material.map.dispose(); o2.material.dispose(); } }); renderer.dispose(); } catch (e) {}
+      }
+    };
+  }
+
+  _motion(reduced) {
+    const $ = id => document.getElementById(id);
+    const pre = $('ivc-pre'), num = $('ivc-preN');
+    const heroBits = ['#ivc-kick', '#ivc-sub', '#ivc-ctas', '#ivc-facts'];
+    const showHero = () => {
+      gsap.fromTo('#ivc-h1a > span, #ivc-h1b > span', { yPercent: 112 }, { yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: 0.09 });
+      gsap.fromTo(heroBits, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1, stagger: 0.08, delay: 0.3, ease: 'power3.out' });
+      gsap.fromTo('#ivc-uniWrap', { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 1.3, delay: 0.25, ease: 'power3.out' });
+      gsap.fromTo('#ivc-nav', { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.4 });
+      gsap.fromTo('#ivc-scroll', { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 1 });
+    };
+    let wiped = false;
+    try { if (sessionStorage.getItem('ivcWipe') === '1') { wiped = true; sessionStorage.removeItem('ivcWipe'); } } catch (e) {}
+    if (pre && wiped && !reduced) {
+      if (num) num.style.display = 'none';
+      gsap.timeline({ delay: 0.1 })
+        .to(pre, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.8, ease: 'power4.inOut' })
+        .add(showHero, '-=0.5')
+        .set(pre, { display: 'none' });
+    } else if (pre && num && !reduced) {
+      const o = { v: 0 };
+      gsap.timeline()
+        .to(o, { v: 100, duration: 1.3, ease: 'power2.inOut', onUpdate: () => { num.textContent = String(Math.round(o.v)).padStart(3, '0'); } })
+        .to(pre, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.85, ease: 'power4.inOut' }, '+=0.1')
+        .add(showHero, '-=0.5')
+        .set(pre, { display: 'none' });
+    } else { if (pre) pre.style.display = 'none'; showHero(); }
+    const manif = $('manifesto');
+    const phrases = gsap.utils.toArray('[data-ph]');
+    if (manif && phrases.length) {
+      if (reduced) phrases.forEach(p => { p.style.opacity = 1; });
+      else ScrollTrigger.create({
+        trigger: manif, start: 'top top', end: '+=120%', pin: true, scrub: true,
+        onUpdate: s => {
+          const p = s.progress * (phrases.length + 1);
+          phrases.forEach((el, i) => {
+            const k = Math.max(0, Math.min(1, p - i));
+            el.style.opacity = (0.12 + 0.88 * k).toFixed(3);
+          });
+        }
+      });
+    }
+    const facts = gsap.utils.toArray('[data-fact]');
+    if (facts.length) {
+      gsap.set(facts, { clipPath: reduced ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)', opacity: reduced ? 1 : 0.001 });
+      ScrollTrigger.create({
+        trigger: '#ivc-facts8', start: 'top 80%', once: true,
+        onEnter: () => {
+          gsap.to(facts, { clipPath: 'inset(0 0 0% 0)', opacity: 1, duration: 1, ease: 'expo.out', stagger: { each: 0.08, from: 'start' } });
+          gsap.fromTo(facts.map(f => f.children[1]), { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', stagger: 0.08, delay: 0.25 });
+          gsap.fromTo(facts.map(f => f.children[2]), { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.08, delay: 0.35 });
+        }
+      });
+    }
+    gsap.utils.toArray('[data-rev]').forEach(el => {
+      gsap.fromTo(el, { opacity: 0, y: reduced ? 0 : 40 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    });
+    gsap.utils.toArray('[data-count]').forEach(el => {
+      const to = parseFloat(el.getAttribute('data-count')) || 0;
+      const pad = parseInt(el.getAttribute('data-pad') || '1', 10);
+      ScrollTrigger.create({
+        trigger: el, start: 'top 85%', once: true,
+        onEnter: () => { const o = { v: 0 }; gsap.to(o, { v: to, duration: reduced ? 0.01 : 1.6, ease: 'power2.out', onUpdate: () => { el.textContent = String(Math.round(o.v)).padStart(pad, '0'); } }); }
+      });
+    });
+  }
+
+  _ui(reduced, fine) {
+    const $ = id => document.getElementById(id);
+    const fineHov = fine && !reduced;
+    const ring = $('ivc-curR');
+    if (ring && fine) {
+      ring.style.display = 'block';
+      const qx = gsap.quickTo(ring, 'x', { duration: 0.35, ease: 'power3' });
+      const qy = gsap.quickTo(ring, 'y', { duration: 0.35, ease: 'power3' });
+      this._on(window, 'pointermove', e => { qx(e.clientX); qy(e.clientY); });
+      this._on(document, 'mouseover', e => {
+        const t = e.target.closest && e.target.closest('a, button, [data-hov]');
+        gsap.to(ring, { scale: t ? 1.7 : 1, opacity: t ? 1 : 0.6, duration: 0.3 });
+      });
+    }
+    if (fineHov) {
+      gsap.utils.toArray('[data-mag]').forEach(el => {
+        this._on(el, 'pointermove', e => { const r = el.getBoundingClientRect(); gsap.to(el, { x: (e.clientX - (r.left + r.width / 2)) * 0.16, y: (e.clientY - (r.top + r.height / 2)) * 0.22, duration: 0.4, ease: 'power2.out' }); });
+        this._on(el, 'pointerleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, .5)' }));
+      });
+      gsap.utils.toArray('[data-tilt]').forEach(el => {
+        this._on(el, 'pointermove', e => {
+          const r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+          gsap.to(el, { rotateY: px * 6, rotateX: -py * 6, transformPerspective: 900, duration: 0.5, ease: 'power2.out' });
+        });
+        this._on(el, 'pointerleave', () => gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.7, ease: 'power3.out' }));
+      });
+    }
+    gsap.utils.toArray('[data-mq]').forEach(el => {
+      this._on(el, 'mouseenter', () => { el.style.animationPlayState = 'paused'; });
+      this._on(el, 'mouseleave', () => { el.style.animationPlayState = 'running'; });
+    });
+    gsap.utils.toArray('a[data-region]').forEach(a => {
+      this._on(a, 'click', e => {
+        if (reduced) return;
+        const w = $(a.getAttribute('data-wipe') || 'ivc-wipe');
+        if (!w) return;
+        e.preventDefault();
+        try { sessionStorage.setItem('ivcWipe', '1'); } catch (err) {}
+        const href = a.getAttribute('href');
+        w.style.pointerEvents = 'auto';
+        gsap.to(w, { yPercent: 0, duration: 0.7, ease: 'power4.inOut', onComplete: () => { location.href = href; } });
+      });
+    });
+    gsap.utils.toArray('a[href^="#"]').forEach(a => {
+      this._on(a, 'click', e => {
+        const el = document.querySelector(a.getAttribute('href'));
+        if (!el) return;
+        e.preventDefault();
+        gsap.to(window, { scrollTo: { y: el, autoKill: true }, duration: reduced ? 0 : 1.1, ease: 'power3.inOut' });
+      });
+    });
+    const form = $('ivc-form');
+    if (form) this._on(form, 'submit', e => {
+      e.preventDefault();
+      const em = $('ivc-em'), msg = $('ivc-fmsg');
+      if (em && !/.+@.+\..+/.test(em.value)) { gsap.fromTo(form, { x: -6 }, { x: 0, duration: 0.4, ease: 'elastic.out(1, .4)' }); em.focus(); return; }
+      form.style.display = 'none';
+      if (msg) { msg.style.display = 'flex'; gsap.fromTo(msg, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }); }
+    });
+  }
+}
+
+// Auto mount component
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    const comp = new Component();
+    comp.componentDidMount();
+  } catch (err) {
+    console.warn('Component mount:', err);
+  }
+});
+</script>
+</body>
+</html>
