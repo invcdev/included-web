@@ -1,0 +1,71 @@
+.press {
+  position: relative;
+}
+
+.label {
+  padding-top: 62px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 550;
+  line-height: 24px;
+  color: var(--brand);
+}
+
+.logos {
+  list-style: none;
+  margin-top: 29px;
+  padding-inline: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.logo {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.logo img {
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+/* Colour version sits exactly over the grey one and fades in on hover. */
+.logo .color {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+@media (hover: hover) {
+  .logo[data-color]:hover .grey {
+    opacity: 0;
+  }
+  .logo[data-color]:hover .color {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .logos {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .label {
+    padding-top: 51px;
+    text-align: center;
+  }
+  .logos {
+    margin-top: 24px;
+    gap: 24px 36px;
+  }
+  .logo img {
+    width: auto !important;
+    height: 24px !important;
+  }
+}

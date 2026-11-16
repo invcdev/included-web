@@ -1,0 +1,125 @@
+/* isolation: the CTA glow sits at z-index -1 and must stay above this background.
+   z-index 1 lets the glow spill over the top of the next section, as designed. */
+.band {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  background: var(--bg);
+  padding: 0 0 54.5px;
+}
+
+/* ---------- CTA ---------- */
+
+.cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 28px;
+  padding: 30px 32.5px 29.5px 33px;
+  border: 2px solid transparent;
+  border-radius: 17px;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    var(--cta-border) border-box;
+}
+
+/* Spectrum glow under the card. */
+.cta::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 4%;
+  right: 4%;
+  top: calc(100% - 32px);
+  height: 58px;
+  border-radius: 50%;
+  background: var(--spectrum);
+  filter: blur(24px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.ctaHeading {
+  font-family: var(--font-display);
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 27.5px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.ctaHeading span {
+  display: block;
+}
+
+.ctaNote {
+  margin-top: 6.5px;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--muted);
+}
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 54px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ringed {
+  box-shadow: 0 0 0 9px rgba(80, 53, 226, 0.18);
+}
+
+.primaryBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -10px rgba(80, 53, 226, 0.7);
+}
+
+.ringed:hover {
+  box-shadow:
+    0 0 0 9px rgba(80, 53, 226, 0.18),
+    0 10px 24px -10px rgba(80, 53, 226, 0.7);
+}
+
+/* ---------- Phones and small tablets: stacked ---------- */
+
+@media (max-width: 900px) {
+  .cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .band {
+    padding-bottom: 48px;
+  }
+  .cta {
+    gap: 24px;
+    margin-top: 20px;
+    padding: 28px 24px;
+  }
+  .ctaHeading {
+    font-size: clamp(22px, 6vw, 27px);
+    line-height: 1.15;
+  }
+  .ctaHeading span {
+    display: inline;
+  }
+  .primaryBtn {
+    width: 100%;
+  }
+}

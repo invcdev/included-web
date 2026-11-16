@@ -1,14 +1,37 @@
 :root {
-  --bg-cream: #F7F5EE;
-  --text-dark: #0F0F0F;
-  --text-muted: #55534B;
-  --text-dim: #8A8677;
-  --border-light: #E6E2D4;
-  --accent-lime: #B0FF05;
-  --accent-purple: #5533EB;
-  
-  --grad: linear-gradient(92deg, #5533EB, #0033FF, #00F2FF, #00FF04, #B0FF05, #FFFF00);
-  --grad-text: linear-gradient(92deg, #5533EB, #0033FF, #0095B8, #0FA958, #5F8F00, #B98A00);
+  /* Surfaces */
+  --bg: #FFFFFF;
+  --surface: #F4F5F8;
+  --border: #EEEEEE;
+
+  /* Text */
+  --ink: #131412;
+  --ink-soft: #34363C;
+  --muted: #686A72;
+
+  /* Brand */
+  --brand: #5035E2;
+  --brand-soft: #CAC2F6;
+  --cyan: #6FEEFC;
+  --lime: #C1FD50;
+
+  /* Dark card */
+  --navy: #0F111F;
+  --navy-line: #272A36;
+  --navy-muted: #ABB1C5;
+
+  /* Spectrum: purple -> blue -> cyan -> mint -> lime (sampled from the full-width divider) */
+  --spectrum-stops: #5035E2 0%, #476FEA 16.7%, #53ABF2 33.3%, #6CE7FB 50%, #7AF3B8 66.7%, #98F872 83.3%, #C2FD51 100%;
+  --spectrum: linear-gradient(90deg, var(--spectrum-stops));
+
+  /* Type */
+  --font-display: var(--font-manrope), system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-hanken-grotesk), system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --container: 1152px;
+  --gutter: 24px;
+  --header-h: 72px;
 }
 
 *,
@@ -20,29 +43,28 @@
 }
 
 html {
-  background-color: var(--bg-cream);
+  background-color: var(--bg);
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
 }
 
 body {
-  background-color: var(--bg-cream);
-  color: var(--text-dark);
-  font-family: var(--font-hanken-grotesk), system-ui, -apple-system, sans-serif;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  margin: 0;
-  padding: 0;
 }
 
 ::selection {
-  background-color: var(--accent-lime);
-  color: var(--text-dark);
+  background-color: var(--lime);
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent-purple);
+  outline: 2px solid var(--brand);
   outline-offset: 3px;
 }
 
@@ -51,7 +73,26 @@ a {
   text-decoration: none;
 }
 
-/* Accessible Screen Reader Only utility */
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -64,12 +105,22 @@ a {
   border-width: 0;
 }
 
-@keyframes tickerMove {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
+@media (max-width: 640px) {
+  :root {
+    --gutter: 20px;
+    --header-h: 64px;
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

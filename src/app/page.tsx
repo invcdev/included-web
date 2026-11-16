@@ -1,64 +1,55 @@
-import React from "react";
-import Link from "next/link";
-import { UnicornCanvas } from "@/components/home/UnicornCanvas";
-import styles from "./page.module.css";
+import { Hero } from "@/components/home/Hero";
+import { Press } from "@/components/home/Press";
+import { Network } from "@/components/home/Network";
+import { FounderLetter } from "@/components/home/FounderLetter";
+import { Introducing } from "@/components/home/Introducing";
+import { SeatCta } from "@/components/home/SeatCta";
+import { Climb } from "@/components/home/Climb";
+import { Curriculum } from "@/components/home/Curriculum";
+import { Outcomes } from "@/components/home/Outcomes";
+import { Month } from "@/components/home/Month";
+import { TuesdaySlot } from "@/components/home/TuesdaySlot";
+import { Faculty } from "@/components/home/Faculty";
 
 export default function Home() {
   return (
-    <section id="world" className={styles.heroSection} aria-labelledby="hero-heading">
-      {/* Left Column: Typography & CTAs */}
-      <div className={styles.leftCol}>
-        {/* Kicker badge */}
-        <p className={styles.kicker}>
-          <span className={styles.kickerBar} aria-hidden="true" />
-          <span>GLOBAL FELLOWSHIP — CLASS &apos;26 REGISTRATIONS OPEN</span>
-        </p>
-
-        {/* SEO Single H1 */}
-        <h1 id="hero-heading" className={styles.heading}>
-          <span className={styles.headingLine}>Changing</span>
-          <span className={styles.headingLine}>
-            the <em className={styles.faceEm}>face</em>
-          </span>
-          <span className={styles.headingLine}>of venture</span>
-          <span className={styles.headingLine}>capital.</span>
-        </h1>
-
-        {/* Subtitle */}
-        <p className={styles.subheading}>
-          A fully funded fellowship, launchpad and lifelong community for
-          exceptional people from overlooked backgrounds — breaking into VC and
-          deciding what gets built next.
-        </p>
-
-        {/* Action Buttons */}
-        <div className={styles.ctaGroup}>
-          <a
-            href="https://form.typeform.com/to/bALnGEQ7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.primaryBtn}
-            id="cta-apply-fellowship"
-          >
-            Apply to the Fellowship
-          </a>
-          <Link href="#voices" className={styles.secondaryLink} id="cta-see-fellows">
-            See where Fellows land →
-          </Link>
-        </div>
-
-        {/* Fact highlights */}
-        <p className={styles.factsLine}>
-          FULLY FUNDED <span className={styles.sparkle}>✦</span> PART-TIME{" "}
-          <span className={styles.sparkle}>✦</span> 40+ NATIONALITIES{" "}
-          <span className={styles.sparkle}>✦</span> SIX CONTINENTS
-        </p>
-      </div>
-
-      {/* Right Column: Interactive Spectrum Dot-Matrix Unicorn */}
-      <div className={styles.rightCol} aria-hidden="true">
-        <UnicornCanvas />
-      </div>
-    </section>
+    <>
+      <Hero />
+      <Press />
+      <Network />
+      <FounderLetter />
+      <Introducing />
+      <SeatCta
+        id="take-your-seat"
+        testimonial={{
+          quote: "\u201cIncluded VC is by far the best thing I\u2019ve ever been a part of.\u201d",
+          name: "Sofia Haq",
+          role: "Investment Associate, VamosVentures, Fellow 2021",
+          quoteWidth: 460,
+        }}
+        heading={["Most resolutions have no start time.", "This one does: Tuesday 5 January, 16:00."]}
+        note="About ten minutes, start to finish."
+        border="linear-gradient(90deg, #67defa 0%, #6feff7 5%, #7af3b4 20%, #94f777 35%, #b8fc53 50%, #c1fd51 55%, #a6fb60 65%, #87f594 80%, #74f1d3 95%, #71f0e8 100%)"
+      />
+      <Climb />
+      <Curriculum />
+      <Outcomes />
+      <Month />
+      <TuesdaySlot />
+      <SeatCta
+        id="start-in-january"
+        testimonial={{
+          quote: "\u201cCan I redo the Fellowship? That was my first question after the summit.\u201d",
+          name: "Margarita de la Pe\u00f1a Virg\u00f3s",
+          role: "Investment Lead LatAm, Zacua Ventures, Fellow 2023",
+          quoteWidth: 520,
+        }}
+        heading={["Fourteen Tuesdays. Starts 5 January 2027."]}
+        note="About ten minutes, start to finish."
+        border="linear-gradient(90deg, #7cf3af 0%, #76f0c7 5%, #70eff4 15%, #6ae2fb 20%, #59bcf4 30%, #4d97ef 40%, #4872e9 50%, #494de5 60%, #4e3be3 65%, #4c40e3 70%, #4866e9 80%, #4a8aed 90%, #53adf2 100%)"
+        ring
+      />
+      <Faculty />
+    </>
   );
 }
