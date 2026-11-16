@@ -1,0 +1,242 @@
+.month {
+  background: var(--surface);
+  padding: 87.5px 0 88px;
+}
+
+/* ---------- Heading row (paragraph top-aligned here) ---------- */
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 438.5px;
+  align-items: start;
+  column-gap: 48px;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: var(--brand);
+}
+
+.heading {
+  margin-top: 16.5px;
+  font-family: var(--font-display);
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 61px;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.body {
+  margin-top: 8.5px;
+  font-size: 20px;
+  line-height: 31px;
+  color: var(--muted);
+}
+
+/* ---------- Weeks ---------- */
+
+.weeks {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 39.5px;
+}
+
+.week {
+  min-height: 489px;
+  padding: 19.5px 18px 20px;
+  border: 1px solid #e2e2e2;
+  border-radius: 17px;
+  background: var(--bg);
+}
+
+.weekHead {
+  display: flex;
+  align-items: baseline;
+  gap: 8.5px;
+}
+
+.weekNum {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 36px;
+  color: var(--ink);
+}
+
+.weekLabel {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.events {
+  list-style: none;
+  display: grid;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+/* One event: tinted chip with a 4px accent in the event type's colour. */
+.event {
+  display: flex;
+  flex-direction: column;
+  padding: 11.5px 12px 9.5px;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: var(--tint);
+}
+
+.masterclass {
+  --accent: #3044f5;
+  --tint: #eaedfe;
+}
+.task {
+  --accent: #9dce3f;
+  --tint: #f4ffdc;
+}
+.africa {
+  --accent: #5035e2;
+  --tint: #edebfd;
+}
+.office {
+  --accent: #57bfd3;
+  --tint: #edfdff;
+}
+
+.day {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.eventTitle {
+  margin-top: 3.5px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.meta {
+  margin-top: 1.5px;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--muted);
+}
+
+/* ---------- Stats ---------- */
+
+.stats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 20px;
+  margin-top: 34px;
+}
+
+.stats li {
+  display: flex;
+  flex-direction: column;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 650;
+  line-height: 48px;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.statLabel {
+  margin-top: -0.5px;
+  font-size: 14.5px;
+  line-height: 22px;
+  color: var(--muted);
+}
+
+.footnote {
+  margin-top: 24px;
+  font-size: 13.5px;
+  line-height: 20px;
+  color: var(--muted);
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1100px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    column-gap: 40px;
+  }
+  .heading {
+    font-size: clamp(40px, 5vw, 60px);
+    line-height: 1.04;
+  }
+  .weeks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .week {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .month {
+    padding: 72px 0;
+  }
+  .head {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
+  }
+  .body {
+    max-width: 560px;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .stats {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .month {
+    padding: 56px 0 64px;
+  }
+  .heading {
+    font-size: clamp(34px, 9.6vw, 44px);
+    line-height: 1.05;
+  }
+  .body {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .weeks {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .statValue {
+    font-size: 34px;
+    line-height: 40px;
+  }
+}

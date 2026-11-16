@@ -1,0 +1,203 @@
+.introducing {
+  background: var(--bg);
+  padding: 89px 0 88px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 630px) minmax(0, 466px);
+  justify-content: space-between;
+  column-gap: 56px;
+  align-items: start;
+}
+
+/* ---------- Left: logo + stats ---------- */
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: var(--brand);
+}
+
+.lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 518.5px;
+  max-width: 100%;
+  margin-top: 16.5px;
+}
+
+.logo {
+  display: block;
+  width: 100%;
+  margin-left: -1px;
+  height: auto;
+}
+
+.byline {
+  display: block;
+  width: 138.5px;
+  height: auto;
+  margin-top: 20px;
+  margin-right: -4px;
+}
+
+.stats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding: 20.5px 20px 20px 23px;
+  border: 1px solid #e2e2e2;
+  border-radius: 17px;
+  background: var(--bg);
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 58px;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+}
+
+.statTitle {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 26px;
+  color: var(--ink);
+}
+
+.statText {
+  margin-top: 5.5px;
+  font-size: 14.5px;
+  line-height: 20.5px;
+  color: var(--muted);
+}
+
+/* ---------- Right: illustration + tracks ---------- */
+
+.aside {
+  margin-top: 24.5px;
+}
+
+.illustration {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 17px;
+}
+
+.tracks {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16.5px;
+  margin-top: 18.5px;
+}
+
+.tracksLabel {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.trackList {
+  list-style: none;
+  display: flex;
+  gap: 13px;
+}
+
+.track {
+  display: inline-flex;
+  align-items: center;
+  gap: 10.5px;
+  height: 56.5px;
+  padding: 0 23.5px 0 22.5px;
+  border: 1.5px solid #e2e2e2;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.track::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dot);
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    column-gap: 40px;
+  }
+}
+
+/* ---------- Phones and small tablets: illustration below ---------- */
+
+@media (max-width: 900px) {
+  .introducing {
+    padding: 72px 0;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 48px;
+  }
+  .main,
+  .aside {
+    max-width: 630px;
+  }
+  .aside {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .introducing {
+    padding: 56px 0 64px;
+  }
+  .byline {
+    width: 27%;
+    margin-top: 14px;
+    margin-right: -0.8%;
+  }
+  .stats {
+    margin-top: 22px;
+    gap: 12px;
+  }
+  .statValue {
+    font-size: 48px;
+    line-height: 48px;
+  }
+}
+
+@media (max-width: 520px) {
+  .stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

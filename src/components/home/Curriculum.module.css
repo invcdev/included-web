@@ -1,0 +1,310 @@
+.curriculum {
+  background: var(--bg);
+  padding: 88px 0 88px;
+}
+
+/* ---------- Heading row (same styles as "The climb") ---------- */
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 438.5px;
+  align-items: end;
+  column-gap: 48px;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: var(--brand);
+}
+
+.heading {
+  margin-top: 15px;
+  font-family: var(--font-display);
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 61px;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.body {
+  margin-bottom: 0.5px;
+  font-size: 20px;
+  line-height: 31px;
+  color: var(--muted);
+}
+
+.hint {
+  margin-top: 41px;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--muted);
+}
+
+/* ---------- Blocks of weeks ---------- */
+
+.blocks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 19px;
+}
+
+.block {
+  padding: 23px 20.5px 20px 20px;
+  border: 1px solid #d8dbdc;
+  border-radius: 17px;
+  background: var(--surface);
+}
+
+.blockLabel {
+  padding-left: 2px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.blockTitle {
+  margin-top: 6px;
+  padding-left: 2px;
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 750;
+  line-height: 30px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.weeks {
+  list-style: none;
+  display: grid;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+/* One week: white card with a 6px accent in the week's spectrum colour. */
+.week {
+  border: 1px solid #e2e2e2;
+  border-left: 6px solid var(--week);
+  border-radius: 10px;
+  background: var(--bg);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.week:hover,
+.week:focus-within {
+  border-color: #b8b8b8;
+  box-shadow: 0 3px 16px rgba(16, 18, 31, 0.09);
+}
+
+.weekHeading {
+  font: inherit;
+}
+
+.weekButton {
+  display: grid;
+  grid-template-columns: 67.5px minmax(0, 1fr) auto;
+  align-items: start;
+  width: 100%;
+  min-height: 73px;
+  padding: 0 14px 0 21.5px;
+  text-align: left;
+  border-radius: 9px;
+}
+
+.weekButton:focus-visible {
+  outline-offset: 2px;
+}
+
+.weekNum {
+  padding-top: 20.5px;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 34px;
+  color: var(--week);
+}
+
+.weekTitle {
+  padding-top: 17.5px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 26px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.chevron {
+  width: 16px;
+  height: 10px;
+  margin-top: 27px;
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition:
+    stroke 0.2s ease,
+    transform 0.25s ease;
+}
+
+.week:hover .chevron,
+.week:focus-within .chevron {
+  stroke: var(--ink);
+}
+
+.week[data-open] .chevron {
+  transform: rotate(180deg);
+}
+
+.weekPanel {
+  padding: 0 20px 20px 89px;
+  font-size: 15px;
+  line-height: 22.5px;
+  color: var(--ink-soft);
+}
+
+.weekPanel:empty {
+  display: none;
+}
+
+/* ---------- Ascend Africa banner ---------- */
+
+.africa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 14px;
+  min-height: 105.5px;
+  padding: 26px 28px 25px 28.5px;
+  border-left: 6px solid var(--lime);
+  border-radius: 10px;
+  background: var(--navy);
+}
+
+.africaTitle {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.africaText {
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 22px;
+  color: #bcbed3;
+}
+
+.africaBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 54px;
+  padding: 0 28.5px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.africaBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -10px rgba(193, 253, 80, 0.6);
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1100px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    column-gap: 40px;
+  }
+  .heading {
+    font-size: clamp(40px, 5vw, 60px);
+    line-height: 1.04;
+  }
+}
+
+@media (max-width: 900px) {
+  .curriculum {
+    padding: 72px 0;
+  }
+  .head {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 28px;
+  }
+  .body {
+    max-width: 560px;
+    margin-bottom: 0;
+  }
+  .blocks {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .africa {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .curriculum {
+    padding: 56px 0 64px;
+  }
+  .heading {
+    font-size: clamp(34px, 9.6vw, 44px);
+    line-height: 1.05;
+  }
+  .body {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .hint {
+    margin-top: 28px;
+  }
+  .block {
+    padding: 20px 14px 14px;
+  }
+  .weekButton {
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    padding: 0 12px 0 14px;
+  }
+  .weekNum {
+    font-size: 22px;
+  }
+  .weekTitle {
+    font-size: 16.5px;
+    line-height: 24px;
+    padding-bottom: 18px;
+  }
+  .weekPanel {
+    padding: 0 16px 18px 62px;
+  }
+  .africa {
+    padding: 24px 20px;
+  }
+  .africaBtn {
+    width: 100%;
+  }
+}

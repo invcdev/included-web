@@ -1,0 +1,83 @@
+.testimonial {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 32px 37px 31.5px;
+  border: 1px solid #d9dadc;
+  border-radius: 17px;
+  background: var(--surface);
+}
+
+.bar {
+  display: block;
+  width: 48px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--spectrum);
+}
+
+.quote {
+  margin-top: 16.5px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+/* Sized to its content, up to 300px (longer roles wrap). */
+.person {
+  display: flex;
+  align-items: center;
+  gap: 12.5px;
+  max-width: 300px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--spectrum);
+}
+
+.personText {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--ink);
+}
+
+.role {
+  margin-top: 3px;
+  font-size: 13.5px;
+  line-height: 17.5px;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .testimonial {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonial {
+    padding: 28px 24px;
+  }
+  .quote {
+    font-size: clamp(24px, 6.6vw, 30px);
+    line-height: 1.2;
+  }
+}

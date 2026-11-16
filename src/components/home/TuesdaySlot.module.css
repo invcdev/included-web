@@ -1,0 +1,390 @@
+.section {
+  background: var(--bg);
+  padding: 34px 0 88px;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 440px minmax(0, 1fr);
+  column-gap: 63px;
+  min-height: 576px;
+  padding: 0 52px;
+  border-radius: 24px;
+  background: var(--navy);
+}
+
+/* Purple bloom top right, fading out through teal. */
+.glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 320px 280px at 82% 18%, rgba(70, 56, 214, 0.42), rgba(70, 56, 214, 0) 100%),
+    radial-gradient(ellipse 600px 460px at 64% 32%, rgba(48, 120, 170, 0.16), rgba(48, 120, 170, 0) 100%);
+}
+
+/* ---------- Copy ---------- */
+
+.copy {
+  position: relative;
+  align-self: start;
+  padding: 47.5px 0 48px;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: var(--cyan);
+}
+
+.heading {
+  margin-top: 10.5px;
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 52.5px;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+
+.lede {
+  margin-top: 13px;
+  font-size: 20px;
+  line-height: 31px;
+  color: #6a6b76;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 41.5px;
+  margin-top: 27px;
+  padding: 0 16.5px 0 15px;
+  border: 1px solid #386e7b;
+  border-radius: 999px;
+  background: #182836;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.pillDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lime);
+}
+
+.pillTime {
+  margin-left: 5.5px;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.pillZone {
+  margin-left: 9.5px;
+  font-weight: 400;
+  color: #bbc0c8;
+}
+
+.note {
+  margin-top: 15px;
+  font-size: 13.5px;
+  line-height: 21.5px;
+  color: #9fa5c0;
+}
+
+/* ---------- Visual stage (545 x 440 at full size; scales with its width) ---------- */
+
+.stage {
+  position: relative;
+  align-self: center;
+  width: 100%;
+  aspect-ratio: 545 / 440;
+  container-type: inline-size;
+}
+
+/* 1 design px of the stage; --t enlarges the small text on phones. */
+.stage * {
+  --u: calc(100cqw / 545);
+}
+
+/* City cards (grid state) */
+.cards {
+  list-style: none;
+  position: absolute;
+  inset: 0;
+  perspective: 900px;
+}
+
+.card {
+  --s: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(98.5 * var(--u));
+  height: calc(136 * var(--u));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: calc(10 * var(--u));
+  background: linear-gradient(180deg, var(--sky1), var(--sky2) 50%, var(--sky3));
+  transform: translate(calc(var(--gx) * var(--u)), calc(var(--gy) * var(--u))) scale(var(--s));
+  will-change: transform, opacity;
+}
+
+.card[data-mine] {
+  --s: 1.03;
+  z-index: 1;
+  border: 2px solid var(--lime);
+}
+
+.cardCity {
+  position: absolute;
+  top: calc(11.5 * var(--u));
+  left: calc(11 * var(--u));
+  font-family: var(--font-display);
+  font-size: calc(6.5 * var(--u) * var(--t, 1));
+  font-weight: 700;
+  line-height: calc(8 * var(--u) * var(--t, 1));
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.sun,
+.moon {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--body-y) * var(--u));
+  width: calc(36 * var(--u));
+  height: calc(36 * var(--u));
+  border-radius: 50%;
+  translate: -50% -50%;
+}
+
+.sun {
+  background: radial-gradient(circle at 42% 38%, #fffdf6, #f7f3e6 70%, #efe9d6);
+  box-shadow: 0 0 calc(20 * var(--u)) rgba(255, 247, 225, 0.55);
+}
+
+.moon {
+  background: radial-gradient(circle at 40% 36%, #f6f7fd, #e3e6f6 65%, #cfd4ee);
+  box-shadow: 0 0 calc(22 * var(--u)) rgba(200, 208, 255, 0.45);
+}
+
+.cardTime {
+  position: absolute;
+  top: calc(89.5 * var(--u));
+  left: calc(11 * var(--u));
+  font-family: var(--font-display);
+  font-size: calc(15 * var(--u) * var(--t, 1));
+  font-weight: 600;
+  line-height: calc(18 * var(--u) * var(--t, 1));
+  white-space: nowrap;
+  color: #fff;
+}
+
+.cardTo {
+  position: absolute;
+  top: calc(111.5 * var(--u));
+  left: calc(11 * var(--u));
+  font-size: calc(7.5 * var(--u) * var(--t, 1));
+  line-height: calc(10 * var(--u) * var(--t, 1));
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Orbit state */
+.orbit {
+  position: absolute;
+  inset: 0;
+}
+
+.orbitPath,
+.ring,
+.sphere,
+.place {
+  opacity: 0;
+}
+
+.orbitPath {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.orbitPath circle {
+  fill: none;
+  stroke: rgba(171, 177, 197, 0.38);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.ring {
+  position: absolute;
+  left: calc(150 * var(--u));
+  top: calc(98 * var(--u));
+  width: calc(242 * var(--u));
+  height: calc(242 * var(--u));
+  border: 1px solid rgba(111, 238, 252, 0.22);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(60, 150, 180, 0.2), rgba(60, 150, 180, 0.1) 70%);
+}
+
+.sphere {
+  position: absolute;
+  transform: scale(0.6);
+  left: calc(179.5 * var(--u));
+  top: calc(127.5 * var(--u));
+  width: calc(183 * var(--u));
+  height: calc(183 * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 34%, #c9f8fe 0%, #8af3fd 42%, #72ecfb 70%, #5ccfea 100%);
+  box-shadow: 0 0 calc(60 * var(--u)) rgba(111, 238, 252, 0.3);
+  text-align: center;
+}
+
+.sphereLabel {
+  font-family: var(--font-display);
+  font-size: calc(12 * var(--u) * var(--t, 1));
+  font-weight: 700;
+  line-height: calc(16 * var(--u) * var(--t, 1));
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #11253c;
+}
+
+.sphereTime {
+  margin-top: calc(9 * var(--u));
+  font-family: var(--font-display);
+  font-size: calc(21.5 * var(--u) * var(--t, 1));
+  font-weight: 700;
+  line-height: calc(26 * var(--u) * var(--t, 1));
+  letter-spacing: -0.02em;
+  color: #0d192d;
+}
+
+.sphereNote {
+  margin-top: calc(7 * var(--u));
+  font-size: calc(10 * var(--u) * var(--t, 1));
+  line-height: calc(14 * var(--u) * var(--t, 1));
+  color: #223858;
+}
+
+.place {
+  position: absolute;
+  left: calc(var(--x) * var(--u));
+  top: calc(var(--y) * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(6.5 * var(--u));
+  white-space: nowrap;
+  translate: -50% -50%;
+}
+
+.placeDot {
+  width: calc(9 * var(--u));
+  height: calc(9 * var(--u));
+  border-radius: 50%;
+  background: #5fc8d9;
+  box-shadow: 0 0 0 calc(3 * var(--u)) rgba(95, 200, 217, 0.25);
+}
+
+.place[data-mine] .placeDot {
+  background: #9ed148;
+  box-shadow: 0 0 0 calc(3 * var(--u)) rgba(158, 209, 72, 0.3);
+}
+
+.placeName {
+  font-family: var(--font-display);
+  font-size: calc(9.5 * var(--u) * var(--t, 1));
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e0e1e8;
+}
+
+.placeTime {
+  margin-left: calc(2 * var(--u));
+  font-size: calc(10 * var(--u) * var(--t, 1));
+  font-weight: 500;
+  color: #abadc2;
+}
+
+/* ---------- Grid <-> orbit ---------- */
+/* Driven from TuesdaySlot.tsx: inline transform/opacity per card, opacity on
+   the orbit pieces. The CSS above is the resting card state. */
+
+/* ---------- Smaller screens ---------- */
+
+@media (max-width: 1100px) {
+  .panel {
+    grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+    column-gap: 40px;
+    padding: 0 40px;
+  }
+  .heading {
+    font-size: clamp(40px, 4.6vw, 52px);
+    line-height: 1.02;
+  }
+}
+
+@media (max-width: 900px) {
+  .panel {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    padding: 0 32px 40px;
+  }
+  .copy {
+    padding-bottom: 32px;
+  }
+  .stage {
+    max-width: 545px;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 24px 0 64px;
+  }
+  .panel {
+    padding: 0 20px 28px;
+    border-radius: 20px;
+  }
+  .copy {
+    padding-top: 36px;
+  }
+  .heading {
+    font-size: clamp(32px, 9vw, 40px);
+  }
+  .lede {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .stage {
+    --t: 1.35;
+  }
+  .pill {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 41.5px;
+    padding: 8px 16px;
+    row-gap: 2px;
+    white-space: normal;
+  }
+}
