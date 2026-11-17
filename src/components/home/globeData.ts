@@ -2,21 +2,11 @@
 // Coordinates are design px on those canvases; the component converts them.
 // TODO: replace the *-placeholder.png crops with the final partner logo files.
 
+import type { GlobeLogo as BaseLogo } from "./LogoGlobe";
+
 export type PartnerGroup = "global" | "africa";
 
-export type GlobeLogo = {
-  slug: string;
-  name: string;
-  group: PartnerGroup;
-  /** Logo image size (design px, i.e. 2x of its CSS size in the grid). */
-  w: number;
-  h: number;
-  /** Centre on the globe canvas at rotation 0, with its size and strength there. */
-  globeX: number;
-  globeY: number;
-  globeScale: number;
-  globeAlpha: number;
-};
+export type GlobeLogo = BaseLogo & { group: PartnerGroup };
 
 // Listed in grid order: left to right, top to bottom, per group.
 export const GLOBE_LOGOS: GlobeLogo[] = [

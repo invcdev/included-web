@@ -8,6 +8,15 @@
   padding: 0 0 54.5px;
 }
 
+/* No testimonial: the card opens the band. */
+.solo {
+  padding-top: 13.5px;
+}
+
+.solo .cta {
+  margin-top: 0;
+}
+
 /* ---------- CTA ---------- */
 
 .cta {

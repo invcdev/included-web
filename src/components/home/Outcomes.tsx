@@ -28,7 +28,7 @@ const OUTCOMES = [
 
 export function Outcomes() {
   return (
-    <section id="what-you-get" className={styles.outcomes} aria-labelledby="outcomes-heading">
+    <section id="what-you-leave-with" className={styles.outcomes} aria-labelledby="outcomes-heading">
       <div className="container">
         <h2 id="outcomes-heading" className={styles.heading}>
           What you leave with

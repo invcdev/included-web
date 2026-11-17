@@ -1,0 +1,103 @@
+.deal {
+  background: var(--bg);
+  padding: 30px 0 88px;
+}
+
+/* ---------- Panel ---------- */
+
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) repeat(3, minmax(0, 214px));
+  column-gap: 20.5px;
+  margin-top: 44.5px;
+  padding: 40px 40.5px 39px;
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.intro {
+  max-width: 340px;
+  padding-top: 0.5px;
+}
+
+.heading {
+  max-width: 340px;
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 34.5px;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.body {
+  margin-top: 13px;
+  font-size: 20px;
+  line-height: 31px;
+  color: var(--muted);
+}
+
+.terms {
+  display: contents;
+  list-style: none;
+}
+
+/* 3px bar in the term's colour above each column. */
+.term {
+  padding-top: 15.5px;
+  border-top: 3px solid var(--bar);
+}
+
+.termTitle {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 22.5px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.termText {
+  margin-top: 5.5px;
+  font-size: 15px;
+  line-height: 22.5px;
+  color: var(--ink-soft);
+}
+
+/* ---------- Smaller screens ---------- */
+
+@media (max-width: 1100px) {
+  .panel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 32px;
+  }
+  .intro {
+    grid-column: 1 / -1;
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 760px) {
+  .panel {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 28px;
+    padding: 32px 24px 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .deal {
+    padding-bottom: 64px;
+  }
+  .panel {
+    margin-top: 32px;
+  }
+  .heading {
+    font-size: 30px;
+    line-height: 32px;
+  }
+  .body {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

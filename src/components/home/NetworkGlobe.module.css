@@ -1,39 +1,12 @@
-/*
- * Scroll-driven scene. .morph holds the sticky .scene plus a .travel spacer;
- * the spacer's height is the scroll distance over which the pinned scene turns
- * from the globe into the grid. (A spacer, not padding: sticky elements can
- * only move within their parent's content box.)
- */
-.morph {
-  position: relative;
-}
-
-.travel {
-  height: 90svh;
-}
-
-.scene {
-  /* Grid scale: 1px per design px at 1800 wide, smaller on narrower or
-     shorter screens so the whole grid fits under the header while pinned. */
-  --u: min(1px, calc(100vw / 1800), calc((100svh - 110px) / 900));
-
-  position: sticky;
-  top: calc(var(--header-h) + 8px);
-  display: grid;
-  /* minmax(0, …) so the wide globe stage can't stretch the column. */
-  grid-template-columns: minmax(0, 1fr);
-  overflow-x: clip;
-}
-
-/* Both states share one cell; the scene is as tall as the taller of the two. */
-.grid,
-.globe {
-  grid-area: 1 / 1;
-}
+/* Partner grid: the end state of the partner globe. */
 
 /* ---------- Grid state ---------- */
 
 .grid {
+  /* Grid scale: 1px per design px at 1800 wide, smaller on narrower or
+     shorter screens so the whole grid fits under the header while pinned. */
+  --u: min(1px, calc(100vw / 1800), calc((100svh - 110px) / 900));
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding-bottom: calc(96 * var(--u));
@@ -90,71 +63,11 @@
   grid-column: 1 / -1;
 }
 
-/* ---------- Globe state ---------- */
-
-.globe {
-  align-self: start;
-  min-width: 0;
-  pointer-events: none;
-}
-
-/* 1800 x 695 at full size. Below 1000px wide it stops shrinking and is cropped
-   at the sides instead, so the logos stay legible on phones. */
-.stage {
-  position: relative;
-  left: 50%;
-  width: clamp(1000px, 100vw, 1800px);
-  aspect-ratio: 3600 / 1390;
-  translate: -50% 0;
-  container-type: inline-size;
-}
-
-.rings {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-/* First frame comes from NetworkGlobe.tsx as unitless custom properties:
-   --x/--y in cqw of the stage, --s scale, --o opacity, --z stacking
-   (1 design px = 100/3600 cqw). While animating, inline pixel transforms,
-   opacity and z-index written by the loop override these. */
-.dot,
-.logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: var(--o);
-  transform: translate(calc(var(--x) * 1cqw), calc(var(--y) * 1cqw)) translate(-50%, -50%)
-    scale(var(--s, 1));
-  z-index: var(--z, 0);
-  will-change: transform, opacity;
-}
-
-.dot {
-  width: calc(15 * 100cqw / 3600);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--c);
-}
-
-.logo img {
-  display: block;
-  max-width: none;
-  width: calc(var(--w) * 100cqw / 3600);
-  height: auto;
-}
-
 /* ---------- Phones and small tablets: groups stacked ---------- */
 
 @media (max-width: 900px) {
-  .scene {
-    --u: min(1px, calc((100vw - 40px) / 4 / 130));
-  }
-
   .grid {
+    --u: min(1px, calc((100vw - 40px) / 4 / 130));
     grid-template-columns: 1fr;
     row-gap: 36px;
     padding: 8px 20px 24px;
