@@ -5,7 +5,8 @@ import styles from "./SeatCta.module.css";
 
 type Props = {
   id: string;
-  testimonial: React.ComponentProps<typeof Testimonial>;
+  /** Optional testimonial above the card. */
+  testimonial?: React.ComponentProps<typeof Testimonial>;
   /** Each entry is a line on desktop; they run together on phones. */
   heading: string[];
   note: string;
@@ -13,14 +14,21 @@ type Props = {
   border: string;
   /** Soft lavender ring around the button. */
   ring?: boolean;
+  /** Space above the band, in px (when it follows a section without bottom padding). */
+  topSpace?: number;
 };
 
 /** Testimonial + "Take your seat" card with a gradient border and spectrum glow. */
-export function SeatCta({ id, testimonial, heading, note, border, ring }: Props) {
+export function SeatCta({ id, testimonial, heading, note, border, ring, topSpace }: Props) {
   return (
-    <section id={id} className={styles.band} aria-label="Take your seat">
+    <section
+      id={id}
+      className={testimonial ? styles.band : `${styles.band} ${styles.solo}`}
+      aria-label="Take your seat"
+      style={topSpace !== undefined ? { paddingTop: topSpace } : undefined}
+    >
       <div className="container">
-        <Testimonial {...testimonial} />
+        {testimonial && <Testimonial {...testimonial} />}
 
         <div className={styles.cta} style={{ "--cta-border": border } as React.CSSProperties}>
           <div className={styles.ctaCopy}>

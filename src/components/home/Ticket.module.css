@@ -1,0 +1,418 @@
+.section {
+  background: var(--bg);
+  padding: 0 0 88px;
+}
+
+/* ---------- Heading row (paragraph aligned to the heading's last line) ---------- */
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 438.5px;
+  align-items: end;
+  column-gap: 48px;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: var(--brand);
+}
+
+.heading {
+  margin-top: 15.5px;
+  font-family: var(--font-display);
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 62px;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.body {
+  margin-bottom: 0.5px;
+  font-size: 20px;
+  line-height: 31px;
+  color: var(--muted);
+}
+
+/* ---------- Ticket + features ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: 463.5px minmax(0, 1fr);
+  column-gap: 38.5px;
+  align-items: start;
+  margin-top: 39px;
+}
+
+/* Navy ticket with a 7px spectrum stripe down the left edge. */
+.ticket {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 697.5px;
+  overflow: hidden;
+  border-radius: 19px;
+  background:
+    linear-gradient(90deg, var(--spectrum-stops)) left / 7px 100% no-repeat,
+    radial-gradient(ellipse 230px 170px at 82% 4%, rgba(72, 64, 210, 0.38), rgba(72, 64, 210, 0)),
+    radial-gradient(ellipse 300px 230px at 60% 14%, rgba(60, 140, 180, 0.14), rgba(60, 140, 180, 0)),
+    var(--navy);
+  color: #fff;
+}
+
+.ticketTop {
+  padding: 31px 29.5px 0 34px;
+}
+
+.admit {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.track {
+  letter-spacing: 0.14em;
+  color: #8f94b4;
+}
+
+.price {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 27.5px;
+}
+
+.amount {
+  font-family: var(--font-display);
+  font-size: 78px;
+  font-weight: 700;
+  line-height: 78px;
+  letter-spacing: -0.04em;
+  background: linear-gradient(90deg, #4a33d6 0%, #4562cf 28%, #5fc4ea 55%, #70efe8 72%, #8ef59a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.vat {
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 20px;
+  color: #adb3ce;
+}
+
+.ticketText {
+  margin-top: 14px;
+  font-size: 15.5px;
+  line-height: 24.8px;
+  color: #d0d2e7;
+}
+
+.ticketText strong {
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Dashed tear line with a semicircle notch cut on each side. */
+.tear {
+  position: relative;
+  height: 0;
+  border-top: 1.5px dashed rgba(171, 177, 197, 0.55);
+  margin: 39px 18px 0 10px;
+}
+
+.tear::before,
+.tear::after {
+  content: "";
+  position: absolute;
+  top: -12.5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+
+.tear::before {
+  left: -22.5px;
+}
+
+.tear::after {
+  right: -30.5px;
+}
+
+.ticketBottom {
+  margin-top: auto;
+  padding: 0 29.5px 26.5px 34px;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 211px minmax(0, 1fr);
+  row-gap: 20.5px;
+  padding-top: 25px;
+  border-top: 1px solid #2c2e39;
+}
+
+.detailLabel {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.detailValue {
+  margin-top: 9px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  color: #fff;
+}
+
+.barcode {
+  display: block;
+  width: 100%;
+  height: 42.5px;
+  margin-top: 27.5px;
+  fill: #e8e8ea;
+}
+
+/* ---------- Under the ticket: button, note, track choice ---------- */
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.seatBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 53px;
+  margin-top: 22px;
+  border-radius: 999px;
+  background: #151515;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.seatBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -12px rgba(16, 18, 31, 0.7);
+}
+
+.note {
+  margin-top: 15px;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--muted);
+}
+
+/* Same pills as "Introducing Ascend", selectable here. */
+.tracks {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16.5px;
+  margin-top: 32px;
+}
+
+.tracksLabel {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.trackList {
+  display: flex;
+  gap: 13px;
+}
+
+.trackPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10.5px;
+  height: 56.5px;
+  padding: 0 23.5px 0 22.5px;
+  border: 1.5px solid #e2e2e2;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trackPill::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dot);
+}
+
+.trackPill:hover {
+  border-color: #c9ccd1;
+}
+
+/* Selected: 3px brand outline, drawn inside so the pill doesn't grow. */
+.trackPill[aria-checked="true"] {
+  border-color: var(--brand);
+  box-shadow: inset 0 0 0 1.5px var(--brand);
+}
+
+/* ---------- Features ---------- */
+
+.features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 30.5px;
+  row-gap: 20.5px;
+  padding-top: 20px;
+}
+
+.feature {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  column-gap: 14px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.check {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #c2fc51;
+}
+
+.check svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.featureTitle {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.featureText {
+  margin-top: 5.5px;
+  font-size: 14.5px;
+  line-height: 23.5px;
+  color: var(--ink-soft);
+}
+
+/* ---------- Smaller screens ---------- */
+
+@media (max-width: 1100px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    column-gap: 40px;
+  }
+  .heading {
+    font-size: clamp(40px, 5vw, 60px);
+    line-height: 1.04;
+  }
+  .layout {
+    grid-template-columns: minmax(0, 463.5px) minmax(0, 1fr);
+    column-gap: 32px;
+  }
+  .features {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 24px;
+  }
+  .body {
+    max-width: 560px;
+    margin-bottom: 0;
+  }
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+  }
+  .ticket {
+    width: 100%;
+    max-width: 463.5px;
+  }
+  .features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-bottom: 64px;
+  }
+  .heading {
+    font-size: clamp(34px, 9.6vw, 44px);
+    line-height: 1.05;
+  }
+  .body {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .layout {
+    margin-top: 28px;
+  }
+  .ticket {
+    min-height: 0;
+  }
+  .ticketTop {
+    padding: 26px 20px 0 26px;
+  }
+  .ticketBottom {
+    margin-top: 40px;
+    padding: 0 20px 22px 26px;
+  }
+  .amount {
+    font-size: 64px;
+    line-height: 66px;
+  }
+  .details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .features {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

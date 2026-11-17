@@ -46,6 +46,15 @@ export const siteConfig = {
     ascendAfrica: "#ascend-africa",
     // TODO: confirm where "Explore the network" should go (currently the network section).
     network: "#network",
+    // TODO: link to the alumni community page.
+    alumni: "#stories",
+    // TODO: confirm how people request the invoice template (form, page or email).
+    // TODO: confirm destinations for the two links under "Our values".
+    about: "https://included.vc/about",
+    resources: "https://included.vc/resources",
+    // TODO: link to the office hours booking page.
+    officeHours: "#how-to-join",
+    invoiceTemplate: "mailto:hello@included.vc?subject=Ascend%20invoice%20template",
   },
   mainNav: [
     { title: "Fellowship", href: "/fellowship" },

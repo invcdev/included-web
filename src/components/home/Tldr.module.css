@@ -1,0 +1,324 @@
+.tldr {
+  position: relative;
+  overflow: hidden;
+  background: #10121f;
+  padding: 88px 0 88px;
+  color: #fff;
+}
+
+.inner {
+  position: relative;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: var(--cyan);
+}
+
+.heading {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 61px;
+  letter-spacing: -0.025em;
+}
+
+.lede {
+  max-width: 640px;
+  margin-top: 18.5px;
+  font-size: 20px;
+  line-height: 31px;
+  color: #c3c6d6;
+}
+
+/* ---------- Detail card + constellation ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  column-gap: 51.5px;
+  margin-top: 40px;
+  margin-left: -24px;
+  margin-right: -96px;
+}
+
+/* Fixed height, content centred, so the card does not jump between facts. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 741.5px;
+  padding: 37px 30px 37px 33px;
+  border: 1px solid #3b3e48;
+  border-radius: 16px;
+  background:
+    linear-gradient(0deg, var(--spectrum-stops)) left / 5px 100% no-repeat,
+    #1b1e2a;
+}
+
+.panelBody {
+  animation: factIn 0.35s ease;
+}
+
+@keyframes factIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.panelLabel {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--cyan);
+}
+
+.panelTitle {
+  margin-top: 13px;
+  font-family: var(--font-display);
+  font-size: 35px;
+  font-weight: 600;
+  line-height: 34px;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.panelText {
+  margin-top: 15px;
+  font-size: 16px;
+  line-height: 25.75px;
+  color: #d0d3e3;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 40px;
+}
+
+.navBtn {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  color: #fff;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.navBtn:hover {
+  background: #fff;
+  color: var(--ink);
+}
+
+.navBtn svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.count {
+  margin-left: 8px;
+  font-size: 13.5px;
+  color: #a7aedb;
+}
+
+/* The map sits 14px above the card, as in the design. */
+.map {
+  position: relative;
+  height: 741px;
+  margin-top: -14px;
+}
+
+.lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.lines line {
+  stroke: rgba(255, 255, 255, 0.13);
+  stroke-width: 1;
+}
+
+.star {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 0 6px 4px;
+  translate: -50% -5px;
+  color: #c9cde0;
+}
+
+.star i {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e1e6fd;
+  box-shadow: 0 0 0 4px rgba(225, 230, 253, 0.12);
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    margin 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.star span {
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.star:hover span {
+  color: #fff;
+}
+
+/* Active star: larger lime dot with a soft halo; layout stays put. */
+.star[aria-pressed="true"] i {
+  width: 19px;
+  height: 19px;
+  margin: -4.5px 0;
+  background: var(--lime);
+  box-shadow: 0 0 0 7px rgba(193, 253, 80, 0.18);
+}
+
+.star[aria-pressed="true"] span {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ---------- All facts at once ---------- */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 13px;
+  row-gap: 13.5px;
+  margin-top: 38px;
+  padding-top: 47px;
+  border-top: 1px solid #2c2f3a;
+}
+
+.facts dt {
+  font-size: 13.5px;
+  line-height: 20px;
+  color: #9ea3c1;
+}
+
+.facts dd {
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24.5px;
+  color: #fff;
+}
+
+/* ---------- Smaller screens ---------- */
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 320px minmax(0, 1fr);
+    column-gap: 32px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .map {
+    height: 620px;
+    margin-top: 0;
+  }
+  .panel {
+    height: 620px;
+  }
+  .facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
+  }
+  .map {
+    order: -1;
+    height: 380px;
+    margin: 0 18px;
+  }
+  .panel {
+    height: 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tldr {
+    padding: 56px 0 64px;
+  }
+  .heading {
+    font-size: 44px;
+    line-height: 46px;
+  }
+  .lede {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .map {
+    height: 320px;
+    margin: 0 24px;
+  }
+  .star span {
+    font-size: 10px;
+    line-height: 12px;
+  }
+  .panel {
+    height: 430px;
+    padding: 26px 20px 26px 24px;
+  }
+  .panelTitle {
+    font-size: 27px;
+    line-height: 31px;
+  }
+  .panelText {
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 23px;
+  }
+  .nav {
+    margin-top: 22px;
+  }
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panelBody {
+    animation: none;
+  }
+}

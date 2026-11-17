@@ -10,6 +10,20 @@ import { Outcomes } from "@/components/home/Outcomes";
 import { Month } from "@/components/home/Month";
 import { TuesdaySlot } from "@/components/home/TuesdaySlot";
 import { Faculty } from "@/components/home/Faculty";
+import { WhoItsFor } from "@/components/home/WhoItsFor";
+import { Audience } from "@/components/home/Audience";
+import { Stories } from "@/components/home/Stories";
+import { Alumni } from "@/components/home/Alumni";
+import { Countries } from "@/components/home/Countries";
+import { Deal } from "@/components/home/Deal";
+import { Ticket } from "@/components/home/Ticket";
+import { OurPromise } from "@/components/home/OurPromise";
+import { Employers } from "@/components/home/Employers";
+import { Values } from "@/components/home/Values";
+import { Join } from "@/components/home/Join";
+import { Tldr } from "@/components/home/Tldr";
+import { Faq } from "@/components/home/Faq";
+import { FinalCta } from "@/components/home/FinalCta";
 
 export default function Home() {
   return (
@@ -50,6 +64,41 @@ export default function Home() {
         ring
       />
       <Faculty />
+      <WhoItsFor />
+      <Audience />
+      <Stories />
+      <Alumni />
+      <Countries />
+      <SeatCta
+        id="join-in-january"
+        heading={["Fourteen Tuesdays. Starts 5 January 2027."]}
+        note="About ten minutes, start to finish."
+        border="linear-gradient(90deg, #72f1e6 0%, #6ae7fb 7%, #5ac1f5 17%, #4d9bef 27%, #4776eb 37%, #4951e5 47%, #4e3ce3 55%, #4a4ee5 62%, #4773ea 72%, #4d98ef 82%, #59bdf4 92%, #66dcf9 100%)"
+        ring
+      />
+      <Deal />
+      <Ticket />
+      <OurPromise />
+      <Employers />
+      <Values />
+      <SeatCta
+        id="seat-after-values"
+        topSpace={29}
+        testimonial={{
+          quote: "\u201cIncluded VC didn\u2019t just open doors; it unveiled entire galaxies.\u201d",
+          name: "Aditi Mishra",
+          role: "Included VC Fellow 2025",
+          quoteWidth: 460,
+        }}
+        heading={["Fourteen Tuesdays. Starts 5 January 2027."]}
+        note="About ten minutes, start to finish."
+        border="linear-gradient(90deg, #a9f75a 0%, #86f59a 12%, #74f1d0 28%, #6ce7fb 42%, #59bdf4 56%, #4b8eee 70%, #4866e9 84%, #5035e2 100%)"
+        ring
+      />
+      <Join />
+      <Tldr />
+      <Faq />
+      <FinalCta />
     </>
   );
 }

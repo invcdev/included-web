@@ -1,0 +1,99 @@
+/* Full-bleed spectrum field: cyan at the edges, lime top right, purple rising
+   from the bottom centre. */
+.final {
+  position: relative;
+  overflow: hidden;
+  min-height: 752px;
+  padding: 169px 0 120px;
+  background:
+    radial-gradient(ellipse 34% 48% at 73% 26%, rgba(184, 251, 86, 0.95), rgba(184, 251, 86, 0) 100%),
+    radial-gradient(ellipse 30% 52% at 42% 104%, rgba(80, 58, 224, 0.95), rgba(80, 58, 224, 0) 100%),
+    radial-gradient(ellipse 32% 50% at 24% 70%, rgba(74, 118, 234, 0.85), rgba(74, 118, 234, 0) 100%),
+    radial-gradient(ellipse 30% 48% at 80% 85%, rgba(166, 214, 92, 0.8), rgba(166, 214, 92, 0) 100%),
+    radial-gradient(ellipse 30% 38% at 36% 2%, rgba(108, 232, 246, 0.9), rgba(108, 232, 246, 0) 100%),
+    linear-gradient(90deg, #63d4f7 0%, #5fb4f2 22%, #6cc0ec 50%, #98e690 72%, #8fe3a5 86%, #66d3ee 100%);
+}
+
+.final canvas {
+  opacity: 0.55;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.heading {
+  max-width: 960px;
+  margin-top: -4px;
+  font-family: var(--font-display);
+  font-size: 104px;
+  font-weight: 800;
+  line-height: 103.5px;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.body {
+  max-width: 510px;
+  margin-top: 27.5px;
+  font-size: 18px;
+  line-height: 28.8px;
+  color: var(--ink-soft);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  height: 53px;
+  margin-top: 38px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: #151515;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -12px rgba(16, 18, 31, 0.6);
+}
+
+@media (max-width: 1100px) {
+  .heading {
+    font-size: clamp(56px, 9vw, 104px);
+    line-height: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .final {
+    min-height: 0;
+    padding: 96px 0 104px;
+  }
+  .heading {
+    margin-top: 6px;
+    font-size: clamp(44px, 13vw, 60px);
+  }
+  .body {
+    font-size: 16px;
+    line-height: 26px;
+  }
+}

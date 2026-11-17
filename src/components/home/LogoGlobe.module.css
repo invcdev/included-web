@@ -1,0 +1,102 @@
+/*
+ * Scroll-driven scene. .morph holds the sticky .scene plus a .travel spacer;
+ * the spacer's height is the scroll distance over which the pinned scene turns
+ * from the globe into the grid. (A spacer, not padding: sticky elements can
+ * only move within their parent's content box.)
+ */
+.morph {
+  position: relative;
+}
+
+.travel {
+  height: 90svh;
+}
+
+.scene {
+  position: sticky;
+  top: calc(var(--header-h) + 8px);
+  display: grid;
+  /* minmax(0, …) so the wide globe stage can't stretch the column. */
+  grid-template-columns: minmax(0, 1fr);
+  overflow-x: clip;
+}
+
+/* Both states share one cell (row 2); the scene is as tall as the taller of
+   the two. Optional pinned content sits above (row 1) and below (row 3). */
+.layer,
+.globe {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.before {
+  grid-row: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.after {
+  grid-row: 3;
+  position: relative;
+  z-index: 1;
+}
+
+.layer {
+  min-width: 0;
+}
+
+/* ---------- Globe state ---------- */
+
+.globe {
+  align-self: start;
+  min-width: 0;
+  pointer-events: none;
+}
+
+/* 1800 x 695 at full size. Below 1000px wide it stops shrinking and is cropped
+   at the sides instead, so the logos stay legible on phones. */
+.stage {
+  position: relative;
+  left: 50%;
+  width: clamp(var(--min-w, 1000px), 100vw, 1800px);
+  translate: -50% 0;
+  container-type: inline-size;
+}
+
+.rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* First frame comes from NetworkGlobe.tsx as unitless custom properties:
+   --x/--y in cqw of the stage, --s scale, --o opacity, --z stacking
+   (1 design px = 100/3600 cqw). While animating, inline pixel transforms,
+   opacity and z-index written by the loop override these. */
+.dot,
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: var(--o);
+  transform: translate(calc(var(--x) * 1cqw), calc(var(--y) * 1cqw)) translate(-50%, -50%)
+    scale(var(--s, 1));
+  z-index: var(--z, 0);
+  will-change: transform, opacity;
+}
+
+.dot {
+  width: calc(var(--d, 15) * 100cqw / 3600);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.logo img {
+  display: block;
+  max-width: none;
+  width: calc(var(--w) * 100cqw / 3600);
+  height: auto;
+}
