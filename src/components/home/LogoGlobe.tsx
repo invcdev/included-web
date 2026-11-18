@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import { WIDE_GLOBE, type PlacedLogo } from "./globeLayout";
 import styles from "./LogoGlobe.module.css";
 
 /*
@@ -45,19 +46,6 @@ export type GlobeShape = {
   minWidth?: number;
 };
 
-/** The wide, ringed globe used by the partner and alumni sections. */
-export const WIDE_GLOBE: GlobeShape = {
-  h: 1390,
-  cx: 1799.5,
-  cy: 665.5,
-  rx: 1702,
-  ry: 414.5,
-  rings: [
-    { scale: 1.2135, stroke: "#F0FFD6" },
-    { scale: 1.1074, stroke: "#E2FCEF" },
-    { scale: 1, stroke: "#D5EAFD" },
-  ],
-};
 
 const K = 100 / W; // design px -> cqw of the stage
 const PERIOD_S = 35; // one full revolution
@@ -152,9 +140,9 @@ function dotPose(g: GlobeShape, d: Dot, theta: number, span: number) {
 
 /* ---------- Logos: inside the globe, one each ---------- */
 
-type Logo = GlobeLogo & { rho: number; lon: number; z0: number; delay: number };
+type Logo = PlacedLogo & { rho: number; lon: number; z0: number; delay: number };
 
-function prepareLogos(g: GlobeShape, logos: GlobeLogo[]): Logo[] {
+function prepareLogos(g: GlobeShape, logos: PlacedLogo[]): Logo[] {
   return logos.map((l, i) => {
   const nx = (l.globeX - g.cx) / g.rx;
   const ny = (l.globeY - g.cy) / g.ry;
@@ -197,12 +185,11 @@ function firstFrame(p: { x: number; y: number; scale: number; opacity: number; z
 }
 
 type Props = {
-  logos: GlobeLogo[];
+  /** Logos with their image and globe spot (see placeLogos in ./globeLayout). */
+  logos: PlacedLogo[];
   dots: GlobeDot[];
   /** Globe shape; defaults to the wide ringed globe. */
   shape?: GlobeShape;
-  /** Folder of the logo images: <imageDir>/<slug>-placeholder.png */
-  imageDir: string;
   /** Grid state: markup with a data-slot="<slug>" element per logo. */
   children: React.ReactNode;
   /** Pinned with the globe, above it (e.g. the section heading). */
@@ -221,7 +208,6 @@ export function LogoGlobe({
   logos,
   dots,
   shape = WIDE_GLOBE,
-  imageDir,
   children,
   before,
   after,
@@ -407,7 +393,7 @@ export function LogoGlobe({
             {LOGOS.map((l) => (
               <span key={l.slug} data-logo className={styles.logo} style={firstFrame(logoPose(G, l, 0))}>
                 <Image
-                  src={`${imageDir}/${l.slug}-placeholder.png`}
+                  src={l.src}
                   alt=""
                   width={l.w}
                   height={l.h}

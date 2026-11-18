@@ -1,42 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { siteConfig } from "@/config/site";
+import type { SiteContent } from "@/content/schema";
+import { RichText } from "../RichText";
 import styles from "./Ticket.module.css";
-
-const DETAILS = [
-  { label: "Starts", value: "Tue 5 Jan 2027" },
-  { label: "Doors", value: "16:00\u201318:30 UK time" },
-  { label: "Sessions", value: "14, live" },
-  { label: "Venue", value: "Online" },
-];
-
-const FEATURES = [
-  {
-    title: "14 live sessions",
-    text: "Taught live by practising investors, with you in the room.",
-  },
-  {
-    title: "Office hours",
-    text: "Open Zoom sessions between classes. Bring half-formed questions.",
-  },
-  {
-    title: "A live investment committee",
-    text: "Present a deal to a live investment committee and defend it under questioning.",
-  },
-  {
-    title: "Your Deep Dive",
-    text: "The long-form research Included VC is known for, published with your name on it.",
-  },
-  {
-    title: "Slack community",
-    text: "Your cohort in one dedicated Slack, between sessions and after them.",
-  },
-  {
-    title: "Certificate",
-    text: "Complete the programme and you are an Included VC Ascender, Class of 2027.",
-  },
-];
 
 // A fixed, decorative barcode: [x, width] of each bar, in a 400 x 42.5 box.
 const BARS: [number, number][] = (() => {
@@ -56,16 +23,12 @@ const BARS: [number, number][] = (() => {
   return bars;
 })();
 
-const TRACKS = [
-  { id: "global", name: "Global", dot: "var(--brand)" },
-  { id: "africa", name: "Africa", dot: "var(--lime)" },
-] as const;
+// Dot colours for the two tracks, in order.
+const TRACK_DOTS = ["var(--brand)", "var(--lime)"];
 
-type TrackId = (typeof TRACKS)[number]["id"];
-
-export function Ticket() {
-  const [track, setTrack] = useState<TrackId>("global");
-  const trackName = TRACKS.find((t) => t.id === track)!.name;
+export function Ticket({ content: c }: { content: SiteContent["ticket"] }) {
+  const [track, setTrack] = useState(0);
+  const current = c.tracks[track] ?? c.tracks[0];
   return (
     <section
       id="what-you-get"
@@ -75,14 +38,12 @@ export function Ticket() {
       <div className="container">
         <div className={styles.head}>
           <div>
-            <p className={styles.eyebrow}>What you get</p>
+            <p className={styles.eyebrow}>{c.eyebrow}</p>
             <h2 id="ticket-heading" className={styles.heading}>
-              One seat. Fourteen live weeks.
+              {c.heading}
             </h2>
           </div>
-          <p className={styles.body}>
-            Everyone has the same seat. Here is what comes with it.
-          </p>
+          <p className={styles.body}>{c.body}</p>
         </div>
 
         <div className={styles.layout}>
@@ -90,24 +51,15 @@ export function Ticket() {
             <article className={styles.ticket} aria-label="Your ticket">
               <div className={styles.ticketTop}>
                 <p className={styles.admit}>
-                  <span>Admit one &middot; Founding cohort</span>
-                  <span className={styles.track}>{trackName} track</span>
+                  <span>{c.admit}</span>
+                  {current && <span className={styles.track}>{current.ticketLabel}</span>}
                 </p>
                 <p className={styles.price}>
-                  <span className={styles.amount}>&pound;197</span>
-                  <span className={styles.vat}>+ VAT</span>
+                  <span className={styles.amount}>{c.price}</span>
+                  <span className={styles.vat}>{c.priceSuffix}</span>
                 </p>
                 <p className={styles.ticketText}>
-                  <strong>
-                    The learning is partner-funded. The commitment is yours.
-                  </strong>{" "}
-                  Our partners have covered the teaching, the faculty and the
-                  platform. What they can&rsquo;t fund is you turning up. So
-                  there is a one-off commitment fee. It isn&rsquo;t tuition. It
-                  is your side of the arrangement: a signal to yourself, and to
-                  everyone learning beside you, that your seat will be used. It
-                  also helps keep Included VC running for the people who come
-                  after you.
+                  <RichText text={c.text} />
                 </p>
               </div>
 
@@ -115,7 +67,7 @@ export function Ticket() {
 
               <div className={styles.ticketBottom}>
                 <dl className={styles.details}>
-                  {DETAILS.map((d) => (
+                  {c.details.map((d) => (
                     <div key={d.label}>
                       <dt className={styles.detailLabel}>{d.label}</dt>
                       <dd className={styles.detailValue}>{d.value}</dd>
@@ -134,32 +86,29 @@ export function Ticket() {
               </div>
             </article>
 
-            <a href={siteConfig.cta.enrol} className={styles.seatBtn}>
-              Take your seat
+            <a href={c.cta.href} className={styles.seatBtn}>
+              {c.cta.label}
             </a>
-            <p className={styles.note}>
-              Non-refundable, because a commitment you can undo isn&rsquo;t one.
-              Check your Tuesdays first.
-            </p>
+            <p className={styles.note}>{c.note}</p>
 
             <div className={styles.tracks}>
               <span className={styles.tracksLabel} id="track-label">
-                Two tracks
+                {c.tracksLabel}
               </span>
               <div
                 className={styles.trackList}
                 role="radiogroup"
                 aria-labelledby="track-label"
               >
-                {TRACKS.map((t) => (
+                {c.tracks.map((t, i) => (
                   <button
-                    key={t.id}
+                    key={i}
                     type="button"
                     role="radio"
-                    aria-checked={track === t.id}
+                    aria-checked={track === i}
                     className={styles.trackPill}
-                    style={{ "--dot": t.dot } as React.CSSProperties}
-                    onClick={() => setTrack(t.id)}
+                    style={{ "--dot": TRACK_DOTS[i % TRACK_DOTS.length] } as React.CSSProperties}
+                    onClick={() => setTrack(i)}
                   >
                     {t.name}
                   </button>
@@ -169,7 +118,7 @@ export function Ticket() {
           </div>
 
           <ul className={styles.features}>
-            {FEATURES.map((f) => (
+            {c.features.map((f) => (
               <li key={f.title} className={styles.feature}>
                 <span className={styles.check} aria-hidden="true">
                   <svg viewBox="0 0 22 22">

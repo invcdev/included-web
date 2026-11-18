@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Hanken_Grotesk } from "next/font/google";
 import { siteConfig } from "@/config/site";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { SkipLink } from "@/components/layout/SkipLink";
+import { getSiteContent } from "@/content";
 import { JsonLd } from "@/components/seo/JsonLd";
 import "./globals.css";
 
@@ -26,14 +24,9 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export const metadata: Metadata = {
+/** Static site-wide metadata. The title and description come from the editable content. */
+const baseMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: {
-    default: "Included VC — Changing the face of venture capital",
-    template: `%s | ${siteConfig.name}`,
-  },
-  description:
-    "A fully funded fellowship, launchpad and lifelong community for exceptional people from overlooked backgrounds — breaking into VC and deciding what gets built next.",
   applicationName: siteConfig.name,
   authors: [{ name: siteConfig.author.name, url: siteConfig.author.url }],
   creator: siteConfig.creator,
@@ -46,22 +39,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "./",
-  },
-  openGraph: {
-    type: "website",
-    locale: siteConfig.locale,
-    url: siteConfig.url,
-    title: "Included VC — Changing the face of venture capital",
-    description:
-      "A fully funded fellowship, launchpad and lifelong community for exceptional people from overlooked backgrounds — breaking into VC and deciding what gets built next.",
-    siteName: siteConfig.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Included VC — Changing the face of venture capital",
-    description:
-      "A fully funded fellowship, launchpad and lifelong community for exceptional people from overlooked backgrounds — breaking into VC and deciding what gets built next.",
-    creator: "@included_vc",
   },
   robots: {
     index: true,
@@ -79,6 +56,37 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.webmanifest",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { meta } = await getSiteContent();
+  const images = meta.ogImage
+    ? [{ url: meta.ogImage.url, width: meta.ogImage.width, height: meta.ogImage.height, alt: meta.ogImage.alt }]
+    : undefined;
+  return {
+    ...baseMetadata,
+    title: {
+      default: meta.title,
+      template: `%s | ${siteConfig.name}`,
+    },
+    description: meta.description,
+    openGraph: {
+      type: "website",
+      locale: siteConfig.locale,
+      url: siteConfig.url,
+      title: meta.title,
+      description: meta.description,
+      siteName: siteConfig.name,
+      ...(images ? { images } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: meta.title,
+      description: meta.description,
+      creator: "@included_vc",
+      ...(images ? { images } : {}),
+    },
+  };
+}
 
 export default function RootLayout({
   children,
@@ -112,18 +120,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${manrope.variable} ${hankenGrotesk.variable}`}
     >
       <head>
         <JsonLd data={jsonLdData} />
       </head>
       <body>
-        <SkipLink targetId="main-content" />
-        <Header />
-        <main id="main-content" role="main" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
