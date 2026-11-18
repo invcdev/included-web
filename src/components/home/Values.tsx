@@ -1,58 +1,31 @@
 "use client";
 
 import React, { useState } from "react";
-import { siteConfig } from "@/config/site";
+import type { SiteContent } from "@/content/schema";
 import styles from "./Values.module.css";
-
-const VALUES = [
-  {
-    n: "01",
-    title: "Kindness",
-    short: "Kindness",
-    text: "Kindness is the baseline. It means being respectful, responsive and decent in how you speak, show up, give feedback and treat your cohort.",
-  },
-  {
-    n: "02",
-    title: "Pay it forward (and backward)",
-    short: "Pay it forward",
-    text: "Our fellowships are made possible by people who gave without asking for anything in return. We assume you will pay it forward, and backward too.",
-  },
-  {
-    n: "03",
-    title: "Don\u2019t compete",
-    short: "Don\u2019t compete",
-    text: "Everyone here is ambitious, but this isn\u2019t a zero-sum game. You\u2019re not here to outshine others; you\u2019re here to light them up. We lift as we climb.",
-  },
-  {
-    n: "04",
-    title: "Sparkle",
-    short: "Sparkle",
-    text: "Sparkle is how you show up: the clarity in your thinking, the way you follow through, and the standard you set in every room.",
-  },
-];
 
 // Four-pointed star (centre 0,0; arms 155px).
 const STAR = "M0 -155 Q14 -14 155 0 Q14 14 0 155 Q-14 14 -155 0 Q-14 -14 0 -155 Z";
 // Slimmer inner star: the lighter highlight inside the arms.
 const STAR_INNER = "M0 -140 Q-16 -16 140 0 Q-16 16 0 140 Q16 16 -140 0 Q16 -16 0 -140 Z";
 
-export function Values() {
+export function Values({ content: c }: { content: SiteContent["values"] }) {
   const [active, setActive] = useState(0);
 
   return (
     <section id="our-values" className={styles.values} aria-labelledby="values-heading">
       <div className={`container ${styles.layout}`}>
         <div className={styles.main}>
-          <p className={styles.eyebrow}>Our values</p>
+          <p className={styles.eyebrow}>{c.eyebrow}</p>
           <h2 id="values-heading" className={styles.heading}>
-            How we treat each other.
+            {c.heading}
           </h2>
-          <p className={styles.body}>Four values every Included VC cohort is held to.</p>
+          <p className={styles.body}>{c.body}</p>
 
           <ul className={styles.cards}>
-            {VALUES.map((v, i) => (
+            {c.values.map((v, i) => (
               <li
-                key={v.n}
+                key={i}
                 className={styles.card}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
@@ -67,12 +40,11 @@ export function Values() {
           </ul>
 
           <div className={styles.links}>
-            <a href={siteConfig.cta.about} className={styles.linkUnderlined}>
-              About Included VC
-            </a>
-            <a href={siteConfig.cta.resources} className={styles.link}>
-              View resources
-            </a>
+            {c.links.map((l, i) => (
+              <a key={i} href={l.href} className={i === 0 ? styles.linkUnderlined : styles.link}>
+                {l.label}
+              </a>
+            ))}
           </div>
         </div>
 
@@ -97,9 +69,10 @@ export function Values() {
             <circle r="7.5" fill="#fff" />
           </svg>
 
-          {VALUES.map((v, i) => (
+          {/* One pill per point of the star (four). */}
+          {c.values.slice(0, 4).map((v, i) => (
             <button
-              key={v.n}
+              key={i}
               type="button"
               className={`${styles.pill} ${styles[`pill${i + 1}`]}`}
               aria-pressed={active === i}

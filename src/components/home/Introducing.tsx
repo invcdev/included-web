@@ -1,49 +1,36 @@
 import React from "react";
 import Image from "next/image";
+import type { SiteContent } from "@/content/schema";
 import styles from "./Introducing.module.css";
 
-const STATS = [
-  { value: "14", title: "live sessions", text: "Tuesdays, 16:00 to 18:30 UK time" },
-  {
-    value: "3",
-    title: "pieces of real work",
-    text: "An investment memo, an investment committee and a Deep Dive",
-  },
-  { value: "2", title: "tracks", text: "Global, or Africa with six extra sessions" },
-  { value: "1", title: "cohort", text: "Everyone in the same room on Tuesdays" },
-];
+// Dot colours for the two tracks, in order.
+const TRACK_DOTS = ["var(--brand)", "var(--lime)"];
 
-const TRACKS = [
-  { name: "Global", dot: "var(--brand)" },
-  { name: "Africa", dot: "var(--lime)" },
-];
-
-export function Introducing() {
+export function Introducing({ content: c }: { content: SiteContent["introducing"] }) {
   return (
     <section id="introducing" className={styles.introducing} aria-labelledby="introducing-heading">
       <div className={`container ${styles.grid}`}>
         <div className={styles.main}>
-          <p className={styles.eyebrow}>Introducing</p>
-          {/* TODO: replace both placeholders (cropped from the design) with the final SVG logos. */}
+          <p className={styles.eyebrow}>{c.eyebrow}</p>
           <h2 id="introducing-heading" className={styles.lockup}>
             <Image
-              src="/ascend/ascend-logo-placeholder.png"
-              alt="Ascend"
-              width={1037}
-              height={226}
+              src={c.logo.url}
+              alt={c.logo.alt}
+              width={c.logo.width}
+              height={c.logo.height}
               className={styles.logo}
             />
             <Image
-              src="/ascend/by-included-placeholder.png"
-              alt="by Included VC"
-              width={277}
-              height={65}
+              src={c.byline.url}
+              alt={c.byline.alt}
+              width={c.byline.width}
+              height={c.byline.height}
               className={styles.byline}
             />
           </h2>
 
           <ul className={styles.stats}>
-            {STATS.map((s) => (
+            {c.stats.map((s) => (
               <li key={s.title} className={styles.stat}>
                 <span className={styles.statValue}>{s.value}</span>
                 <span className={styles.statTitle}>{s.title}</span>
@@ -54,24 +41,23 @@ export function Introducing() {
         </div>
 
         <div className={styles.aside}>
-          {/* TODO: replace with the final illustration (cropped from the design for now). */}
           <Image
-            src="/ascend/ascend-illustration-placeholder.jpg"
-            alt="Collage of people climbing rising bar charts in the Ascend colours, helping each other up"
-            width={932}
-            height={931}
+            src={c.illustration.url}
+            alt={c.illustration.alt}
+            width={c.illustration.width}
+            height={c.illustration.height}
             className={styles.illustration}
           />
           <div className={styles.tracks}>
-            <span className={styles.tracksLabel}>Two tracks</span>
+            <span className={styles.tracksLabel}>{c.tracksLabel}</span>
             <ul className={styles.trackList}>
-              {TRACKS.map((t) => (
+              {c.tracks.map((t, i) => (
                 <li
-                  key={t.name}
+                  key={t}
                   className={styles.track}
-                  style={{ "--dot": t.dot } as React.CSSProperties}
+                  style={{ "--dot": TRACK_DOTS[i % TRACK_DOTS.length] } as React.CSSProperties}
                 >
-                  {t.name}
+                  {t}
                 </li>
               ))}
             </ul>

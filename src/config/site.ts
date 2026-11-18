@@ -27,35 +27,8 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/company/includedvc",
     github: "https://github.com/includedvc",
   },
-  // Programme landing page (Ascend) — section anchors on the home page.
-  programmeNav: [
-    { title: "Who it's for", href: "#who-its-for" },
-    { title: "Curriculum", href: "#curriculum" },
-    { title: "Faculty", href: "#faculty" },
-    { title: "What you get", href: "#what-you-get" },
-    { title: "How to join", href: "#how-to-join" },
-    { title: "FAQs", href: "#faqs" },
-  ],
-  // TODO: confirm final destinations for these CTAs.
-  cta: {
-    enrol: "#how-to-join",
-    confirmPlace: "#how-to-join",
-    // TODO: link to the founder's full letter once it exists.
-    founderLetter: "#founder-letter",
-    // TODO: link to the Ascend Africa page/section once it exists.
-    ascendAfrica: "#ascend-africa",
-    // TODO: confirm where "Explore the network" should go (currently the network section).
-    network: "#network",
-    // TODO: link to the alumni community page.
-    alumni: "#stories",
-    // TODO: confirm how people request the invoice template (form, page or email).
-    // TODO: confirm destinations for the two links under "Our values".
-    about: "https://included.vc/about",
-    resources: "https://included.vc/resources",
-    // TODO: link to the office hours booking page.
-    officeHours: "#how-to-join",
-    invoiceTemplate: "mailto:hello@included.vc?subject=Ascend%20invoice%20template",
-  },
+  // The landing page's nav, buttons and links are editable content now:
+  // see src/content/defaults.ts (and the admin, once it exists).
   mainNav: [
     { title: "Fellowship", href: "/fellowship" },
     { title: "Partners", href: "/partners" },

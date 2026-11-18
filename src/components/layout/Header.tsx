@@ -3,10 +3,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { siteConfig } from "@/config/site";
+import type { SiteContent } from "@/content/schema";
 import styles from "./Header.module.css";
 
-export function Header() {
+export function Header({ content: c }: { content: SiteContent["header"] }) {
   const [open, setOpen] = useState(false);
   const progressRef = useRef<HTMLDivElement>(null);
 
@@ -59,13 +59,12 @@ export function Header() {
   return (
     <header className={styles.header} data-open={open || undefined}>
       <div className={`container ${styles.bar}`}>
-        <Link href="/" className={styles.brand} aria-label={`${siteConfig.name} home`}>
-          {/* TODO: replace placeholder with the final logo asset (SVG). */}
+        <Link href="/" className={styles.brand} aria-label={`${c.logo.alt || "Included VC"} home`}>
           <Image
-            src="/brand/logo-placeholder.png"
+            src={c.logo.url}
             alt=""
-            width={257}
-            height={71}
+            width={c.logo.width}
+            height={c.logo.height}
             priority
             className={styles.logo}
           />
@@ -73,10 +72,10 @@ export function Header() {
 
         <nav className={styles.nav} aria-label="Main">
           <ul className={styles.navList}>
-            {siteConfig.programmeNav.map((item) => (
-              <li key={item.href}>
+            {c.nav.map((item, i) => (
+              <li key={i}>
                 <a href={item.href} className={styles.navLink}>
-                  {item.title}
+                  {item.label}
                 </a>
               </li>
             ))}
@@ -84,8 +83,8 @@ export function Header() {
         </nav>
 
         <div className={styles.actions}>
-          <a href={siteConfig.cta.enrol} className={styles.cta}>
-            Take your seat
+          <a href={c.cta.href} className={styles.cta}>
+            {c.cta.label}
           </a>
           <button
             type="button"
@@ -105,16 +104,16 @@ export function Header() {
       <div id="mobile-menu" className={styles.mobileMenu} hidden={!open}>
         <nav aria-label="Mobile">
           <ul className={styles.mobileList}>
-            {siteConfig.programmeNav.map((item) => (
-              <li key={item.href}>
+            {c.nav.map((item, i) => (
+              <li key={i}>
                 <a href={item.href} className={styles.mobileLink} onClick={close}>
-                  {item.title}
+                  {item.label}
                 </a>
               </li>
             ))}
           </ul>
-          <a href={siteConfig.cta.enrol} className={styles.mobileCta} onClick={close}>
-            Take your seat
+          <a href={c.cta.href} className={styles.mobileCta} onClick={close}>
+            {c.cta.label}
           </a>
         </nav>
       </div>

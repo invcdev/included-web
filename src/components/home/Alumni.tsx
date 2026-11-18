@@ -1,28 +1,28 @@
 import React from "react";
+import type { SiteContent } from "@/content/schema";
 import { ALUMNI_DOTS, ALUMNI_LOGOS } from "./alumniData";
+import { placeLogos, WIDE_GLOBE } from "./globeLayout";
 import { LogoGlobe } from "./LogoGlobe";
 import styles from "./Alumni.module.css";
 
-export function Alumni() {
+export function Alumni({ content: c }: { content: SiteContent["alumni"] }) {
+  const placed = placeLogos(WIDE_GLOBE, ALUMNI_LOGOS, c.firms);
   return (
     <section id="alumni" className={styles.alumni} aria-labelledby="alumni-heading">
       <div className={`container ${styles.head}`}>
         <div>
-          <p className={styles.eyebrow}>Where our alumni work</p>
+          <p className={styles.eyebrow}>{c.eyebrow}</p>
           <h2 id="alumni-heading" className={styles.heading}>
-            Where Included VC Fellows work now.
+            {c.heading}
           </h2>
         </div>
-        <p className={styles.body}>
-          Firms that alumni of our Fellowship have joined. Ascend is new and does not guarantee a
-          job.
-        </p>
+        <p className={styles.body}>{c.body}</p>
       </div>
 
       {/* Same globe-to-grid scroll animation as the partner section. */}
-      <LogoGlobe logos={ALUMNI_LOGOS} dots={ALUMNI_DOTS} imageDir="/alumni" className={styles.globe}>
+      <LogoGlobe logos={placed} dots={ALUMNI_DOTS} className={styles.globe}>
         <ul className={styles.grid}>
-          {ALUMNI_LOGOS.map((l) => (
+          {placed.map((l) => (
             <li key={l.slug} className={styles.cell}>
               <span
                 data-slot={l.slug}

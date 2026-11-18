@@ -1,24 +1,9 @@
 import React from "react";
-import { siteConfig } from "@/config/site";
+import type { SiteContent } from "@/content/schema";
 import styles from "./WhoItsFor.module.css";
 
-const PEOPLE = [
-  "People with disabilities",
-  "Athletes and ex-professional sport",
-  "A DJ",
-  "Armed forces veterans",
-  "Doctors and dentists",
-  "PhD researchers",
-  "Lawyers",
-  // "You" sits here (centre)
-  "Engineers",
-  "Teachers",
-  "New parents",
-  "Career changers in their 40s and 50s",
-  "A surgeon",
-  "First-generation graduates",
-  "An opera singer",
-];
+type Content = SiteContent["everyoneIncluded"];
+
 
 /*
  * Jigsaw layout. Each inside edge has one tab at its midpoint.
@@ -128,7 +113,18 @@ function youPiece(l: Layout) {
   );
 }
 
-function Puzzle({ layout, className }: { layout: Layout; className: string }) {
+function Puzzle({
+  layout,
+  people,
+  you,
+  className,
+}: {
+  layout: Layout;
+  /** Filled into the pieces left to right, top to bottom, skipping "You". */
+  people: Content["people"];
+  you: Content["you"];
+  className: string;
+}) {
   const W = layout.cols * layout.w;
   const H = layout.rows * layout.h;
   const [yr, yc] = layout.you;
@@ -141,14 +137,14 @@ function Puzzle({ layout, className }: { layout: Layout; className: string }) {
       if (r === yr && c === yc) {
         cells.push(
           <li key="you" className={styles.you} style={pos}>
-            <strong className={styles.youTitle}>You</strong>
-            <span className={styles.youText}>The missing piece. Ready to Ascend</span>
+            <strong className={styles.youTitle}>{you.title}</strong>
+            <span className={styles.youText}>{you.text}</span>
           </li>,
         );
       } else {
-        const label = PEOPLE[i++];
+        const label = people[i++];
         cells.push(
-          <li key={label} className={styles.piece} style={pos}>
+          <li key={`${r}-${c}`} className={styles.piece} style={pos}>
             {label}
           </li>,
         );
@@ -195,21 +191,18 @@ const STARS = Array.from({ length: 46 }, (_, i) => {
   return { x: r(12.9898) * 100, y: r(78.233) * 100, s: 1 + r(37.719) * 1.6, o: 0.18 + r(91.17) * 0.45 };
 });
 
-export function WhoItsFor() {
+export function WhoItsFor({ content: c }: { content: Content }) {
   return (
     <section id="everyone-included" className={styles.section} aria-labelledby="who-heading">
       <div className="container">
         <div className={styles.head}>
           <div>
-            <p className={styles.eyebrow}>Is this you?</p>
+            <p className={styles.eyebrow}>{c.eyebrow}</p>
             <h2 id="who-heading" className={styles.heading}>
-              Everyone is included.
+              {c.heading}
             </h2>
           </div>
-          <p className={styles.body}>
-            Included VC programmes have been home to people from every background and stage of
-            life. One piece is missing.
-          </p>
+          <p className={styles.body}>{c.body}</p>
         </div>
 
         <div className={styles.panel}>
@@ -222,19 +215,19 @@ export function WhoItsFor() {
             ))}
           </div>
 
-          <Puzzle layout={DESKTOP} className={styles.puzzleWide} />
-          <Puzzle layout={PHONE} className={styles.puzzleNarrow} />
+          <Puzzle layout={DESKTOP} people={c.people} you={c.you} className={styles.puzzleWide} />
+          <Puzzle layout={PHONE} people={c.people} you={c.you} className={styles.puzzleNarrow} />
 
           <p className={styles.note}>
             <span className={styles.noteDot} aria-hidden="true" />
-            That is the room complete.{" "}
-            <a href={siteConfig.cta.enrol} className={styles.noteLink}>
-              Take your place
+            {c.note}{" "}
+            <a href={c.noteLink.href} className={styles.noteLink}>
+              {c.noteLink.label}
             </a>
           </p>
 
           <blockquote className={styles.quote}>
-            <p>And one person who sat under a tree, just to get enough signal to join the sessions.</p>
+            <p>{c.quote}</p>
           </blockquote>
         </div>
       </div>

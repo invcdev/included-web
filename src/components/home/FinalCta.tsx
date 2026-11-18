@@ -1,23 +1,20 @@
 import React from "react";
-import { siteConfig } from "@/config/site";
+import type { SiteContent } from "@/content/schema";
 import { StarSky } from "./StarSky";
 import styles from "./FinalCta.module.css";
 
-export function FinalCta() {
+export function FinalCta({ content: c }: { content: SiteContent["finalCta"] }) {
   return (
     <section id="start" className={styles.final} aria-labelledby="final-heading">
       <StarSky density={0.6} />
       <div className={`container ${styles.inner}`}>
-        <p className={styles.eyebrow}>Ascend by Included VC</p>
+        <p className={styles.eyebrow}>{c.eyebrow}</p>
         <h2 id="final-heading" className={styles.heading}>
-          Start the year in the room.
+          {c.heading}
         </h2>
-        <p className={styles.body}>
-          The first Tuesday of 2027, 16:00 UK time. Fourteen live weeks follow. About ten minutes to
-          enrol. Enrolment closes Monday 4 January.
-        </p>
-        <a href={siteConfig.cta.enrol} className={styles.button}>
-          Take your seat
+        <p className={styles.body}>{c.body}</p>
+        <a href={c.cta.href} className={styles.button}>
+          {c.cta.label}
         </a>
       </div>
     </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import type { SiteContent } from "@/content/schema";
 import styles from "./TuesdaySlot.module.css";
 
 /*
@@ -8,7 +9,8 @@ import styles from "./TuesdaySlot.module.css";
  *
  * Times are worked out from the first session (Tuesday 5 January 2027,
  * 16:00-18:30 UK time) for each city and for the visitor's own time zone,
- * which also decides which city is highlighted.
+ * which also decides which city is highlighted. The session date and the
+ * city list are code (they drive the time maths); the wording is content.
  *
  * When the panel comes into view the city cards tumble into an orbit around
  * the UK time. Scrolling back up (the panel heading down out of view) plays it
@@ -84,7 +86,7 @@ function orbitPoint(i: number) {
   return { x: ORBIT.x + ORBIT.r * Math.sin(a), y: ORBIT.y - ORBIT.r * Math.cos(a) };
 }
 
-export function TuesdaySlot() {
+export function TuesdaySlot({ content: c }: { content: SiteContent["tuesdays"] }) {
   const [tz, setTz] = useState(DEFAULT_TZ);
   // The animation loop reads the time zone without re-subscribing.
   const tzRef = useRef(tz);
@@ -211,27 +213,20 @@ export function TuesdaySlot() {
           <div className={styles.glow} aria-hidden="true" />
 
           <div className={styles.copy}>
-            <p className={styles.eyebrow}>Live every Tuesday &middot; 16:00&ndash;18:30 UK time</p>
+            <p className={styles.eyebrow}>{c.eyebrow}</p>
             <h2 id="tuesdays-heading" className={styles.heading}>
-              Your Tuesdays: {yourStart} to {yourEnd}.
+              {c.headingPrefix} {yourStart} to {yourEnd}.
             </h2>
-            <p className={styles.lede}>
-              This is your slot for fourteen Tuesdays. Put it in your calendar now. If it fits, so do
-              you.
-            </p>
+            <p className={styles.lede}>{c.lede}</p>
             <p className={styles.pill}>
               <span className={styles.pillDot} aria-hidden="true" />
-              <span>Your Tuesday:</span>
+              <span>{c.pillLabel}</span>
               <strong className={styles.pillTime}>
                 {yourStart} to {yourEnd}
               </strong>
               <span className={styles.pillZone}>{tz}</span>
             </p>
-            <p className={styles.note}>
-              Sessions are always at 16:00 UK time. The times here are for the first session, Tuesday
-              5 January. Outside the UK and Europe, your local time moves by an hour for a few
-              sessions in March and April, when clocks change.
-            </p>
+            <p className={styles.note}>{c.note}</p>
           </div>
 
           <div ref={stageRef} className={styles.stage}>
@@ -242,9 +237,9 @@ export function TuesdaySlot() {
               </svg>
               <span className={styles.ring} data-fade />
               <span className={styles.sphere} data-sphere>
-                <span className={styles.sphereLabel}>UK time</span>
-                <span className={styles.sphereTime}>16:00&ndash;18:30</span>
-                <span className={styles.sphereNote}>every Tuesday</span>
+                <span className={styles.sphereLabel}>{c.sphereLabel}</span>
+                <span className={styles.sphereTime}>{c.sphereTime}</span>
+                <span className={styles.sphereNote}>{c.sphereNote}</span>
               </span>
               {CITIES.map((c, i) => {
                 const { x, y } = orbitPoint(i);
