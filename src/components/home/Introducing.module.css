@@ -46,6 +46,14 @@
   margin-right: -4px;
 }
 
+.body {
+  margin-top: 24px;
+  max-width: 560px;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--muted);
+}
+
 .stats {
   list-style: none;
   display: grid;

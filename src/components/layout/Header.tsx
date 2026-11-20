@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { SiteContent } from "@/content/schema";
 import styles from "./Header.module.css";
+import { siteHref } from "./siteHref";
 
 export function Header({ content: c }: { content: SiteContent["header"] }) {
   const [open, setOpen] = useState(false);
@@ -74,7 +75,7 @@ export function Header({ content: c }: { content: SiteContent["header"] }) {
           <ul className={styles.navList}>
             {c.nav.map((item, i) => (
               <li key={i}>
-                <a href={item.href} className={styles.navLink}>
+                <a href={siteHref(item.href)} className={styles.navLink}>
                   {item.label}
                 </a>
               </li>
@@ -83,7 +84,7 @@ export function Header({ content: c }: { content: SiteContent["header"] }) {
         </nav>
 
         <div className={styles.actions}>
-          <a href={c.cta.href} className={styles.cta}>
+          <a href={siteHref(c.cta.href)} className={styles.cta}>
             {c.cta.label}
           </a>
           <button
@@ -106,13 +107,13 @@ export function Header({ content: c }: { content: SiteContent["header"] }) {
           <ul className={styles.mobileList}>
             {c.nav.map((item, i) => (
               <li key={i}>
-                <a href={item.href} className={styles.mobileLink} onClick={close}>
+                <a href={siteHref(item.href)} className={styles.mobileLink} onClick={close}>
                   {item.label}
                 </a>
               </li>
             ))}
           </ul>
-          <a href={c.cta.href} className={styles.mobileCta} onClick={close}>
+          <a href={siteHref(c.cta.href)} className={styles.mobileCta} onClick={close}>
             {c.cta.label}
           </a>
         </nav>

@@ -1,0 +1,13 @@
+/* The Africa sessions reuse the curriculum's styles (Curriculum.module.css); these are the differences. */
+.section:is(section) {
+  padding-top: 40px;
+}
+
+.list {
+  margin-top: 41px;
+}
+
+/* The step label sits above the heading row, as on the other sections. */
+.section :global(.container) > p:first-child {
+  margin-bottom: 40px;
+}

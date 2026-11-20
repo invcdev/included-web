@@ -15,74 +15,10 @@
  */
 import { z } from "zod";
 
-/* ---------- Building blocks ---------- */
-
-/**
- * An image. `url` is either a path under /public (defaults) or a Cloudinary
- * delivery URL (https://res.cloudinary.com/...). `width`/`height` are the
- * intrinsic pixel size, used for aspect ratio and responsive sizes.
- * `publicId` is kept when the image lives in Cloudinary, so the admin can
- * replace or transform it later.
- */
-/** Where images may come from. next/image only serves these (see next.config.ts). */
-export const IMAGE_URL_PREFIXES = ["/", "https://res.cloudinary.com/"] as const;
-
-export const imageSchema = z.object({
-  url: z
-    .string()
-    .min(1, "Add an image")
-    .refine((u) => IMAGE_URL_PREFIXES.some((p) => u.startsWith(p)) && !u.startsWith("//"), {
-      message: "Upload the image, or use a /public path or a res.cloudinary.com URL",
-    }),
-  alt: z.string(),
-  width: z.number().int().positive(),
-  height: z.number().int().positive(),
-  publicId: z.string().optional(),
-});
-
-export const linkSchema = z.object({
-  label: z.string(),
-  href: z.string(),
-});
-
-export const kickerSchema = z.object({
-  step: z.string(),
-  label: z.string(),
-});
-
-export const statSchema = z.object({
-  value: z.string(),
-  label: z.string(),
-});
-
-export const testimonialSchema = z.object({
-  quote: z.string(),
-  name: z.string(),
-  role: z.string(),
-  /** Optional photo; the gradient circle is shown when empty. */
-  avatar: imageSchema.optional(),
-});
-
-/** A heading/eyebrow/body trio used by most sections. */
-const intro = {
-  eyebrow: z.string(),
-  heading: z.string(),
-  body: z.string(),
-};
-
-/** A logo shown in a globe and its grid. `slug` keys it to its globe position. */
-export const globeLogoSchema = z.object({
-  slug: z.string(),
-  name: z.string(),
-  logo: imageSchema,
-});
-
-/** A list of globe logos. Slugs must be unique: each one is a cell in the grid. */
-function logoList<T extends z.ZodType<{ slug: string }>>(item: T) {
-  return z.array(item).refine((list) => new Set(list.map((l) => l.slug)).size === list.length, {
-    message: "Each logo needs its own slug",
-  });
-}
+export * from "./blocks";
+import { pageSchemas } from "./pages";
+import { pageMetaSchema } from "./pages/shared";
+import { imageSchema, linkSchema, kickerSchema, statSchema, testimonialSchema, intro, globeLogoSchema, logoList } from "./blocks";
 
 /* ---------- Sections ---------- */
 
@@ -150,6 +86,8 @@ export const introducingSchema = z.object({
   eyebrow: z.string(),
   logo: imageSchema,
   byline: imageSchema,
+  /** Optional paragraph under the logo (the Ascend Africa page has one). */
+  body: z.string().optional(),
   stats: z.array(z.object({ value: z.string(), title: z.string(), text: z.string() })),
   illustration: imageSchema,
   tracksLabel: z.string(),
@@ -393,6 +331,40 @@ export const footerSchema = z.object({
   legal: z.array(linkSchema),
 });
 
+/* ---------- Ascend Africa (/ascend-africa) ----------
+ * The Africa page uses the landing page's sections. Sections that read the same
+ * on both pages share the landing page's content; these are the ones that differ,
+ * plus two of its own. */
+
+export const africaSessionsSchema = z.object({
+  kicker: kickerSchema.describe("Step label above the section. Leave both empty to hide it."),
+  ...intro,
+  sessions: z.array(z.object({ title: z.string(), details: z.string() })).describe("Each session opens to show its details."),
+});
+
+export const africaBuiltSchema = z.object({
+  ...intro,
+  cards: z.array(z.object({ title: z.string(), text: z.string() })),
+});
+
+export const africaSchemas = {
+  africaMeta: pageMetaSchema,
+  africaHero: heroSchema,
+  africaNetwork: networkSchema,
+  africaIntroducing: introducingSchema,
+  africaClimb: climbSchema,
+  africaCurriculum: curriculumSchema,
+  africaMonth: monthSchema,
+  africaTuesdays: tuesdaysSchema,
+  africaSessions: africaSessionsSchema,
+  africaFaculty: facultySchema,
+  africaBuilt: africaBuiltSchema,
+  africaCountries: countriesSchema,
+  africaTicket: ticketSchema,
+  africaJoin: joinSchema,
+  africaFinalCta: finalCtaSchema,
+};
+
 /* ---------- The whole page ---------- */
 
 export const siteContentSchema = z.object({
@@ -430,6 +402,10 @@ export const siteContentSchema = z.object({
   faq: faqSchema,
   finalCta: finalCtaSchema,
   footer: footerSchema,
+  // Ascend Africa
+  ...africaSchemas,
+  // The other pages (src/content/pages)
+  ...pageSchemas,
 });
 
 export type SiteContent = z.infer<typeof siteContentSchema>;

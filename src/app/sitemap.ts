@@ -1,25 +1,16 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
+import { PAGES } from "@/content/pages";
 
+/** Every public page (the list the admin also uses). The landing page and the two Ascend tracks rank highest. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = [
-    { path: "", changeFrequency: "weekly" as const, priority: 1.0 },
-    { path: "/fellowship", changeFrequency: "weekly" as const, priority: 0.9 },
-    { path: "/partners", changeFrequency: "monthly" as const, priority: 0.8 },
-    { path: "/fellows", changeFrequency: "monthly" as const, priority: 0.8 },
-    { path: "/about", changeFrequency: "monthly" as const, priority: 0.8 },
-    { path: "/insights", changeFrequency: "weekly" as const, priority: 0.7 },
-    { path: "/apply", changeFrequency: "monthly" as const, priority: 0.9 },
-    { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
-    { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
-  ];
-
   const currentDate = new Date().toISOString();
+  const top = new Set(["/", "/ascend-africa", "/programme"]);
 
-  return staticRoutes.map((route) => ({
-    url: `${siteConfig.url}${route.path}`,
+  return PAGES.flatMap((p) => (p.path ? [p.path] : [])).map((path) => ({
+    url: `${siteConfig.url}${path === "/" ? "" : path}`,
     lastModified: currentDate,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
+    changeFrequency: top.has(path) ? ("weekly" as const) : ("monthly" as const),
+    priority: path === "/" ? 1.0 : top.has(path) ? 0.9 : 0.7,
   }));
 }

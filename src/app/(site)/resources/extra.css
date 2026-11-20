@@ -1,0 +1,11 @@
+/* Additions to the original page's styles (page.css is generated): inline styles from the original markup. */
+.pg-resources .stars .rs-rating{color:#4b5068;letter-spacing:0;font-size:11px}
+.pg-resources .info p.rs-why{margin-top:8px}
+.pg-resources .hd .lede.rs-zine-lede{max-width:380px;margin:0}
+.pg-resources .rs-plain{-webkit-background-clip:border-box;background-clip:border-box;color:inherit}
+.pg-resources sup.rs-sup{font-size:7px}
+.pg-resources .more .btn.rs-white{background:#fff;color:#0a0f24}
+.pg-resources .rs-nl{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.pg-resources .rs-form{display:grid;gap:12px;max-width:520px;margin-top:26px}
+.pg-resources .rs-form input,.pg-resources .rs-form select{padding:14px 18px;border-radius:12px;border:1.5px solid #ccc;font-family:inherit;font-size:16px;background:#fff}
+@media (max-width:900px){.pg-resources .rs-nl{grid-template-columns:minmax(0,1fr)}}

@@ -1,0 +1,742 @@
+{
+"/site/about-hero.jpg": [
+1800,
+1013
+],
+"/site/alogos/27v.png": [
+84,
+84
+],
+"/site/alogos/4pcapital.png": [
+102,
+84
+],
+"/site/alogos/anandaimpactventures.png": [
+261,
+84
+],
+"/site/alogos/apx.png": [
+272,
+84
+],
+"/site/alogos/atomico.png": [
+364,
+84
+],
+"/site/alogos/balderton.png": [
+406,
+84
+],
+"/site/alogos/blume.png": [
+262,
+84
+],
+"/site/alogos/btov.png": [
+84,
+84
+],
+"/site/alogos/capitalmills.png": [
+84,
+84
+],
+"/site/alogos/carbon13.png": [
+146,
+84
+],
+"/site/alogos/columbialakepartners.png": [
+336,
+84
+],
+"/site/alogos/distillventures.png": [
+260,
+84
+],
+"/site/alogos/dtcp.png": [
+227,
+84
+],
+"/site/alogos/foundersfactoryafrica.png": [
+162,
+84
+],
+"/site/alogos/frontline.png": [
+215,
+84
+],
+"/site/alogos/goldenventures.png": [
+270,
+84
+],
+"/site/alogos/hummingbird.png": [
+404,
+84
+],
+"/site/alogos/hvcapital.png": [
+116,
+84
+],
+"/site/alogos/iccpsbi.png": [
+243,
+84
+],
+"/site/alogos/inmotion.png": [
+71,
+84
+],
+"/site/alogos/invisto.png": [
+84,
+84
+],
+"/site/alogos/jmeventures.png": [
+574,
+84
+],
+"/site/alogos/joyancepartners.png": [
+294,
+84
+],
+"/site/alogos/juafund.png": [
+157,
+84
+],
+"/site/alogos/kavedonkapital.png": [
+251,
+84
+],
+"/site/alogos/kaya.png": [
+225,
+84
+],
+"/site/alogos/kiboventures.png": [
+136,
+84
+],
+"/site/alogos/lantis.png": [
+371,
+84
+],
+"/site/alogos/launchafrica.png": [
+128,
+84
+],
+"/site/alogos/m12.png": [
+191,
+84
+],
+"/site/alogos/matrixpartners.png": [
+210,
+84
+],
+"/site/alogos/mdrlab.png": [
+465,
+84
+],
+"/site/alogos/nextech.png": [
+346,
+84
+],
+"/site/alogos/octopusventures.png": [
+542,
+84
+],
+"/site/alogos/pilabs.png": [
+266,
+84
+],
+"/site/alogos/playfaircapital.png": [
+178,
+84
+],
+"/site/alogos/rallycapventures.png": [
+83,
+84
+],
+"/site/alogos/redstone.png": [
+450,
+84
+],
+"/site/alogos/samosinvestments.png": [
+591,
+84
+],
+"/site/alogos/sequoia.png": [
+489,
+84
+],
+"/site/alogos/seraphimcapital.png": [
+338,
+84
+],
+"/site/alogos/siliconallee.png": [
+140,
+84
+],
+"/site/alogos/tc.png": [
+161,
+84
+],
+"/site/alogos/tcapital.png": [
+84,
+84
+],
+"/site/alogos/tenzing.png": [
+258,
+84
+],
+"/site/alogos/tupperlakepartners.png": [
+264,
+84
+],
+"/site/alogos/unshackledventures.png": [
+236,
+84
+],
+"/site/alogos/upload.png": [
+236,
+84
+],
+"/site/alogos/villageglobal.png": [
+319,
+84
+],
+"/site/alogos/warnermusicgroup.png": [
+200,
+84
+],
+"/site/alogos/waveventures.png": [
+217,
+84
+],
+"/site/alogos/zacuaventures.png": [
+414,
+84
+],
+"/site/alogos/zubicapital.png": [
+446,
+84
+],
+"/site/alumni-hero.jpg": [
+1800,
+1013
+],
+"/site/apple-touch-icon-180.png": [
+180,
+180
+],
+"/site/ascend-lockup-rev.svg": [
+1290,
+412
+],
+"/site/ascend-lockup.svg": [
+1290,
+412
+],
+"/site/city-doha.jpg": [
+900,
+600
+],
+"/site/city-dubai.jpg": [
+900,
+600
+],
+"/site/city-london.jpg": [
+900,
+600
+],
+"/site/city-ny.jpg": [
+900,
+600
+],
+"/site/clogos/50intech.png": [
+171,
+76
+],
+"/site/clogos/54ventures.png": [
+171,
+41
+],
+"/site/clogos/afrobytes.png": [
+157,
+29
+],
+"/site/clogos/bv.png": [
+96,
+96
+],
+"/site/clogos/ink.png": [
+137,
+84
+],
+"/site/clogos/lmf.png": [
+96,
+96
+],
+"/site/clogos/londonafrica.png": [
+153,
+68
+],
+"/site/clogos/overseasvietnamese.png": [
+165,
+25
+],
+"/site/clogos/thebaobabnetwork.png": [
+142,
+96
+],
+"/site/clogos/unrest.png": [
+81,
+96
+],
+"/site/favicon-16.png": [
+16,
+16
+],
+"/site/favicon-32.png": [
+32,
+32
+],
+"/site/fellow_0_florencebavanandan.webp": [
+200,
+200
+],
+"/site/fellow_1_alinabassi.webp": [
+200,
+200
+],
+"/site/fellow_2_audreyadeline.webp": [
+200,
+200
+],
+"/site/fellow_3_joonunes.webp": [
+200,
+200
+],
+"/site/fellow_4_carmenpumario.webp": [
+200,
+200
+],
+"/site/fellow_5_laurentfredericlohma.webp": [
+200,
+200
+],
+"/site/flags/algeria.png": [
+108,
+78
+],
+"/site/flags/angola.png": [
+108,
+78
+],
+"/site/flags/benin.png": [
+108,
+78
+],
+"/site/flags/botswana.png": [
+108,
+78
+],
+"/site/flags/burkina-faso.png": [
+108,
+78
+],
+"/site/flags/burundi.png": [
+108,
+78
+],
+"/site/flags/cameroon.png": [
+108,
+78
+],
+"/site/flags/cape-verde.png": [
+108,
+78
+],
+"/site/flags/central-african-republic.png": [
+108,
+78
+],
+"/site/flags/chad.png": [
+108,
+78
+],
+"/site/flags/comoros.png": [
+108,
+78
+],
+"/site/flags/congo.png": [
+108,
+78
+],
+"/site/flags/cote-divoire.png": [
+108,
+78
+],
+"/site/flags/djibouti.png": [
+108,
+78
+],
+"/site/flags/dr-congo.png": [
+108,
+78
+],
+"/site/flags/egypt.png": [
+108,
+78
+],
+"/site/flags/equatorial-guinea.png": [
+108,
+78
+],
+"/site/flags/eritrea.png": [
+108,
+78
+],
+"/site/flags/eswatini.png": [
+108,
+78
+],
+"/site/flags/ethiopia.png": [
+108,
+78
+],
+"/site/flags/gabon.png": [
+108,
+78
+],
+"/site/flags/gambia.png": [
+108,
+78
+],
+"/site/flags/ghana.png": [
+108,
+78
+],
+"/site/flags/guinea-bissau.png": [
+108,
+78
+],
+"/site/flags/guinea.png": [
+108,
+78
+],
+"/site/flags/kenya.png": [
+108,
+78
+],
+"/site/flags/lesotho.png": [
+108,
+78
+],
+"/site/flags/liberia.png": [
+108,
+78
+],
+"/site/flags/libya.png": [
+108,
+78
+],
+"/site/flags/madagascar.png": [
+108,
+78
+],
+"/site/flags/malawi.png": [
+108,
+78
+],
+"/site/flags/mali.png": [
+108,
+78
+],
+"/site/flags/mauritania.png": [
+108,
+78
+],
+"/site/flags/mauritius.png": [
+108,
+78
+],
+"/site/flags/morocco.png": [
+108,
+78
+],
+"/site/flags/mozambique.png": [
+108,
+78
+],
+"/site/flags/namibia.png": [
+108,
+78
+],
+"/site/flags/niger.png": [
+108,
+78
+],
+"/site/flags/nigeria.png": [
+108,
+78
+],
+"/site/flags/rwanda.png": [
+108,
+78
+],
+"/site/flags/sao-tome-and-principe.png": [
+108,
+78
+],
+"/site/flags/senegal.png": [
+108,
+78
+],
+"/site/flags/seychelles.png": [
+108,
+78
+],
+"/site/flags/sierra-leone.png": [
+108,
+78
+],
+"/site/flags/somalia.png": [
+108,
+78
+],
+"/site/flags/south-africa.png": [
+108,
+78
+],
+"/site/flags/south-sudan.png": [
+108,
+78
+],
+"/site/flags/sudan.png": [
+108,
+78
+],
+"/site/flags/tanzania.png": [
+108,
+78
+],
+"/site/flags/togo.png": [
+108,
+78
+],
+"/site/flags/tunisia.png": [
+108,
+78
+],
+"/site/flags/uganda.png": [
+108,
+78
+],
+"/site/flags/zambia.png": [
+108,
+78
+],
+"/site/flags/zimbabwe.png": [
+108,
+78
+],
+"/site/founder-nikita.jpg": [
+678,
+452
+],
+"/site/instructors-hero.jpg": [
+1800,
+1013
+],
+"/site/invc-logo-rev.png": [
+510,
+148
+],
+"/site/invc-logo.png": [
+510,
+148
+],
+"/site/logos/a_aban.png": [
+325,
+130
+],
+"/site/logos/a_ahl.png": [
+335,
+82
+],
+"/site/logos/a_aruwa.png": [
+335,
+121
+],
+"/site/logos/a_atg.png": [
+319,
+110
+],
+"/site/logos/a_enza.png": [
+197,
+69
+],
+"/site/logos/a_fsd.png": [
+335,
+110
+],
+"/site/logos/a_german.png": [
+140,
+86
+],
+"/site/logos/a_giz.png": [
+91,
+49
+],
+"/site/logos/a_jedar.png": [
+305,
+80
+],
+"/site/logos/a_launch.png": [
+335,
+130
+],
+"/site/logos/a_madica.png": [
+335,
+72
+],
+"/site/logos/a_next176.png": [
+335,
+90
+],
+"/site/logos/a_persistent.png": [
+127,
+149
+],
+"/site/logos/a_sabou.png": [
+294,
+80
+],
+"/site/logos/a_sais.png": [
+57,
+43
+],
+"/site/logos/a_timbuktoo.png": [
+335,
+76
+],
+"/site/logos/a_undp.png": [
+179,
+347
+],
+"/site/logos/g_bitkraft.png": [
+249,
+55
+],
+"/site/logos/g_creandum.png": [
+239,
+39
+],
+"/site/logos/g_daphni.png": [
+217,
+125
+],
+"/site/logos/g_eif.png": [
+164,
+98
+],
+"/site/logos/g_esprit.png": [
+215,
+63
+],
+"/site/logos/g_hsbc.png": [
+246,
+80
+],
+"/site/logos/g_hv.png": [
+164,
+120
+],
+"/site/logos/g_mangrove.png": [
+218,
+64
+],
+"/site/logos/g_mouro.png": [
+244,
+49
+],
+"/site/logos/g_notion.png": [
+237,
+55
+],
+"/site/logos/g_seedcamp.png": [
+267,
+55
+],
+"/site/logos/g_wilson.png": [
+231,
+99
+],
+"/site/p0.jpg": [
+520,
+520
+],
+"/site/p1.jpg": [
+520,
+520
+],
+"/site/p2.jpg": [
+520,
+520
+],
+"/site/p3.jpg": [
+520,
+520
+],
+"/site/p4.jpg": [
+520,
+520
+],
+"/site/p5.jpg": [
+520,
+520
+],
+"/site/p6.jpg": [
+520,
+520
+],
+"/site/p7.jpg": [
+520,
+520
+],
+"/site/planet.png": [
+900,
+900
+],
+"/site/press/p00.webp": [
+184,
+68
+],
+"/site/press/p01.webp": [
+211,
+63
+],
+"/site/press/p02.webp": [
+202,
+70
+],
+"/site/press/p03.webp": [
+202,
+59
+],
+"/site/press/p04.webp": [
+212,
+74
+],
+"/site/space.jpg": [
+1920,
+1080
+],
+"/site/tile-africa.jpg": [
+720,
+684
+],
+"/site/tile-global.jpg": [
+720,
+684
+],
+"/site/tile-investor.jpg": [
+720,
+684
+]
+}

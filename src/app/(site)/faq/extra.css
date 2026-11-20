@@ -1,0 +1,5 @@
+/* Additions to the original page's styles (page.css is generated): inline styles from the original markup. */
+.pg-faq .av2faq p.faq-foot{margin-top:28px;font-size:14px}
+.pg-faq .faq-foot a,.pg-faq .av2oh small a{color:inherit}
+.pg-faq .faq-strip{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap}
+.pg-faq .faq-strip .btn{padding:9px 15px;font-size:12px;letter-spacing:0;text-transform:none}

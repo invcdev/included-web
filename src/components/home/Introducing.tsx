@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import type { SiteContent } from "@/content/schema";
+import { RichText } from "../RichText";
 import styles from "./Introducing.module.css";
 
 // Dot colours for the two tracks, in order.
@@ -28,6 +29,12 @@ export function Introducing({ content: c }: { content: SiteContent["introducing"
               className={styles.byline}
             />
           </h2>
+
+          {c.body && (
+            <p className={styles.body}>
+              <RichText text={c.body} />
+            </p>
+          )}
 
           <ul className={styles.stats}>
             {c.stats.map((s) => (

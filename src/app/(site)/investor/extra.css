@@ -1,0 +1,3 @@
+/* Additions to the original page's styles (page.css is generated): the two-column block stacks on small screens. */
+.pg-investor .inv-who{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+@media (max-width:900px){.pg-investor .inv-who{grid-template-columns:minmax(0,1fr);gap:40px}}

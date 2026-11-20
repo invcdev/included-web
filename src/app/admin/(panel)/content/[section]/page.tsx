@@ -5,6 +5,7 @@ import { requireAdmin } from "@/lib/auth/session";
 import { defaultContent, sectionSchemas, type SectionKey } from "@/content";
 import { getContentStore } from "@/content/store";
 import { SECTIONS } from "@/content/sections";
+import { PAGES } from "@/content/pages";
 import { isCloudinaryConfigured } from "@/lib/cloudinary";
 import { SectionEditor, type JsonSchema } from "@/components/admin/SectionEditor";
 import { Back } from "@/components/admin/icons";
@@ -35,8 +36,8 @@ export default async function EditSection({ params }: { params: Promise<{ sectio
   return (
     <>
       <header className={styles.pageHead}>
-        <Link href="/admin" className={styles.back}>
-          <Back /> Page content
+        <Link href={`/admin?page=${meta.page}`} className={styles.back}>
+          <Back /> {PAGES.find((p) => p.slug === meta.page)?.label ?? "Page content"}
         </Link>
         <h1 className={styles.title}>{meta.label}</h1>
         <p className={styles.lead}>{meta.description}</p>

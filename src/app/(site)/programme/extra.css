@@ -1,0 +1,19 @@
+/* Additions to the original page's styles (page.css is generated): inline styles from the original markup. */
+.pg-programme .pc .eyebrow.pg-light{color:#cfd5ff}
+.pg-programme .pg-plain{-webkit-background-clip:border-box;background-clip:border-box;color:inherit}
+.pg-programme .sec.pg-road{padding-top:40px}
+.pg-programme .head .lede.pg-side-lede{margin:0;max-width:440px}
+.pg-programme .month p.pg-month-note{margin-top:22px;font-size:13.5px;color:var(--mute)}
+.pg-programme .key i.pg-key-m{background:#2a45ff}
+.pg-programme .key i.pg-key-a{background:var(--purple)}
+.pg-programme .key i.pg-key-t{background:#8fd000}
+.pg-programme .key i.pg-key-o{background:#00c2d6}
+
+/* Phones: the original roadmap's third column ran off screen. Let the columns shrink and long headings wrap. */
+@media (max-width:560px){
+  .pg-programme .ivc-road .ivc-map{padding:0 14px}
+  .pg-programme .ivc-road .ivc-row,.pg-programme .ivc-road .ivc-row.ivc-rev{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  /* The original type scale sets h3 sizes with !important on html body h3. */
+  html body .pg-programme .ivc-road .ivc-stop h3{font-size:13px!important;line-height:1.2!important;letter-spacing:0!important;overflow-wrap:break-word}
+  .pg-programme .ivc-road .ivc-stop p{font-size:12px}
+}
