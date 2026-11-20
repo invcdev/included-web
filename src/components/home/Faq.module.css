@@ -53,7 +53,7 @@
 }
 
 .tab:hover {
-  background: rgba(80, 53, 226, 0.07);
+  background: rgb(var(--brand-rgb) / 0.07);
   color: var(--ink);
 }
 

@@ -29,12 +29,21 @@ import { Faq } from "@/components/home/Faq";
 import { FinalCta } from "@/components/home/FinalCta";
 import { pageMetadata } from "@/components/site/pageMetadata";
 
+/* Green replaces the purple on this page: the .theme-africa wrapper switches the colour variables
+   (src/app/globals.css); these are the colours set in code. */
+const GREEN_BAND = "linear-gradient(90deg, #2F8F43, #9ED23A, #C9CD35, #9ED23A, #2F8F43)";
+const WEEK_GREENS = [
+  "#2F8F43", "#37994a", "#49a74f", "#5bb44f", "#6DC24B", "#7fc244", "#8fc93f",
+  "#9ED23A", "#a8d138", "#b4d037", "#bfcf36", "#C9CD35", "#dcc63f", "#C9CD35",
+];
+
 export async function generateMetadata() {
   return pageMetadata((await getSiteContent()).africaMeta, "/ascend-africa");
 }
 
 /*
- * Ascend Africa: the landing page's sections in the Africa design's order.
+ * Ascend Africa: the landing page's sections in the Africa design's order
+ * (TLDR early, two Africa-only sections), in the Africa design's greens.
  * Sections that read the same on both pages use the landing page's content
  * (edited once, under "Ascend"); the rest have Africa versions ("Ascend Africa"
  * in the admin). The "Take your seat" bands match the landing page.
@@ -42,7 +51,7 @@ export async function generateMetadata() {
 export default async function AscendAfricaPage() {
   const c = await getSiteContent();
   return (
-    <>
+    <div className="theme-africa">
       <Hero content={c.africaHero} />
       <Press content={c.press} />
       <Network content={c.africaNetwork} />
@@ -53,10 +62,10 @@ export default async function AscendAfricaPage() {
         id="take-your-seat"
         content={c.seatCtas.afterIntroducing}
         quoteWidth={460}
-        border="linear-gradient(90deg, #67defa 0%, #6feff7 5%, #7af3b4 20%, #94f777 35%, #b8fc53 50%, #c1fd51 55%, #a6fb60 65%, #87f594 80%, #74f1d3 95%, #71f0e8 100%)"
+        border={GREEN_BAND}
       />
       <Climb content={c.africaClimb} />
-      <Curriculum content={c.africaCurriculum} />
+      <Curriculum content={c.africaCurriculum} weekColors={WEEK_GREENS} />
       <Outcomes content={c.outcomes} />
       <Month content={c.africaMonth} />
       <TuesdaySlot content={c.africaTuesdays} cities={AFRICA_CITIES} />
@@ -64,7 +73,7 @@ export default async function AscendAfricaPage() {
         id="start-in-january"
         content={c.seatCtas.afterTuesdays}
         quoteWidth={520}
-        border="linear-gradient(90deg, #7cf3af 0%, #76f0c7 5%, #70eff4 15%, #6ae2fb 20%, #59bcf4 30%, #4d97ef 40%, #4872e9 50%, #494de5 60%, #4e3be3 65%, #4c40e3 70%, #4866e9 80%, #4a8aed 90%, #53adf2 100%)"
+        border={GREEN_BAND}
         ring
       />
       <AfricaSessions content={c.africaSessions} />
@@ -78,7 +87,7 @@ export default async function AscendAfricaPage() {
       <SeatCta
         id="join-in-january"
         content={c.seatCtas.afterCountries}
-        border="linear-gradient(90deg, #72f1e6 0%, #6ae7fb 7%, #5ac1f5 17%, #4d9bef 27%, #4776eb 37%, #4951e5 47%, #4e3ce3 55%, #4a4ee5 62%, #4773ea 72%, #4d98ef 82%, #59bdf4 92%, #66dcf9 100%)"
+        border={GREEN_BAND}
         ring
       />
       <Deal content={c.deal} />
@@ -91,12 +100,12 @@ export default async function AscendAfricaPage() {
         content={c.seatCtas.afterValues}
         topSpace={29}
         quoteWidth={460}
-        border="linear-gradient(90deg, #a9f75a 0%, #86f59a 12%, #74f1d0 28%, #6ce7fb 42%, #59bdf4 56%, #4b8eee 70%, #4866e9 84%, #5035e2 100%)"
+        border={GREEN_BAND}
         ring
       />
       <Join content={c.africaJoin} />
       <Faq content={c.faq} />
       <FinalCta content={c.africaFinalCta} />
-    </>
+    </div>
   );
 }

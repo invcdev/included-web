@@ -139,7 +139,7 @@
 .count {
   margin-left: 8px;
   font-size: 13.5px;
-  color: #a7aedb;
+  color: var(--tldr-muted, #a7aedb);
 }
 
 /* The map sits 14px above the card, as in the design. */

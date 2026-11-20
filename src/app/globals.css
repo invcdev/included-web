@@ -11,6 +11,7 @@
 
   /* Brand */
   --brand: #5035E2;
+  --brand-rgb: 80 53 226; /* --brand as r g b, for transparent shades */
   --brand-soft: #CAC2F6;
   --cyan: #6FEEFC;
   --lime: #C1FD50;
@@ -21,7 +22,14 @@
   --navy-muted: #ABB1C5;
 
   /* Spectrum: purple -> blue -> cyan -> mint -> lime (sampled from the full-width divider) */
-  --spectrum-stops: #5035E2 0%, #476FEA 16.7%, #53ABF2 33.3%, #6CE7FB 50%, #7AF3B8 66.7%, #98F872 83.3%, #C2FD51 100%;
+  --sp1: #5035E2;
+  --sp2: #476FEA;
+  --sp3: #53ABF2;
+  --sp4: #6CE7FB;
+  --sp5: #7AF3B8;
+  --sp6: #98F872;
+  --sp7: #C2FD51;
+  --spectrum-stops: var(--sp1) 0%, var(--sp2) 16.7%, var(--sp3) 33.3%, var(--sp4) 50%, var(--sp5) 66.7%, var(--sp6) 83.3%, var(--sp7) 100%;
   --spectrum: linear-gradient(90deg, var(--spectrum-stops));
 
   /* Type */
@@ -32,6 +40,80 @@
   --container: 1152px;
   --gutter: 24px;
   --header-h: 72px;
+}
+
+/* Purple tints and shades used by a few sections (see the Ascend Africa theme below). */
+:root {
+  --lavender-rgb: 150 140 235;
+  --lavender-2-rgb: 190 180 245;
+  --ticket-glow-rgb: 72 64 210;
+  --tuesday-glow-rgb: 70 56 214;
+  --ticket-price: linear-gradient(90deg, #4a33d6 0%, #4562cf 28%, #5fc4ea 55%, #70efe8 72%, #8ef59a 100%);
+  --month-masterclass: #3044f5;
+  --month-masterclass-tint: #eaedfe;
+  --month-task: #9dce3f;
+  --month-task-tint: #f4ffdc;
+  --month-africa-tint: #edebfd;
+  --month-office: #57bfd3;
+  --month-office-tint: #edfdff;
+}
+
+/*
+ * Ascend Africa: green replaces the purple across the whole page (header and
+ * footer included) while /ascend-africa is open. The page marks itself with
+ * .theme-africa; everything below follows from these variables.
+ */
+:root:has(.theme-africa) {
+  --brand: #2F8F43;
+  --brand-rgb: 47 143 67;
+  --brand-soft: #BFE3B4;
+  --sp1: #2F8F43;
+  --sp2: #3FA34D;
+  --sp3: #5BB44F;
+  --sp4: #6DC24B;
+  --sp5: #8FC93F;
+  --sp6: #9ED23A;
+  --sp7: #C9CD35;
+  --lavender-rgb: 199 214 201;
+  --lavender-2-rgb: 215 228 212;
+  --ticket-glow-rgb: 47 143 67;
+  --tuesday-glow-rgb: 47 143 67;
+  --ticket-price: linear-gradient(90deg, #2f8f43 0%, #3fa34d 28%, #6dc24b 55%, #9ed23a 72%, #c9cd35 100%);
+  --month-masterclass: #6dc24b;
+  --month-masterclass-tint: #ecf8e6;
+  --month-task: #9ed23a;
+  --month-task-tint: #f4fbdc;
+  --month-africa-tint: #e3f2e2;
+  --month-office: #c9cd35;
+  --month-office-tint: #fafbe2;
+  /* the partner globe's rings (outer to inner) */
+  --globe-ring-1: #f4f8d6;
+  --globe-ring-2: #e6f5e0;
+  --globe-ring-3: #d9eed4;
+  /* section glows and tints (each falls back to the landing page's colour) */
+  --hero-glow-rgb: 80 170 90;
+  --hero-glow-cyan-rgb: 170 220 110;
+  --room-glow-rgb: 47 143 67;
+  /* the values star (sampled from the Ascend Africa design) */
+  --values-glow-1-rgb: 186 215 204;
+  --values-glow-2-rgb: 172 206 190;
+  --values-stop-1: #7fb34f;
+  --values-stop-2: #93c252;
+  --values-stop-3: #a6cc55;
+  --values-stop-4: #b7cf55;
+  --values-core-1: #c6df82;
+  --values-core-2: #a9cf74;
+  --join-accent: #3fa34d;
+  --join-tint-1: #cfe8c6;
+  --join-tint-2: #d6eccd;
+  --tldr-muted: #b3c2ad;
+  --final-cta-bg:
+    radial-gradient(ellipse 34% 48% at 73% 26%, rgba(201, 205, 53, 0.95), rgba(201, 205, 53, 0) 100%),
+    radial-gradient(ellipse 30% 52% at 42% 104%, rgba(47, 143, 67, 0.95), rgba(47, 143, 67, 0) 100%),
+    radial-gradient(ellipse 32% 50% at 24% 70%, rgba(63, 163, 77, 0.85), rgba(63, 163, 77, 0) 100%),
+    radial-gradient(ellipse 30% 48% at 80% 85%, rgba(158, 210, 58, 0.8), rgba(158, 210, 58, 0) 100%),
+    radial-gradient(ellipse 30% 38% at 36% 2%, rgba(143, 201, 63, 0.9), rgba(143, 201, 63, 0) 100%),
+    linear-gradient(90deg, #8fc93f 0%, #5bb44f 22%, #6dc24b 50%, #9ed23a 72%, #b4d037 86%, #8fc93f 100%);
 }
 
 *,

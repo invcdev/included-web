@@ -89,18 +89,18 @@
 }
 
 .ringed {
-  box-shadow: 0 0 0 9px rgba(80, 53, 226, 0.18);
+  box-shadow: 0 0 0 9px rgb(var(--brand-rgb) / 0.18);
 }
 
 .primaryBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 24px -10px rgba(80, 53, 226, 0.7);
+  box-shadow: 0 10px 24px -10px rgb(var(--brand-rgb) / 0.7);
 }
 
 .ringed:hover {
   box-shadow:
-    0 0 0 9px rgba(80, 53, 226, 0.18),
-    0 10px 24px -10px rgba(80, 53, 226, 0.7);
+    0 0 0 9px rgb(var(--brand-rgb) / 0.18),
+    0 10px 24px -10px rgb(var(--brand-rgb) / 0.7);
 }
 
 /* ---------- Phones and small tablets: stacked ---------- */

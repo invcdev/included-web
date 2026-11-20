@@ -58,6 +58,12 @@ export function africaDefaults(home: Home): Africa {
     },
     africaIntroducing: {
       ...home.introducing,
+      // Green versions of the Ascend logo and illustration (the page is green, see the page's theme).
+      logo: { ...home.introducing.logo, ...img("/site/africa/ascend-logo-green.png", home.introducing.logo.alt) },
+      illustration: {
+        ...home.introducing.illustration,
+        ...img("/site/africa/ascend-illustration-green.jpg", home.introducing.illustration.alt),
+      },
       body: "Ascend by Included VC is our live investment education programme and one of the ways into the Included VC universe. Included VC has launched on the continent, and Ascend Africa grows and scales the careers of people building and leading the investment industry in Africa, alongside the funds already shaping African capital. Our aim is career development for everyone who joins. Across fourteen weeks you learn how the investment industry in Africa works from investors doing the job now, and you leave able to read a deal, write a memo and hold your own in the rooms where capital gets allocated.",
       stats: gmt(home.introducing.stats).map((s) =>
         s.title === "tracks"

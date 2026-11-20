@@ -21,7 +21,7 @@
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 320px 280px at 82% 18%, rgba(70, 56, 214, 0.42), rgba(70, 56, 214, 0) 100%),
+    radial-gradient(ellipse 320px 280px at 82% 18%, rgb(var(--tuesday-glow-rgb) / 0.42), rgb(var(--tuesday-glow-rgb) / 0) 100%),
     radial-gradient(ellipse 600px 460px at 64% 32%, rgba(48, 120, 170, 0.16), rgba(48, 120, 170, 0) 100%);
 }
 

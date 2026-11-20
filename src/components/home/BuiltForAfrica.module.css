@@ -18,7 +18,8 @@
   color: var(--brand);
 }
 
-/* The landing section that follows expects a white section above it. */
+/* The section that follows ("Everyone is included") gets its top space from the
+   white Faculty section on the landing page; give it the same 88px here. */
 .section:is(section) + section {
-  padding-top: 104px;
+  padding-top: 88px;
 }
