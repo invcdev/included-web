@@ -51,9 +51,7 @@ const baseMetadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  // Icons come from the files in src/app: favicon.ico, icon.svg and apple-icon.png.
   manifest: "/manifest.webmanifest",
 };
 
@@ -112,7 +110,8 @@ export default function RootLayout({
       sameAs: [
         siteConfig.links.twitter,
         siteConfig.links.linkedin,
-        siteConfig.links.github,
+        siteConfig.links.instagram,
+        siteConfig.links.medium,
       ],
     },
   ];

@@ -28,6 +28,8 @@ import { Tldr } from "@/components/home/Tldr";
 import { Faq } from "@/components/home/Faq";
 import { FinalCta } from "@/components/home/FinalCta";
 import { pageMetadata } from "@/components/site/pageMetadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { courseData } from "@/components/seo/structuredData";
 
 /* Green replaces the purple on this page: the .theme-africa wrapper switches the colour variables
    (src/app/globals.css); these are the colours set in code. */
@@ -52,6 +54,7 @@ export default async function AscendAfricaPage() {
   const c = await getSiteContent();
   return (
     <div className="theme-africa">
+      <JsonLd data={courseData({ name: "Ascend Africa by Included VC", description: c.africaMeta.description, path: "/ascend-africa" })} />
       <Hero content={c.africaHero} />
       <Press content={c.press} />
       <Network content={c.africaNetwork} />

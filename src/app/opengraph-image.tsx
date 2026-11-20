@@ -1,12 +1,21 @@
 import { ImageResponse } from "next/og";
-import { siteConfig } from "@/config/site";
+import { join } from "node:path";
+import { readFile } from "node:fs/promises";
 
-export const alt = `${siteConfig.name} - Global Venture Capital Fellowship`;
-export const size = {
-  width: 1200,
-  height: 630,
-};
+/**
+ * The preview image for shared links (Open Graph and Twitter), used by every
+ * page: the Ascend logo and the programme's headline on the site's white,
+ * with the brand spectrum along the top.
+ */
+export const alt = "Ascend by Included VC: fourteen Tuesdays inside venture capital";
+export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+const logo = await readFile(join(process.cwd(), "public/ascend/ascend-logo-placeholder.png"), "base64");
+const logoSrc = `data:image/png;base64,${logo}`;
+// The site's display font (Manrope, OFL), static weights for the image renderer.
+const manrope800 = await readFile(join(process.cwd(), "src/app/_fonts/manrope-800.woff"));
+const manrope500 = await readFile(join(process.cwd(), "src/app/_fonts/manrope-500.woff"));
 
 export default function Image() {
   return new ImageResponse(
@@ -17,112 +26,41 @@ export default function Image() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "80px",
-          backgroundColor: "#090d16",
-          backgroundImage:
-            "radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.25) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(14, 165, 233, 0.2) 0%, transparent 50%)",
-          color: "#f8fafc",
-          fontFamily: "sans-serif",
+          background: "#ffffff",
+          color: "#131412",
+          fontFamily: "Manrope",
         }}
       >
-        {/* Top badge */}
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <div
-            style={{
-              width: "56px",
-              height: "56px",
-              borderRadius: "16px",
-              background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "24px",
-              fontWeight: 800,
-              color: "#ffffff",
-              boxShadow: "0 8px 24px rgba(99, 102, 241, 0.4)",
-            }}
-          >
-            IV
-          </div>
-          <span
-            style={{
-              fontSize: "28px",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              color: "#ffffff",
-            }}
-          >
-            {siteConfig.name}
-          </span>
-        </div>
-
-        {/* Center Headline */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <h1
-            style={{
-              fontSize: "64px",
-              fontWeight: 800,
-              lineHeight: 1.1,
-              letterSpacing: "-0.03em",
-              margin: 0,
-              background: "linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%)",
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            Empowering the Next Generation of Venture Capital Leaders
-          </h1>
-          <p
-            style={{
-              fontSize: "26px",
-              lineHeight: 1.4,
-              color: "#94a3b8",
-              margin: 0,
-              maxWidth: "960px",
-            }}
-          >
-            {siteConfig.description}
-          </p>
-        </div>
-
-        {/* Bottom meta row */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            borderTop: "1px solid rgba(255, 255, 255, 0.12)",
-            paddingTop: "32px",
+            height: 14,
+            width: "100%",
+            background: "linear-gradient(90deg, #5035E2 0%, #476FEA 17%, #53ABF2 33%, #6CE7FB 50%, #7AF3B8 67%, #98F872 83%, #C2FD51 100%)",
           }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-            <span
-              style={{
-                fontSize: "18px",
-                fontWeight: 600,
-                color: "#6366f1",
-                backgroundColor: "rgba(99, 102, 241, 0.15)",
-                padding: "8px 18px",
-                borderRadius: "9999px",
-                border: "1px solid rgba(99, 102, 241, 0.3)",
-              }}
-            >
-              SEO Optimized Template
-            </span>
-            <span style={{ fontSize: "18px", color: "#94a3b8" }}>
-              Global Fellowship & Mentorship
-            </span>
+        />
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flex: 1, padding: "64px 80px 60px" }}>
+          <img src={logoSrc} width={415} height={90} alt="" />
+          <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+            <div style={{ fontSize: 76, fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.02, maxWidth: 900 }}>
+              Fourteen Tuesdays inside venture capital.
+            </div>
+            <div style={{ fontSize: 30, fontWeight: 500, color: "#686A72", lineHeight: 1.35, maxWidth: 940 }}>
+              A live investment academy taught by practising investors and funded by our partners.
+            </div>
           </div>
-          <span style={{ fontSize: "20px", color: "#64748b", fontWeight: 500 }}>
-            included.vc
-          </span>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 26, fontWeight: 800 }}>
+            <span style={{ color: "#5035E2" }}>Ascend by Included VC</span>
+            <span style={{ color: "#686A72" }}>included.vc</span>
+          </div>
         </div>
       </div>
     ),
     {
       ...size,
-    }
+      fonts: [
+        { name: "Manrope", data: manrope800, weight: 800, style: "normal" },
+        { name: "Manrope", data: manrope500, weight: 500, style: "normal" },
+      ],
+    },
   );
 }

@@ -137,3 +137,19 @@ This is design rather than content:
 - **Images** from the export are in `public/site/`. Their pixel sizes are in `src/content/pages/assetDims.json`. The 54 African flags on Ascend Africa were rendered from the emoji the design uses.
 
 **Forms.** The design's contact form (About) and newsletter sign-up (Resources) only pretended to send. They now open the visitor's email app with the message filled in, addressed to the email set in the admin. Connecting them to a form service or mailing list is a later step.
+
+## Search engines and sharing
+
+- **Every page is prerendered as static HTML.** Search engines get the full text without running JavaScript. The exception is the parts the original scripts build, such as carousels and the alumni wall; Google renders those too.
+- **Titles and descriptions** come from each page's **Search & sharing** section in the admin. Each page also gets a canonical URL, Open Graph and Twitter tags, and the shared preview image (`src/app/opengraph-image.tsx`).
+- **Structured data** (`src/components/seo/structuredData.ts`) is built from the content:
+  - `WebSite` and `Organization` on every page;
+  - `Course` on Ascend and Ascend Africa;
+  - `FAQPage` on /faq.
+- **`sitemap.xml`** lists every page from `src/content/pages/index.ts`.
+- **`robots.txt`** keeps `/admin` and `/api` out of search results.
+- **Icons:**
+  - `src/app/favicon.ico`, `icon.svg` and `apple-icon.png`;
+  - `public/icon-192.png` and `icon-512.png` for the web app manifest.
+  - They are the Ascend "A" mark from the design export.
+- **Before launch:** set `NEXT_PUBLIC_SITE_URL` to the live domain. Canonical URLs, the sitemap and the preview image links are built from it. Then add the site to Google Search Console and submit `/sitemap.xml`.
