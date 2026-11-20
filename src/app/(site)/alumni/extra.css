@@ -1,0 +1,10 @@
+/* Additions to the original page's styles (page.css is generated): inline styles from the original markup. */
+.pg-alumni .crumbs.al-crumbs{color:#cfd5ea}
+.pg-alumni .crumbs.al-crumbs a{color:#fff}
+.pg-alumni .eyebrow.al-light{color:#cfd5ea}
+.pg-alumni .eyebrow.al-dim{color:#9aa3c7}
+.pg-alumni .lede.al-dim-lede{color:#b9bfd8}
+.pg-alumni h2.al-wall-h{margin:10px 0 24px}
+.pg-alumni .al-live{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.pg-alumni .al-live-art{aspect-ratio:4/3;border-radius:22px;background:linear-gradient(135deg,#0033ff,#00ff04 55%,#ffff00);opacity:.9}
+@media (max-width:900px){.pg-alumni .al-live{grid-template-columns:minmax(0,1fr)}}

@@ -8,7 +8,7 @@ export function Faculty({ content: c }: { content: SiteContent["faculty"] }) {
   return (
     <section id="faculty" className={styles.faculty} aria-labelledby="faculty-heading">
       <div className="container">
-        <Kicker step={c.kicker.step} label={c.kicker.label} />
+        {(c.kicker.step || c.kicker.label) && <Kicker step={c.kicker.step} label={c.kicker.label} />}
 
         <div className={styles.head}>
           <div>

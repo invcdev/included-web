@@ -32,14 +32,15 @@ function weekColour(n: number) {
   return "rgb(194 253 81)";
 }
 
-function WeekItem({ week }: { week: Week }) {
+/** One expandable week. `colour` overrides the spectrum colour (the Ascend Africa sessions use greens). */
+export function WeekItem({ week, colour }: { week: Pick<Week, "n" | "title" | "details">; colour?: string }) {
   const [open, setOpen] = useState(false);
   const id = useId();
   return (
     <li
       className={styles.week}
       data-open={open || undefined}
-      style={{ "--week": weekColour(week.n) } as React.CSSProperties}
+      style={{ "--week": colour ?? weekColour(week.n) } as React.CSSProperties}
     >
       <h4 className={styles.weekHeading}>
         <button

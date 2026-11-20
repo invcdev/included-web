@@ -1,0 +1,7 @@
+/* Additions to the original page's styles (page.css is generated): inline styles from the original markup. */
+.pg-about .crumbs.ab-crumbs{color:#cfd5ea}
+.pg-about .crumbs.ab-crumbs a{color:#fff}
+.pg-about .eyebrow.ab-light{color:#cfd5ea}
+.pg-about .eyebrow.ab-lilac{color:#cfd5ff}
+.pg-about .orb .head .lede.orb-lede{margin:0;max-width:420px}
+.pg-about .ab-test .btn.ab-voices-btn{margin-top:6px}

@@ -21,7 +21,7 @@ import styles from "./TuesdaySlot.module.css";
 const START = Date.UTC(2027, 0, 5, 16, 0); // 16:00 UK (GMT in January)
 const END = START + 150 * 60 * 1000; // 18:30
 
-type City = {
+export type City = {
   name: string;
   tz: string;
   aliases?: string[];
@@ -44,6 +44,23 @@ const CITIES: City[] = [
   { name: "Mumbai", tz: "Asia/Kolkata", aliases: ["Asia/Calcutta"], sky: ["#3D446F", "#545661", "#6A6955"], body: "moon", bodyY: 38 },
   { name: "Singapore", tz: "Asia/Singapore", sky: ["#121B32", "#19233F", "#3C425B"], body: "moon", bodyY: 63 },
   { name: "Sydney", tz: "Australia/Sydney", sky: ["#121B32", "#19233F", "#3A425F"], body: "moon", bodyY: 63 },
+];
+
+/**
+ * The Ascend Africa page's cities. Sessions are at 16:00 GMT, so every sky is
+ * day to dusk; the colours reuse the design's palettes for the same local hour.
+ */
+export const AFRICA_CITIES: City[] = [
+  { name: "Dakar", tz: "Africa/Dakar", sky: ["#74B4E2", "#A1CCDD", "#D1E5DA"], body: "sun", bodyY: 44 },
+  { name: "Casablanca", tz: "Africa/Casablanca", sky: ["#73B3DF", "#A1CCDD", "#D1E5DA"], body: "sun", bodyY: 42 },
+  { name: "Abidjan", tz: "Africa/Abidjan", sky: ["#74B4E2", "#A1CCDD", "#D1E5DA"], body: "sun", bodyY: 44 },
+  { name: "Accra", tz: "Africa/Accra", sky: ["#74B4E2", "#A1CCDD", "#D1E5DA"], body: "sun", bodyY: 44 },
+  { name: "Lagos", tz: "Africa/Lagos", sky: ["#73B3DF", "#A1CCDD", "#D1E5DA"], body: "sun", bodyY: 42 },
+  { name: "Kigali", tz: "Africa/Kigali", sky: ["#727FAA", "#859088", "#9AA468"], body: "sun", bodyY: 40 },
+  { name: "Nairobi", tz: "Africa/Nairobi", sky: ["#727FAA", "#859088", "#9AA468"], body: "sun", bodyY: 38 },
+  { name: "Addis Ababa", tz: "Africa/Addis_Ababa", sky: ["#727FAA", "#859088", "#9AA468"], body: "sun", bodyY: 38 },
+  { name: "Cairo", tz: "Africa/Cairo", sky: ["#727FAA", "#859088", "#9AA468"], body: "sun", bodyY: 40 },
+  { name: "Johannesburg", tz: "Africa/Johannesburg", sky: ["#727FAA", "#859088", "#9AA468"], body: "sun", bodyY: 40 },
 ];
 
 function formatTime(ms: number, timeZone: string) {
@@ -86,7 +103,16 @@ function orbitPoint(i: number) {
   return { x: ORBIT.x + ORBIT.r * Math.sin(a), y: ORBIT.y - ORBIT.r * Math.cos(a) };
 }
 
-export function TuesdaySlot({ content: c }: { content: SiteContent["tuesdays"] }) {
+export function TuesdaySlot({
+  content: c,
+  cities: CITY_LIST = CITIES,
+  id = "your-tuesdays",
+}: {
+  content: SiteContent["tuesdays"];
+  /** Ten cities (the grid is 5 x 2 and the orbit spaces them 36° apart). */
+  cities?: City[];
+  id?: string;
+}) {
   const [tz, setTz] = useState(DEFAULT_TZ);
   // The animation loop reads the time zone without re-subscribing.
   const tzRef = useRef(tz);
@@ -131,7 +157,7 @@ export function TuesdaySlot({ content: c }: { content: SiteContent["tuesdays"] }
     const draw = () => {
       const e = p * TOTAL; // seconds into the timeline
       cards.forEach((el, i) => {
-        const c = CITIES[i];
+        const c = CITY_LIST[i];
         const t = clamp((e - i * STAGGER) / CARD_DUR);
         const k = easeInOut(t);
         const bump = Math.sin(Math.PI * t);
@@ -200,14 +226,14 @@ export function TuesdaySlot({ content: c }: { content: SiteContent["tuesdays"] }
       ro.disconnect();
       cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [CITY_LIST]);
 
   const mine = (c: City) => c.tz === tz || (c.aliases ?? []).includes(tz);
   const yourStart = formatTime(START, tz) || formatTime(START, DEFAULT_TZ);
   const yourEnd = formatTime(END, tz) || formatTime(END, DEFAULT_TZ);
 
   return (
-    <section id="your-tuesdays" className={styles.section} aria-labelledby="tuesdays-heading">
+    <section id={id} className={styles.section} aria-labelledby="tuesdays-heading">
       <div className="container">
         <div ref={panelRef} className={styles.panel}>
           <div className={styles.glow} aria-hidden="true" />
@@ -241,7 +267,7 @@ export function TuesdaySlot({ content: c }: { content: SiteContent["tuesdays"] }
                 <span className={styles.sphereTime}>{c.sphereTime}</span>
                 <span className={styles.sphereNote}>{c.sphereNote}</span>
               </span>
-              {CITIES.map((c, i) => {
+              {CITY_LIST.map((c, i) => {
                 const { x, y } = orbitPoint(i);
                 return (
                   <span
@@ -253,7 +279,10 @@ export function TuesdaySlot({ content: c }: { content: SiteContent["tuesdays"] }
                   >
                     <span className={styles.placeDot} />
                     <span className={styles.placeName}>{c.name}</span>
-                    <span className={styles.placeTime}>{formatTime(START, c.tz)}</span>
+                    {/* Server and browser time-zone data can disagree (e.g. Morocco), so the browser's value wins. */}
+                    <span className={styles.placeTime} suppressHydrationWarning>
+                      {formatTime(START, c.tz)}
+                    </span>
                   </span>
                 );
               })}
@@ -261,7 +290,7 @@ export function TuesdaySlot({ content: c }: { content: SiteContent["tuesdays"] }
 
             {/* Grid state: the cards fly to their orbit positions */}
             <ul className={styles.cards} aria-label="The first session in other cities">
-              {CITIES.map((c, i) => {
+              {CITY_LIST.map((c, i) => {
                 return (
                   <li
                     key={c.name}
@@ -281,8 +310,12 @@ export function TuesdaySlot({ content: c }: { content: SiteContent["tuesdays"] }
                   >
                     <span className={styles.cardCity}>{c.name}</span>
                     <span className={c.body === "sun" ? styles.sun : styles.moon} aria-hidden="true" />
-                    <span className={styles.cardTime}>{formatTime(START, c.tz)}</span>
-                    <span className={styles.cardTo}>to {formatTime(END, c.tz)}</span>
+                    <span className={styles.cardTime} suppressHydrationWarning>
+                      {formatTime(START, c.tz)}
+                    </span>
+                    <span className={styles.cardTo} suppressHydrationWarning>
+                      to {formatTime(END, c.tz)}
+                    </span>
                   </li>
                 );
               })}

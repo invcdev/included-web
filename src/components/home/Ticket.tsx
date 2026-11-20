@@ -26,8 +26,8 @@ const BARS: [number, number][] = (() => {
 // Dot colours for the two tracks, in order.
 const TRACK_DOTS = ["var(--brand)", "var(--lime)"];
 
-export function Ticket({ content: c }: { content: SiteContent["ticket"] }) {
-  const [track, setTrack] = useState(0);
+export function Ticket({ content: c, defaultTrack = 0 }: { content: SiteContent["ticket"]; defaultTrack?: number }) {
+  const [track, setTrack] = useState(defaultTrack);
   const current = c.tracks[track] ?? c.tracks[0];
   return (
     <section

@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import type { SiteContent } from "@/content/schema";
 import styles from "./Footer.module.css";
+import { siteHref } from "./siteHref";
 
 export function Footer({ content: c }: { content: SiteContent["footer"] }) {
   return (
@@ -35,7 +36,7 @@ export function Footer({ content: c }: { content: SiteContent["footer"] }) {
                 {col.links.map((l, j) => (
                   <li key={j}>
                     <a
-                      href={l.href}
+                      href={siteHref(l.href)}
                       {...(l.href.startsWith("http")
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
@@ -55,7 +56,7 @@ export function Footer({ content: c }: { content: SiteContent["footer"] }) {
             {c.legal.map((l, i) => (
               <React.Fragment key={i}>
                 {i > 0 && " \u00b7 "}
-                <a href={l.href}>{l.label}</a>
+                <a href={siteHref(l.href)}>{l.label}</a>
               </React.Fragment>
             ))}
           </span>

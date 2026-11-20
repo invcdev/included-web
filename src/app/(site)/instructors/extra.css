@@ -1,0 +1,7 @@
+/* Additions to the original page's styles (page.css is generated): inline styles from the original markup. */
+.pg-instructors .crumbs.in-crumbs{color:#cfd5ea}
+.pg-instructors .crumbs.in-crumbs a{color:#fff}
+.pg-instructors .eyebrow.in-light{color:#cfd5ea}
+.pg-instructors .sec.in-intro{padding:56px 0 10px}
+.pg-instructors .in-intro .wrap{max-width:900px}
+.pg-instructors .nw .row{cursor:pointer}

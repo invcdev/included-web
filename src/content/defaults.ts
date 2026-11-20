@@ -10,6 +10,8 @@ import { ALUMNI_LOGOS } from "@/components/home/alumniData";
 import { FLAGS } from "@/components/home/flagData";
 import { GLOBE_LOGOS } from "@/components/home/globeData";
 import type { ImageContent, SiteContent } from "./schema";
+import { pageDefaults } from "./pages";
+import { africaDefaults } from "./africaDefaults";
 
 type MonthEvent = SiteContent["month"]["weeks"][number]["events"][number];
 
@@ -644,20 +646,20 @@ const footerColumns = [
     title: "Programme",
     links: [
       { label: "Ascend", href: "/" },
-      { label: "Ascend Africa", href: "#" },
-      { label: "Investor Fellowship", href: "#" },
-      { label: "The curriculum", href: "#curriculum" },
-      { label: "FAQs", href: "#faqs" },
+      { label: "Ascend Africa", href: "/ascend-africa" },
+      { label: "Investor Fellowship", href: "/investor" },
+      { label: "The curriculum", href: "/programme#curriculum" },
+      { label: "FAQs", href: "/faq" },
     ],
   },
   {
     title: "Included VC",
     links: [
-      { label: "About", href: "#" },
-      { label: "Partners", href: "#network" },
-      { label: "Alumni & Community", href: "#" },
-      { label: "Instructors & Mentors", href: "#faculty" },
-      { label: "Resources", href: "#" },
+      { label: "About", href: "/about" },
+      { label: "Partners", href: "/about#partners" },
+      { label: "Alumni & Community", href: "/alumni" },
+      { label: "Instructors & Mentors", href: "/instructors" },
+      { label: "Resources", href: "/resources" },
     ],
   },
   {
@@ -718,7 +720,7 @@ const curriculumBlocks: { label: string; title: string; weeks: { n: number; titl
 
 /* ---- The page ---- */
 
-export const defaultContent: SiteContent = {
+const homeDefaults: Omit<SiteContent, `africa${string}`> = {
   meta: {
     title: "Ascend by Included VC",
     description:
@@ -869,7 +871,7 @@ export const defaultContent: SiteContent = {
     africa: {
       title: "Ascend Africa \u00b7 six more sessions",
       text: "Everything above, plus six Thursday sessions on African investment markets with the funds shaping them.",
-      cta: { label: "About Ascend Africa", href: "#ascend-africa" },
+      cta: { label: "About Ascend Africa", href: "/ascend-africa" },
     },
   },
 
@@ -1081,4 +1083,8 @@ export const defaultContent: SiteContent = {
       { label: "Privacy", href: "#" },
     ],
   },
+  // The other pages (src/content/pages)
+  ...pageDefaults,
 };
+
+export const defaultContent: SiteContent = { ...homeDefaults, ...africaDefaults(homeDefaults) };

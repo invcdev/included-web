@@ -1,6 +1,6 @@
 # Editable content and the admin portal
 
-Every piece of text, every link and every image on the Ascend landing page comes from one content object. Admins edit it at **`/admin`**. It is stored in **MongoDB**, and images go to **Cloudinary**. When nothing has been saved, the page uses the built-in defaults, so the site works before the database is set up.
+Every piece of text, every link and every image on the site comes from one content object. Admins edit it at **`/admin`**. It is stored in **MongoDB**, and images go to **Cloudinary**. When nothing has been saved, the page uses the built-in defaults, so the site works before the database is set up.
 
 ## Setting it up
 
@@ -30,7 +30,7 @@ Every piece of text, every link and every image on the Ascend landing page comes
 
 ## Using the admin
 
-- **Page content** lists every section in page order and shows whether each one uses its default or has been edited (when, and by whom).
+- **Page content** has a tab per page (plus **On every page** for the header, footer, closing band and pop-up). Each tab lists that page's sections in page order and shows whether each one uses its default or has been edited (when, and by whom).
 - **Editing a section.** Each section opens as a form. Save it, and the live site updates at once. **Discard changes** throws away unsaved edits. **Reset to original** removes the saved version, so the section goes back to the built-in default.
 - **Text formatting.** Longer text accepts `**bold**`, `*italic*` and `[link text](https://…)`. Nothing typed can inject HTML.
 - **Lists.** Items can be added, removed and reordered. Lists the design needs a set number of (the 14 jigsaw pieces, 6 stories, 4 values, 3 join steps) can be edited but not added to or removed from.
@@ -107,3 +107,33 @@ This is design rather than content:
 - the globe and jigsaw geometry;
 - the "Take your seat" card gradients and quote widths (set in `src/app/(site)/page.tsx`);
 - the Tuesday session date and the city list in `TuesdaySlot.tsx`, which drive the time-zone maths. The wording around them is editable.
+
+- the Ascend Africa page's cities (`AFRICA_CITIES` in `TuesdaySlot.tsx`);
+- artwork that is part of a page's design: the era cards on About, the roadmap icons and TLDR stars on The programme, the field-note covers and Journal art on Resources (each page's `fixed.ts`). Artwork cycles when an editor adds more items than there are designs.
+
+## The site pages
+
+| Page | Route | Content | Built from |
+| --- | --- | --- | --- |
+| Ascend | `/` | `src/content/schema.ts` | the landing page components |
+| Ascend Africa | `/ascend-africa` | `src/content/schema.ts` (`africa*`), defaults in `src/content/africaDefaults.ts` | the landing page components |
+| The programme | `/programme` | `src/content/pages/programme.ts` | `ascend-site/programme.html` |
+| Investor Fellowship | `/investor` | `src/content/pages/investor.ts` | `ascend-site/investor.html` |
+| About | `/about` | `src/content/pages/about.ts` | `ascend-site/about.html` |
+| Alumni & Community | `/alumni` | `src/content/pages/alumni.ts` | `ascend-site/alumni.html` |
+| Instructors & Mentors | `/instructors` | `src/content/pages/instructors.ts` | `ascend-site/instructors.html` |
+| Resources | `/resources` | `src/content/pages/resources.ts` | `ascend-site/resources.html` |
+| FAQs | `/faq` | `src/content/pages/faq.ts` | `ascend-site/faq.html` |
+| Partners | `/partners` | `src/content/pages/partners.ts` | `ascend-site/partners.html` (the export notes nothing links here; About has `#partners`) |
+
+**Ascend Africa shares content with Ascend.** It uses the landing page's sections. Sections that read the same on both pages (press, founder letter, TLDR, testimonials, alumni, the deal, promise, employers, values, FAQs, the "Take your seat" bands) are edited once, under **Ascend**. Sections whose wording differs have their own copy under **Ascend Africa**.
+
+**How the other pages are built.** They are ports of the static design export (`ascend-site/*.html`), kept as close to it as possible:
+
+- **Markup** is in `src/app/(site)/<page>/page.tsx`, with every text, link and image from the content.
+- **Styles.** `page.css` is the page's original stylesheet, scoped to the page's wrapper (`.pg-<page>`) by `scripts/scope-css.mjs` so it can't affect the rest of the site. `extra.css` holds the few additions: inline styles from the original markup and small mobile fixes. Either file can be edited by hand. To regenerate `page.css` from an updated export, run `node scripts/scope-css.mjs <page> "src/app/(site)/<page>/page.css" <path>/<page>.html`. This overwrites `page.css`.
+- **Behaviour.** The canvases, sliders, modals and filters run the original scripts (`src/components/site/scripts/`), inside a small sandbox (`src/components/site/runtime.ts`). The sandbox scopes them to the page and stops everything when the visitor navigates away. Lists those scripts build (programme cards, people, quotes, books…) come from the content, and the values are escaped.
+- **Shared by these pages:** the closing "Ready to ascend?" band and the "Applications open" pop-up (`src/content/pages/shared.ts`), and the partner logo sphere (`src/components/site/Orb.tsx`).
+- **Images** from the export are in `public/site/`. Their pixel sizes are in `src/content/pages/assetDims.json`. The 54 African flags on Ascend Africa were rendered from the emoji the design uses.
+
+**Forms.** The design's contact form (About) and newsletter sign-up (Resources) only pretended to send. They now open the visitor's email app with the message filled in, addressed to the email set in the admin. Connecting them to a form service or mailing list is a later step.

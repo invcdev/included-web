@@ -3,6 +3,7 @@ import Link from "next/link";
 import { requireAdmin } from "@/lib/auth/session";
 import { getContentStore, type SectionInfo } from "@/content/store";
 import { SECTIONS } from "@/content/sections";
+import { PAGES } from "@/content/pages";
 import { ChevronRight } from "@/components/admin/icons";
 import styles from "../admin.module.css";
 
@@ -24,8 +25,11 @@ function spectrum(t: number) {
 const date = (d: Date) => d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 const time = (d: Date) => d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
 
-export default async function Dashboard() {
+export default async function Dashboard({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
   await requireAdmin();
+  const { page: slug } = await searchParams;
+  const page = PAGES.find((p) => p.slug === slug) ?? PAGES[0];
+  const sections = SECTIONS.filter((s) => s.page === page.slug);
   let info: SectionInfo = {};
   let dbError = false;
   try {
@@ -34,22 +38,47 @@ export default async function Dashboard() {
     console.error("[admin] could not read content info", err);
     dbError = true;
   }
-  const edited = SECTIONS.filter((s) => info[s.key]).length;
+  const edited = sections.filter((s) => info[s.key]).length;
 
   return (
     <>
       <header className={styles.pageHead}>
         <h1 className={styles.title}>Page content</h1>
         <p className={styles.lead}>
-          The landing page, top to bottom. Open a section to edit it; saving publishes it straight away.
+          Pick a page, then open a section to edit it. Sections are listed top to bottom, and saving publishes straight away.
         </p>
       </header>
+
+      <nav className={styles.pageTabs} aria-label="Pages">
+        {PAGES.map((p) => {
+          const n = SECTIONS.filter((s) => s.page === p.slug && info[s.key]).length;
+          return (
+            <Link
+              key={p.slug}
+              href={`/admin?page=${p.slug}`}
+              className={styles.pageTab}
+              aria-current={p.slug === page.slug ? "page" : undefined}
+            >
+              {p.label}
+              {n > 0 && <span className={styles.pageTabCount}>{n} edited</span>}
+            </Link>
+          );
+        })}
+      </nav>
 
       {dbError && <p className={styles.notice}>The database didn&rsquo;t respond, so edit dates aren&rsquo;t shown.</p>}
 
       <div className={styles.mapHead}>
         <span>
-          {edited === 0 ? "All sections show their original content" : `${edited} of ${SECTIONS.length} sections edited`}
+          {edited === 0 ? "All sections show their original content" : `${edited} of ${sections.length} sections edited`}
+          {page.path && (
+            <>
+              {" · "}
+              <a href={page.path} target="_blank" rel="noopener noreferrer" className={styles.viewLink}>
+                View page
+              </a>
+            </>
+          )}
         </span>
         <span className={styles.legend2} aria-hidden="true">
           <span className={styles.keyFilled} /> Edited
@@ -58,10 +87,10 @@ export default async function Dashboard() {
       </div>
 
       <ol className={styles.pageMap}>
-        {SECTIONS.map((s, i) => {
+        {sections.map((s, i) => {
           const e = info[s.key];
           return (
-            <li key={s.key} style={{ "--dot": spectrum(i / (SECTIONS.length - 1)) } as React.CSSProperties}>
+            <li key={s.key} style={{ "--dot": spectrum(i / Math.max(1, sections.length - 1)) } as React.CSSProperties}>
               <Link href={`/admin/content/${s.key}`} className={styles.mapRow} data-edited={e ? "" : undefined}>
                 <span className={styles.mapDot} aria-hidden="true" />
                 <span className={styles.mapText}>
