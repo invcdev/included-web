@@ -5,13 +5,15 @@
   overflow: hidden;
   min-height: 752px;
   padding: 169px 0 120px;
-  background:
+  background: var(
+    --final-cta-bg,
     radial-gradient(ellipse 34% 48% at 73% 26%, rgba(184, 251, 86, 0.95), rgba(184, 251, 86, 0) 100%),
     radial-gradient(ellipse 30% 52% at 42% 104%, rgba(80, 58, 224, 0.95), rgba(80, 58, 224, 0) 100%),
     radial-gradient(ellipse 32% 50% at 24% 70%, rgba(74, 118, 234, 0.85), rgba(74, 118, 234, 0) 100%),
     radial-gradient(ellipse 30% 48% at 80% 85%, rgba(166, 214, 92, 0.8), rgba(166, 214, 92, 0) 100%),
     radial-gradient(ellipse 30% 38% at 36% 2%, rgba(108, 232, 246, 0.9), rgba(108, 232, 246, 0) 100%),
-    linear-gradient(90deg, #63d4f7 0%, #5fb4f2 22%, #6cc0ec 50%, #98e690 72%, #8fe3a5 86%, #66d3ee 100%);
+    linear-gradient(90deg, #63d4f7 0%, #5fb4f2 22%, #6cc0ec 50%, #98e690 72%, #8fe3a5 86%, #66d3ee 100%)
+  );
 }
 
 .final canvas {

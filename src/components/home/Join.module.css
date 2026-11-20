@@ -69,7 +69,7 @@
 .step2 {
   left: 266.5px;
   width: 312px;
-  background: #4489ed;
+  background: var(--join-accent, #4489ed);
   clip-path: polygon(0 0, 281.5px 0, 312px 50%, 281.5px 100%, 0 100%, 31px 50%);
   color: #fff;
 }
@@ -99,11 +99,11 @@
 }
 
 .step1 .num {
-  color: #cac5f6;
+  color: var(--join-tint-1, #cac5f6);
 }
 
 .step2 .num {
-  color: #caddfc;
+  color: var(--join-tint-2, #caddfc);
 }
 
 .step3 .num {

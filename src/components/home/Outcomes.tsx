@@ -3,10 +3,10 @@ import type { SiteContent } from "@/content/schema";
 import { Testimonial } from "./Testimonial";
 
 // Top-edge colours are points on the brand spectrum, in card order.
-const ACCENTS = ["#5035E2", "#53ABF2", "#7AF3B8", "#C2FD51"];
+const ACCENTS = ["var(--sp1)", "var(--sp3)", "var(--sp5)", "var(--sp7)"];
 import styles from "./Outcomes.module.css";
 
-export function Outcomes({ content: c }: { content: SiteContent["outcomes"] }) {
+export function Outcomes({ content: c, accents = ACCENTS }: { content: SiteContent["outcomes"]; accents?: string[] }) {
   return (
     <section id="what-you-leave-with" className={styles.outcomes} aria-labelledby="outcomes-heading">
       <div className="container">
@@ -18,7 +18,7 @@ export function Outcomes({ content: c }: { content: SiteContent["outcomes"] }) {
             <li
               key={o.title}
               className={styles.card}
-              style={{ "--accent": ACCENTS[i % ACCENTS.length] } as React.CSSProperties}
+              style={{ "--accent": accents[i % accents.length] } as React.CSSProperties}
             >
               <h3 className={styles.cardTitle}>{o.title}</h3>
               <p className={styles.cardText}>{o.text}</p>

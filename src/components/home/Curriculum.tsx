@@ -64,7 +64,14 @@ export function WeekItem({ week, colour }: { week: Pick<Week, "n" | "title" | "d
   );
 }
 
-export function Curriculum({ content: c }: { content: Content }) {
+export function Curriculum({
+  content: c,
+  weekColors,
+}: {
+  content: Content;
+  /** One colour per week (by week number - 1) instead of the brand spectrum. Ascend Africa uses greens. */
+  weekColors?: string[];
+}) {
   return (
     <section id="curriculum" className={styles.curriculum} aria-labelledby="curriculum-heading">
       <div className="container">
@@ -87,7 +94,7 @@ export function Curriculum({ content: c }: { content: Content }) {
               <h3 className={styles.blockTitle}>{b.title}</h3>
               <ol className={styles.weeks}>
                 {b.weeks.map((w) => (
-                  <WeekItem key={w.n} week={w} />
+                  <WeekItem key={w.n} week={w} colour={weekColors?.[(w.n - 1) % weekColors.length]} />
                 ))}
               </ol>
             </section>

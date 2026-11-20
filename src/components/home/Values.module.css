@@ -136,11 +136,11 @@
   border-radius: 50%;
   background: radial-gradient(
     circle closest-side,
-    rgba(80, 200, 250, 0.7) 0%,
-    rgba(110, 150, 240, 0.48) 35%,
-    rgba(150, 140, 235, 0.32) 55%,
-    rgba(190, 180, 245, 0.17) 75%,
-    rgba(200, 195, 245, 0) 100%
+    rgb(var(--values-glow-1-rgb, 80 200 250) / 0.7) 0%,
+    rgb(var(--values-glow-2-rgb, 110 150 240) / 0.48) 35%,
+    rgb(var(--lavender-rgb) / 0.32) 55%,
+    rgb(var(--lavender-2-rgb) / 0.17) 75%,
+    rgb(var(--lavender-2-rgb) / 0) 100%
   );
   pointer-events: none;
 }

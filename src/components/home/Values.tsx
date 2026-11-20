@@ -52,16 +52,16 @@ export function Values({ content: c }: { content: SiteContent["values"] }) {
           <div className={styles.glow} aria-hidden="true" />
           <svg className={styles.star} viewBox="-160 -160 320 320" aria-hidden="true">
             <defs>
-              {/* Blue at the top right, through cyan, to green at the bottom left. */}
+              {/* Blue at the top right, through cyan, to green at the bottom left (greens on Ascend Africa). */}
               <linearGradient id="values-star" x1="0.7" y1="0" x2="0.3" y2="1">
-                <stop offset="0" stopColor="#4a8cee" />
-                <stop offset="0.38" stopColor="#5fd0f6" />
-                <stop offset="0.6" stopColor="#6cebe3" />
-                <stop offset="1" stopColor="#7cf4a2" />
+                <stop offset="0" style={{ stopColor: "var(--values-stop-1, #4a8cee)" }} />
+                <stop offset="0.38" style={{ stopColor: "var(--values-stop-2, #5fd0f6)" }} />
+                <stop offset="0.6" style={{ stopColor: "var(--values-stop-3, #6cebe3)" }} />
+                <stop offset="1" style={{ stopColor: "var(--values-stop-4, #7cf4a2)" }} />
               </linearGradient>
               <radialGradient id="values-core" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0" stopColor="#9ff6fd" />
-                <stop offset="1" stopColor="#6ee8fb" />
+                <stop offset="0" style={{ stopColor: "var(--values-core-1, #9ff6fd)" }} />
+                <stop offset="1" style={{ stopColor: "var(--values-core-2, #6ee8fb)" }} />
               </radialGradient>
             </defs>
             <path d={STAR} fill="url(#values-star)" />

@@ -30,12 +30,12 @@
   border-radius: 50%;
   background: radial-gradient(
     circle closest-side,
-    rgba(80, 53, 226, 0.115) 0%,
-    rgba(80, 53, 226, 0.11) 19%,
-    rgba(80, 53, 226, 0.095) 37%,
-    rgba(80, 53, 226, 0.067) 50%,
-    rgba(80, 53, 226, 0.036) 69%,
-    rgba(80, 53, 226, 0) 100%
+    rgb(var(--brand-rgb) / 0.115) 0%,
+    rgb(var(--brand-rgb) / 0.11) 19%,
+    rgb(var(--brand-rgb) / 0.095) 37%,
+    rgb(var(--brand-rgb) / 0.067) 50%,
+    rgb(var(--brand-rgb) / 0.036) 69%,
+    rgb(var(--brand-rgb) / 0) 100%
   );
   pointer-events: none;
 }
@@ -155,7 +155,7 @@
 
 .primaryBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 24px -10px rgba(80, 53, 226, 0.7);
+  box-shadow: 0 10px 24px -10px rgb(var(--brand-rgb) / 0.7);
 }
 
 .secondaryBtn {

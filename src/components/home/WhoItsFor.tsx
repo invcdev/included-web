@@ -159,13 +159,13 @@ function Puzzle({
       <svg className={styles.puzzleArt} viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
         <defs>
           <linearGradient id={gid} x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0" stopColor="#5035E2" />
-            <stop offset="0.2" stopColor="#476FEA" />
-            <stop offset="0.38" stopColor="#53ABF2" />
-            <stop offset="0.55" stopColor="#6CE7FB" />
-            <stop offset="0.72" stopColor="#7AF3B8" />
-            <stop offset="0.88" stopColor="#98F872" />
-            <stop offset="1" stopColor="#C2FD51" />
+            <stop offset="0" style={{ stopColor: "var(--sp1)" }} />
+            <stop offset="0.2" style={{ stopColor: "var(--sp2)" }} />
+            <stop offset="0.38" style={{ stopColor: "var(--sp3)" }} />
+            <stop offset="0.55" style={{ stopColor: "var(--sp4)" }} />
+            <stop offset="0.72" style={{ stopColor: "var(--sp5)" }} />
+            <stop offset="0.88" style={{ stopColor: "var(--sp6)" }} />
+            <stop offset="1" style={{ stopColor: "var(--sp7)" }} />
           </linearGradient>
           <filter id={`${gid}-glow`} x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="26" />
@@ -174,7 +174,7 @@ function Puzzle({
         <rect width={W} height={H} className={styles.puzzleFill} />
         <path d={lines(layout)} className={styles.puzzleLines} />
         <rect width={W} height={H} className={styles.puzzleLines} />
-        <path d={youPath} fill="#6CE7FB" opacity="0.45" filter={`url(#${gid}-glow)`} />
+        <path d={youPath} style={{ fill: "var(--sp4)" }} opacity="0.45" filter={`url(#${gid}-glow)`} />
         <path d={youPath} fill={`url(#${gid})`} />
       </svg>
       <ul className={styles.labels}>{cells}</ul>

@@ -54,27 +54,18 @@ const DOT_MAX = 15; // dot diameter (design px) when facing the viewer
 const DEPTH_SCALE = 0.3;
 const DEPTH_ALPHA = 0.36;
 
-const SPECTRUM: [number, [number, number, number]][] = [
-  [0, [0x50, 0x35, 0xe2]],
-  [1 / 6, [0x47, 0x6f, 0xea]],
-  [2 / 6, [0x53, 0xab, 0xf2]],
-  [3 / 6, [0x6c, 0xe7, 0xfb]],
-  [4 / 6, [0x7a, 0xf3, 0xb8]],
-  [5 / 6, [0x98, 0xf8, 0x72]],
-  [1, [0xc2, 0xfd, 0x51]],
-];
+/** Positions of the seven spectrum colours (--sp1 … --sp7 in globals.css, green on Ascend Africa). */
+const STOPS = [0, 1 / 6, 2 / 6, 3 / 6, 4 / 6, 5 / 6, 1];
 
+/** A point on the brand spectrum, as CSS so it follows the page's theme. */
 function spectrumAt(t: number) {
-  for (let i = 1; i < SPECTRUM.length; i++) {
-    const [t1, c1] = SPECTRUM[i];
-    if (t <= t1) {
-      const [t0, c0] = SPECTRUM[i - 1];
-      const f = (t - t0) / (t1 - t0);
-      const c = c0.map((v, j) => Math.round(v + (c1[j] - v) * f));
-      return `rgb(${c[0]} ${c[1]} ${c[2]})`;
+  for (let i = 1; i < STOPS.length; i++) {
+    if (t <= STOPS[i]) {
+      const f = (t - STOPS[i - 1]) / (STOPS[i] - STOPS[i - 1]);
+      return `color-mix(in srgb, var(--sp${i + 1}) ${(f * 100).toFixed(1)}%, var(--sp${i}))`;
     }
   }
-  return "rgb(194 253 81)";
+  return "var(--sp7)";
 }
 
 const clamp = (v: number, a = 0, b = 1) => Math.max(a, Math.min(b, v));
@@ -360,7 +351,7 @@ export function LogoGlobe({
             style={{ aspectRatio: `${W} / ${G.h}`, "--min-w": `${G.minWidth ?? 1000}px` } as React.CSSProperties}
           >
             <svg ref={ringsRef} className={styles.rings} viewBox={`0 0 ${W} ${G.h}`}>
-              {G.rings.map((r) => (
+              {G.rings.map((r, k) => (
                 <ellipse
                   key={r.scale}
                   cx={G.cx}
@@ -368,7 +359,7 @@ export function LogoGlobe({
                   rx={G.rx * r.scale}
                   ry={G.ry * r.scale}
                   fill="none"
-                  stroke={r.stroke}
+                  style={{ stroke: `var(--globe-ring-${k + 1}, ${r.stroke})` }}
                   strokeWidth={1.5}
                   vectorEffect="non-scaling-stroke"
                 />

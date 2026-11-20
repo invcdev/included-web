@@ -97,21 +97,22 @@
 }
 
 .masterclass {
-  --accent: #3044f5;
-  --tint: #eaedfe;
+  --accent: var(--month-masterclass);
+  --tint: var(--month-masterclass-tint);
 }
 .task {
-  --accent: #9dce3f;
-  --tint: #f4ffdc;
+  --accent: var(--month-task);
+  --tint: var(--month-task-tint);
 }
 .africa {
-  --accent: #5035e2;
-  --tint: #edebfd;
+  --accent: var(--brand);
+  --tint: var(--month-africa-tint);
 }
 .office {
-  --accent: #57bfd3;
-  --tint: #edfdff;
+  --accent: var(--month-office);
+  --tint: var(--month-office-tint);
 }
+
 
 .day {
   font-family: var(--font-display);

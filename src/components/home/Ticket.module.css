@@ -58,7 +58,7 @@
   border-radius: 19px;
   background:
     linear-gradient(90deg, var(--spectrum-stops)) left / 7px 100% no-repeat,
-    radial-gradient(ellipse 230px 170px at 82% 4%, rgba(72, 64, 210, 0.38), rgba(72, 64, 210, 0)),
+    radial-gradient(ellipse 230px 170px at 82% 4%, rgb(var(--ticket-glow-rgb) / 0.38), rgb(var(--ticket-glow-rgb) / 0)),
     radial-gradient(ellipse 300px 230px at 60% 14%, rgba(60, 140, 180, 0.14), rgba(60, 140, 180, 0)),
     var(--navy);
   color: #fff;
@@ -99,7 +99,7 @@
   font-weight: 700;
   line-height: 78px;
   letter-spacing: -0.04em;
-  background: linear-gradient(90deg, #4a33d6 0%, #4562cf 28%, #5fc4ea 55%, #70efe8 72%, #8ef59a 100%);
+  background: var(--ticket-price);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
