@@ -4,6 +4,8 @@ import { SiteClosing } from "@/components/site/SiteClosing";
 import { SitePopup } from "@/components/site/SitePopup";
 import { Txt, safeHref } from "@/components/site/Txt";
 import { pageMetadata } from "@/components/site/pageMetadata";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqPageData } from "@/components/seo/structuredData";
 import "./page.css";
 import "./extra.css";
 
@@ -16,6 +18,7 @@ export default async function FaqPage() {
   const { faqPageHero: h, faqPageList: list, faqPageOfficeHours: oh, faqPageEnd: end } = c;
   return (
     <PageRoot page="faq">
+      <JsonLd data={faqPageData(list.groups)} />
       <div className="av2 av3 av4">
         <section className="av4fh" id="support">
           <canvas className="space" id="faqspace" aria-hidden="true" />

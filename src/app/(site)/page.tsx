@@ -25,6 +25,8 @@ import { Join } from "@/components/home/Join";
 import { Tldr } from "@/components/home/Tldr";
 import { Faq } from "@/components/home/Faq";
 import { FinalCta } from "@/components/home/FinalCta";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { courseData } from "@/components/seo/structuredData";
 
 /*
  * The landing page. All text, links and images come from getSiteContent()
@@ -36,6 +38,7 @@ export default async function Home() {
   const c = await getSiteContent();
   return (
     <>
+      <JsonLd data={courseData({ name: "Ascend by Included VC", description: c.meta.description, path: "/" })} />
       <Hero content={c.hero} />
       <Press content={c.press} />
       <Network content={c.network} />

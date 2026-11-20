@@ -2,9 +2,8 @@ export const siteConfig = {
   name: "Included VC",
   shortName: "Included VC",
   description:
-    "A global venture capital fellowship empowering diverse candidates with high-impact training, mentorship, and access to leading VC funds.",
+    "Included VC changes who gets to invest. Ascend by Included VC is a fourteen-week live investment academy taught by practising investors and funded by our partners.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://included.vc",
-  ogImage: "https://included.vc/opengraph-image",
   locale: "en_US",
   author: {
     name: "Included VC",
@@ -25,7 +24,8 @@ export const siteConfig = {
   links: {
     twitter: "https://twitter.com/included_vc",
     linkedin: "https://www.linkedin.com/company/includedvc",
-    github: "https://github.com/includedvc",
+    instagram: "https://www.instagram.com/included.vc/",
+    medium: "https://medium.com/included-vc",
   },
   // The landing page's nav, buttons and links are editable content now:
   // see src/content/defaults.ts (and the admin, once it exists).

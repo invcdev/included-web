@@ -194,6 +194,8 @@ export default async function ResourcesPage() {
 
   return (
     <PageRoot page="resources" data={{ newsletter: { to: nl.to, done: nl.done } }}>
+      {/* The design has no visible page heading; this gives the page its one h1. */}
+      <h1 className="sr-only">{c.resourcesMeta.title}: the Included VC reading shelf, field notes and Journal</h1>
       <section className="lib" id="shelf">
         <div className="wrap">
           <div className="top">
