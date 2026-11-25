@@ -168,6 +168,21 @@
 
 @media (max-width: 520px) {
   .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .card {
+    border-radius: 8px;
+  }
+  .text {
+    padding: 0 8px 9px;
+  }
+  .name {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .role {
+    margin-top: 2px;
+    font-size: 9.5px;
+    line-height: 12.5px;
   }
 }
