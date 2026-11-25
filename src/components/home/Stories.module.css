@@ -40,6 +40,10 @@
 
 /* ---------- Story grid ---------- */
 
+.track {
+  display: contents;
+}
+
 .grid {
   list-style: none;
   display: grid;
@@ -51,6 +55,10 @@
     "e e f";
   gap: 16px;
   margin-top: 39px;
+}
+
+.gridClone {
+  display: none;
 }
 
 .story {
@@ -262,24 +270,74 @@
     font-size: 18px;
     line-height: 28px;
   }
-  .grid {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "a" "b" "c" "d" "e" "f";
-    grid-auto-rows: auto;
-    gap: 12px;
+  .marquee {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
     margin-top: 28px;
+    overflow: hidden;
+  }
+  .track {
+    display: flex;
+    width: max-content;
+    animation: storiesMarquee 45s linear infinite;
+  }
+  .marquee:hover .track,
+  .marquee:active .track,
+  .marquee:focus-within .track {
+    animation-play-state: paused;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+    margin-top: 0;
+    padding-right: 12px;
+  }
+  .gridClone {
+    display: flex;
+  }
+  .story {
+    flex: 0 0 288px;
+    width: 288px;
   }
   .card,
   .wide,
   .feature {
-    padding: 24px 22px 26px;
+    padding: 22px 20px 24px;
+  }
+  .quote {
+    font-size: 15.5px;
+    line-height: 23px;
   }
   .feature .quote {
-    font-size: 26px;
-    line-height: 32px;
+    margin-top: 16px;
+    font-size: 20px;
+    line-height: 26px;
   }
   .statValue {
     font-size: 46px;
     line-height: 52px;
+  }
+}
+
+@keyframes storiesMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+    padding-inline: 20px;
+  }
+  .track {
+    animation: none;
+  }
+  .gridClone {
+    display: none;
   }
 }
