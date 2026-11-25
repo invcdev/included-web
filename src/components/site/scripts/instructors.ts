@@ -4,17 +4,15 @@ import type { Env } from "../runtime";
 import { app } from "./app";
 
 /**
- * The searchable instructors table. Same behaviour as the original, but the
- * list comes from the editable content and every value is escaped.
+ * The searchable instructors table. Same behaviour as the original. The people
+ * are the landing page's Faculty (see src/app/(site)/instructors/page.tsx, which
+ * also renders the first state on the server); every value is escaped.
  */
 function page(env: Env, data: any) {
   const { document, addEventListener, esc } = env;
-  const N = data && data.network;
-  if (!N) return;
-  var P = N.people.map(function (p) {
-    return { n: p.name, t: p.title, o: p.organisation, r: p.roles, f: p.fields, img: p.photo ? p.photo.url : "", link: p.link, bio: p.bio };
-  }),
-    FLD = N.fields,
+  if (!data || !data.people) return;
+  var P = data.people,
+    FLD = data.fields || [],
     rows = document.getElementById("nwrows"),
     card = document.getElementById("nwcard"),
     q = document.getElementById("nwq"),
@@ -23,35 +21,32 @@ function page(env: Env, data: any) {
     selF = "",
     cur = 0;
   if (!rows || !card || !q || !ff || !cnt || !P.length) return;
-  function href(u) {
-    return /^(https?:|mailto:|tel:|#|\/)/.test(u || "") ? esc(u) : "#";
-  }
   function ini(n) {
     return esc(n.split(" ").slice(0, 2).map(function (w) { return w[0] || ""; }).join("").toUpperCase());
   }
   function av(p) {
-    if (p.img) return '<img src="' + esc(p.img) + '" alt="">';
-    return ini(p.n);
+    return p.photo ? '<img src="' + esc(p.photo) + '" alt="">' : ini(p.name);
   }
   function showCard(p) {
     card.innerHTML =
-      '<div class="pic">' + av(p) + '</div><h3><a href="' + href(p.link) + '">' + esc(p.n) + '</a><i class="dash"></i></h3><dl><dt>Organisation</dt><dd>' +
-      esc(p.o || p.t) + "</dd><dt>Title</dt><dd>" + esc(p.o ? p.t : "Partner organisation") + '</dd><dt>Field</dt><dd class="tags">' +
-      p.f.map(function (x) { return '<span class="tag">' + esc(x) + "</span>"; }).join("") +
-      "</dd><dt>About</dt><dd>" + esc(p.bio) + '</dd></dl><a class="cta" href="' + href(p.link) + '">Profile</a>';
+      '<div class="pic">' + av(p) + "</div><h3>" + esc(p.name) + '<i class="dash"></i></h3><dl>' +
+      (p.organisation ? "<dt>Organisation</dt><dd>" + esc(p.organisation) + "</dd>" : "") +
+      "<dt>Title</dt><dd>" + esc(p.title) + "</dd>" +
+      (p.fields.length ? '<dt>Field</dt><dd class="tags">' + p.fields.map(function (x) { return '<span class="tag">' + esc(x) + "</span>"; }).join("") + "</dd>" : "") +
+      "</dl>";
   }
   function render() {
     var s = q.value.toLowerCase();
     var list = P.filter(function (p) {
-      return (!s || (p.n + " " + p.t + " " + p.o + " " + p.r.join(" ") + " " + p.f.join(" ")).toLowerCase().indexOf(s) >= 0) && (!selF || p.f.indexOf(selF) >= 0);
+      return (!s || (p.name + " " + p.title + " " + p.organisation + " " + p.fields.join(" ")).toLowerCase().indexOf(s) >= 0) && (!selF || p.fields.indexOf(selF) >= 0);
     });
     rows.innerHTML = list.length
       ? list.map(function (p) {
           var i = P.indexOf(p);
-          return '<div class="row' + (i === cur ? " on" : "") + '" data-i="' + i + '" tabindex="0" role="button"><div class="nm"><span class="av">' + av(p) + '</span><span class="nmx">' + esc(p.n) +
-            '<i class="dash"></i></span></div><div class="t">' + esc(p.o || p.t) + '</div><div class="r">' + esc(p.o ? p.t : "") + '</div><div class="fl">' + esc(p.f.join(", ")) + "</div></div>";
+          return '<div class="row' + (i === cur ? " on" : "") + '" data-i="' + i + '" tabindex="0" role="button"><div class="nm"><span class="av">' + av(p) + '</span><span class="nmx">' + esc(p.name) +
+            '<i class="dash"></i></span></div><div class="t">' + esc(p.organisation) + '</div><div class="r">' + esc(p.title) + '</div><div class="fl">' + esc(p.fields.join(", ")) + "</div></div>";
         }).join("")
-      : '<div class="empty">' + esc(N.emptyText) + "</div>";
+      : '<div class="empty">' + esc(data.emptyText) + "</div>";
     cnt.textContent = list.length + " of " + P.length + " people" + (selF ? " · " + selF : "");
     [].slice.call(rows.children).forEach(function (r) {
       function pick() {

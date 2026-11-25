@@ -647,7 +647,6 @@ const footerColumns = [
     links: [
       { label: "Ascend", href: "/" },
       { label: "Ascend Africa", href: "/ascend-africa" },
-      { label: "Investor Fellowship", href: "/investor" },
       { label: "The curriculum", href: "/programme#curriculum" },
       { label: "FAQs", href: "/faq" },
     ],
@@ -656,10 +655,7 @@ const footerColumns = [
     title: "Included VC",
     links: [
       { label: "About", href: "/about" },
-      { label: "Partners", href: "/about#partners" },
-      { label: "Alumni & Community", href: "/alumni" },
       { label: "Instructors & Mentors", href: "/instructors" },
-      { label: "Resources", href: "/resources" },
     ],
   },
   {
@@ -909,7 +905,7 @@ const homeDefaults: Omit<SiteContent, `africa${string}`> = {
     kicker: { step: "03 / 05", label: "Who is in the room" },
     eyebrow: "Faculty",
     heading: "Taught by people who invest for a living.",
-    button: { label: "Explore the network", href: "#network" },
+    button: { label: "Explore the network", href: "/instructors" },
     people: facultyPeople.map((f) => ({
       name: f.name,
       role: f.role,

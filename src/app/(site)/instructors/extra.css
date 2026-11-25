@@ -5,3 +5,6 @@
 .pg-instructors .sec.in-intro{padding:56px 0 10px}
 .pg-instructors .in-intro .wrap{max-width:900px}
 .pg-instructors .nw .row{cursor:pointer}
+/* Photos in full colour (the original design showed them in black and white). */
+.pg-instructors .nw .card .pic img,
+.pg-instructors .nw .row .nm .av img{filter:none}

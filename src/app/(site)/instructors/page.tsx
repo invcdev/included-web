@@ -12,38 +12,56 @@ export async function generateMetadata() {
   return pageMetadata((await getSiteContent()).instructorsMeta, "/instructors");
 }
 
-type Person = Awaited<ReturnType<typeof getSiteContent>>["instructorsNetwork"]["people"][number];
+type Faculty = Awaited<ReturnType<typeof getSiteContent>>["faculty"];
+type Person = { name: string; title: string; organisation: string; fields: string[]; photo: string };
+
+/** The landing page's Faculty, as table rows: a role "Title · Organisation" is split at the last ·. */
+function peopleFrom(faculty: Faculty): Person[] {
+  return faculty.people.map((p) => {
+    const at = p.role.lastIndexOf("·");
+    return {
+      name: p.name.trim(),
+      title: (at >= 0 ? p.role.slice(0, at) : p.role).trim(),
+      organisation: at >= 0 ? p.role.slice(at + 1).trim() : "",
+      fields: (p.fields ?? []).map((f) => f.trim()).filter(Boolean),
+      photo: p.photo.url,
+    };
+  });
+}
 
 /* The table's first state, rendered on the server so search engines see everyone.
    Same markup as src/components/site/scripts/instructors.ts, which takes over in the browser. */
 const esc = (v: string) => v.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
-const link = (u: string) => esc(safeHref(u));
 const initials = (n: string) => esc(n.split(" ").slice(0, 2).map((w) => w[0] ?? "").join("").toUpperCase());
-const avatar = (p: Person) => (p.photo ? `<img src="${esc(p.photo.url)}" alt="">` : initials(p.name));
+const avatar = (p: Person) => (p.photo ? `<img src="${esc(p.photo)}" alt="">` : initials(p.name));
 function rowsHtml(people: Person[]) {
   return people
     .map(
       (p, i) =>
         `<div class="row${i === 0 ? " on" : ""}" data-i="${i}" tabindex="0" role="button"><div class="nm"><span class="av">${avatar(p)}</span>` +
-        `<span class="nmx">${esc(p.name)}<i class="dash"></i></span></div><div class="t">${esc(p.organisation || p.title)}</div>` +
-        `<div class="r">${esc(p.organisation ? p.title : "")}</div><div class="fl">${esc(p.fields.join(", "))}</div></div>`,
+        `<span class="nmx">${esc(p.name)}<i class="dash"></i></span></div><div class="t">${esc(p.organisation)}</div>` +
+        `<div class="r">${esc(p.title)}</div><div class="fl">${esc(p.fields.join(", "))}</div></div>`,
     )
     .join("");
 }
 function cardHtml(p: Person) {
   return (
-    `<div class="pic">${avatar(p)}</div><h3><a href="${link(p.link)}">${esc(p.name)}</a><i class="dash"></i></h3><dl>` +
-    `<dt>Organisation</dt><dd>${esc(p.organisation || p.title)}</dd><dt>Title</dt><dd>${esc(p.organisation ? p.title : "Partner organisation")}</dd>` +
-    `<dt>Field</dt><dd class="tags">${p.fields.map((f) => `<span class="tag">${esc(f)}</span>`).join("")}</dd>` +
-    `<dt>About</dt><dd>${esc(p.bio)}</dd></dl><a class="cta" href="${link(p.link)}">Profile</a>`
+    `<div class="pic">${avatar(p)}</div><h3>${esc(p.name)}<i class="dash"></i></h3><dl>` +
+    (p.organisation ? `<dt>Organisation</dt><dd>${esc(p.organisation)}</dd>` : "") +
+    `<dt>Title</dt><dd>${esc(p.title)}</dd>` +
+    (p.fields.length ? `<dt>Field</dt><dd class="tags">${p.fields.map((f) => `<span class="tag">${esc(f)}</span>`).join("")}</dd>` : "") +
+    `</dl>`
   );
 }
 
 export default async function InstructorsPage() {
   const c = await getSiteContent();
   const { instructorsHero: h, instructorsIntro: intro, instructorsNetwork: net } = c;
+  const people = peopleFrom(c.faculty);
+  // The Field filter offers every field given to someone, in the order they first appear.
+  const fields = [...new Set(people.flatMap((p) => p.fields))];
   return (
-    <PageRoot page="instructors" data={{ network: net }}>
+    <PageRoot page="instructors" data={{ people, fields, emptyText: net.emptyText }}>
       <section className="al-hero ihero" id="top">
         <img className="bg" src={h.image.url} alt={h.image.alt} />
         <div className="wrap">
@@ -98,13 +116,13 @@ export default async function InstructorsPage() {
                     <b>Field</b> ▾<div className="menu" />
                   </div>
                 </div>
-                <div id="nwrows" dangerouslySetInnerHTML={{ __html: rowsHtml(net.people) }} />
+                <div id="nwrows" dangerouslySetInnerHTML={{ __html: rowsHtml(people) }} />
               </div>
               <div className="count" id="nwcount">
-                {net.people.length} of {net.people.length} people
+                {people.length} of {people.length} people
               </div>
             </div>
-            <div className="card" id="nwcard" dangerouslySetInnerHTML={{ __html: net.people[0] ? cardHtml(net.people[0]) : "" }} />
+            <div className="card" id="nwcard" dangerouslySetInnerHTML={{ __html: people[0] ? cardHtml(people[0]) : "" }} />
           </div>
         </div>
       </section>

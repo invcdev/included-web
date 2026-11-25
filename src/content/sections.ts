@@ -15,7 +15,7 @@ const HOME: { key: SectionKey; label: string; description: string }[] = [
   { key: "outcomes", label: "What you leave with", description: "Four outcome cards and a testimonial." },
   { key: "month", label: "A month in Ascend", description: "The four example weeks and the time stats." },
   { key: "tuesdays", label: "Your Tuesdays", description: "Wording of the local-time panel." },
-  { key: "faculty", label: "Faculty", description: "Faculty names, roles and photos." },
+  { key: "faculty", label: "Faculty", description: "Names, roles, photos and fields. Also the people on the Instructors & Mentors page." },
   { key: "everyoneIncluded", label: "Everyone is included", description: "The jigsaw pieces and quote." },
   { key: "audience", label: "Who it is for", description: "The four audience cards and their tags." },
   { key: "stories", label: "In their own words", description: "Six stories and the Fellowship stats." },
