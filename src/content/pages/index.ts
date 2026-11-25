@@ -15,6 +15,7 @@ import { programmeDefaults, programmeSchemas, programmeSections } from "./progra
 import { aboutDefaults, aboutSchemas, aboutSections } from "./about";
 import { alumniDefaults, alumniSchemas, alumniSections } from "./alumni";
 import { resourcesDefaults, resourcesSchemas, resourcesSections } from "./resources";
+import { saveTheDateDefaults, saveTheDateSchemas, saveTheDateSections } from "./saveTheDate";
 
 export const PAGES = [
   { slug: "home", label: "Ascend", path: "/" },
@@ -27,6 +28,7 @@ export const PAGES = [
   { slug: "resources", label: "Resources", path: "/resources" },
   { slug: "faq", label: "FAQs", path: "/faq" },
   { slug: "partners", label: "Partners", path: "/partners" },
+  { slug: "save-the-date", label: "Save the date", path: "/save-the-date" },
   { slug: "shared", label: "On every page", path: null },
 ] as const;
 
@@ -42,6 +44,7 @@ export const pageSchemas = {
   ...aboutSchemas,
   ...alumniSchemas,
   ...resourcesSchemas,
+  ...saveTheDateSchemas,
 };
 
 export const pageDefaults = {
@@ -54,6 +57,7 @@ export const pageDefaults = {
   ...aboutDefaults,
   ...alumniDefaults,
   ...resourcesDefaults,
+  ...saveTheDateDefaults,
 };
 
 type Entry = { key: keyof typeof pageSchemas; label: string; description: string };
@@ -64,4 +68,5 @@ export const pageSections = [
   ...on("investor", investorSections), ...on("faq", faqPageSections), ...on("about", aboutSections),
   ...on("alumni", alumniSections),
   ...on("instructors", instructorsSections),
-  ...on("resources", resourcesSections), ...on("partners", partnersSections), ...on("shared", sharedSections)];
+  ...on("resources", resourcesSections), ...on("partners", partnersSections),
+  ...on("save-the-date", saveTheDateSections), ...on("shared", sharedSections)];

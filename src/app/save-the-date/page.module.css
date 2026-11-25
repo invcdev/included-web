@@ -1,0 +1,234 @@
+/* Save the date: one centred card on a deep space ground, the event above a 2x2 grid of calendar choices. */
+.page {
+  --ink: #f4f6ff;
+  --ink-mute: #a6adc8;
+  --ground: #07080d;
+  --panel: #0e1018;
+  --line: #242838;
+  --cyan: #00f2ff;
+  --grad: linear-gradient(90deg, #5533eb 0%, #0033ff 22%, #00f2ff 45%, #00ff04 68%, #b0ff05 85%, #ffff00 100%);
+  --display: var(--std-display), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: var(--std-body), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-block: clamp(28px, 6vw, 72px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  line-height: 1.6;
+  color-scheme: dark;
+}
+
+/* Overscroll and the area behind the page match the ground. */
+:global(html):has(.page),
+:global(html):has(.page) :global(body) {
+  background: #07080d;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  outline: none;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+  color: inherit;
+  text-decoration: none;
+}
+.mark span:last-child {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.mark:hover span:last-child {
+  color: var(--ink);
+}
+.mark:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--grad);
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.rule {
+  height: 3px;
+  background: var(--grad);
+}
+.pad {
+  padding: clamp(22px, 5vw, 34px);
+}
+
+.eyebrow {
+  font-family: var(--display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin: 0 0 12px;
+}
+.title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 5.4vw, 2.1rem);
+  line-height: 1.18;
+  letter-spacing: normal;
+  margin: 0 0 14px;
+  text-wrap: balance;
+  color: var(--ink);
+}
+.lede {
+  color: var(--ink-mute);
+  margin: 0 0 24px;
+  font-size: 0.98rem;
+}
+
+.when {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 0 0 26px;
+}
+.when div {
+  min-width: 0;
+}
+.when dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 3px;
+}
+.when dd {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ask {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (max-width: 420px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px 15px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #141725;
+  color: var(--ink);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    transform 0.18s ease,
+    background 0.18s ease;
+  text-align: left;
+  width: 100%;
+}
+.btn:hover {
+  border-color: #3b4260;
+  background: #181c2d;
+  transform: translateY(-1px);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+.logo {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+.btn.suggested {
+  border-color: var(--cyan);
+}
+.tag {
+  margin-left: auto;
+  font-family: var(--body);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.note {
+  margin: 20px 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-mute);
+}
+.note a {
+  color: var(--cyan);
+}
+
+.footer {
+  margin-top: 22px;
+  font-size: 0.76rem;
+  color: #6b7290;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}

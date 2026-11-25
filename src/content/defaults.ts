@@ -18,7 +18,7 @@ type MonthEvent = SiteContent["month"]["weeks"][number]["events"][number];
 /** A local placeholder image. */
 const img = (url: string, width: number, height: number, alt = ""): ImageContent => ({ url, alt, width, height });
 
-const ENROL = { label: "Take your seat", href: "#how-to-join" };
+const ENROL = { label: "Take your seat", href: "/save-the-date" };
 const SEAT_NOTE = "About ten minutes, start to finish.";
 const FOURTEEN = ["Fourteen Tuesdays. Starts 5 January 2027."];
 
