@@ -175,7 +175,17 @@ export const facultySchema = z.object({
   eyebrow: z.string(),
   heading: z.string(),
   button: linkSchema,
-  people: z.array(z.object({ name: z.string(), role: z.string(), photo: imageSchema })),
+  people: z.array(
+    z.object({
+      name: z.string(),
+      role: z.string().describe("Title · Organisation (the Instructors & Mentors page splits it at the ·)."),
+      photo: imageSchema,
+      fields: z
+        .array(z.string())
+        .optional()
+        .describe("Fields of expertise, e.g. Fintech, Deep Tech. Shown and filterable on the Instructors & Mentors page."),
+    }),
+  ),
 });
 
 export const everyoneIncludedSchema = z.object({

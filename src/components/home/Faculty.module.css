@@ -88,12 +88,17 @@
   object-position: top;
 }
 
-/* Light scrim so the name stays readable without hiding the photo. */
+/* Subtle bottom scrim so the name stays readable without covering the photo. */
 .card::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(16, 14, 22, 0) 58%, rgba(16, 14, 22, 0.22) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 14, 22, 0) 64%,
+    rgba(16, 14, 22, 0.48) 84%,
+    rgba(16, 14, 22, 0.78) 100%
+  );
 }
 
 .text {
@@ -101,14 +106,15 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  padding: 0 14px 18px 15px;
+  padding: 0 14px 14px 15px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
 }
 
 .name {
   font-family: var(--font-display);
   font-size: 15px;
   font-weight: 700;
-  line-height: 27px;
+  line-height: 20px;
   color: #fff;
 }
 
