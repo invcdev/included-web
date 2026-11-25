@@ -34,6 +34,20 @@ import { courseData } from "@/components/seo/structuredData";
  * the design: the gradient of each "Take your seat" card, the quote widths
  * that set where each testimonial breaks, and spacing.
  */
+/**
+ * The landing page's faculty: the global faculty, then the Ascend Africa faculty
+ * (from the Ascend Africa tab), skipping anyone already listed. Names are shown
+ * in capitals to match the global cards.
+ */
+function allFaculty(c: Awaited<ReturnType<typeof getSiteContent>>) {
+  const key = (n: string) => n.trim().toLowerCase().replace(/\s+/g, " ");
+  const seen = new Set(c.faculty.people.map((p) => key(p.name)));
+  const africa = c.africaFaculty.people
+    .filter((p) => !seen.has(key(p.name)))
+    .map((p) => ({ ...p, name: p.name.toUpperCase() }));
+  return { ...c.faculty, people: [...c.faculty.people, ...africa] };
+}
+
 export default async function Home() {
   const c = await getSiteContent();
   return (
@@ -62,7 +76,7 @@ export default async function Home() {
         border="linear-gradient(90deg, #7cf3af 0%, #76f0c7 5%, #70eff4 15%, #6ae2fb 20%, #59bcf4 30%, #4d97ef 40%, #4872e9 50%, #494de5 60%, #4e3be3 65%, #4c40e3 70%, #4866e9 80%, #4a8aed 90%, #53adf2 100%)"
         ring
       />
-      <Faculty content={c.faculty} />
+      <Faculty content={allFaculty(c)} />
       <WhoItsFor content={c.everyoneIncluded} />
       <Audience content={c.audience} />
       <Stories content={c.stories} />
