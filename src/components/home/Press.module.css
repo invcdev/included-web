@@ -49,9 +49,17 @@
 
 @media (max-width: 900px) {
   .logos {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 28px 48px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .logo {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  .logo img {
+    max-width: 100%;
+    height: auto !important;
   }
 }
 
@@ -62,10 +70,18 @@
   }
   .logos {
     margin-top: 24px;
-    gap: 24px 36px;
+    padding-inline: 0;
+    gap: 10px;
   }
   .logo img {
     width: auto !important;
-    height: 24px !important;
+    max-width: 100%;
+    height: auto !important;
+    max-height: clamp(14px, 4.2vw, 22px);
+  }
+  .logo .color {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
   }
 }

@@ -205,7 +205,22 @@
 }
 
 @media (max-width: 520px) {
-  .stats {
-    grid-template-columns: minmax(0, 1fr);
+  .stat {
+    padding: 16px 14px;
+    border-radius: 14px;
+  }
+  .statValue {
+    font-size: 38px;
+    line-height: 40px;
+  }
+  .statTitle {
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .statText {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 18px;
   }
 }

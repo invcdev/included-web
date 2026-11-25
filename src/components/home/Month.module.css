@@ -214,8 +214,7 @@
 
 @media (max-width: 760px) {
   .stats {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 20px;
+    column-gap: 16px;
   }
 }
 
@@ -236,8 +235,18 @@
     gap: 12px;
     margin-top: 28px;
   }
+  .stats {
+    column-gap: 14px;
+    margin-top: 28px;
+  }
   .statValue {
-    font-size: 34px;
-    line-height: 40px;
+    font-size: clamp(19px, 5.2vw, 28px);
+    line-height: 1.15;
+  }
+  .statLabel {
+    margin-top: 5px;
+    font-size: 11px;
+    line-height: 1.45;
+    text-wrap: balance;
   }
 }

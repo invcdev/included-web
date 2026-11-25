@@ -3,12 +3,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { SiteContent } from "@/content/schema";
 import styles from "./Header.module.css";
 import { siteHref } from "./siteHref";
 
 export function Header({ content: c }: { content: SiteContent["header"] }) {
   const [open, setOpen] = useState(false);
+  // Section links stay on Ascend Africa when used there (see siteHref).
+  const pathname = usePathname();
   const progressRef = useRef<HTMLDivElement>(null);
 
   // Scroll progress bar: reveal the spectrum from left to right as the page scrolls.
@@ -75,7 +78,7 @@ export function Header({ content: c }: { content: SiteContent["header"] }) {
           <ul className={styles.navList}>
             {c.nav.map((item, i) => (
               <li key={i}>
-                <a href={siteHref(item.href)} className={styles.navLink}>
+                <a href={siteHref(item.href, pathname)} className={styles.navLink}>
                   {item.label}
                 </a>
               </li>
@@ -84,7 +87,7 @@ export function Header({ content: c }: { content: SiteContent["header"] }) {
         </nav>
 
         <div className={styles.actions}>
-          <a href={siteHref(c.cta.href)} className={styles.cta}>
+          <a href={siteHref(c.cta.href, pathname)} className={styles.cta}>
             {c.cta.label}
           </a>
           <button
@@ -107,13 +110,13 @@ export function Header({ content: c }: { content: SiteContent["header"] }) {
           <ul className={styles.mobileList}>
             {c.nav.map((item, i) => (
               <li key={i}>
-                <a href={siteHref(item.href)} className={styles.mobileLink} onClick={close}>
+                <a href={siteHref(item.href, pathname)} className={styles.mobileLink} onClick={close}>
                   {item.label}
                 </a>
               </li>
             ))}
           </ul>
-          <a href={siteHref(c.cta.href)} className={styles.mobileCta} onClick={close}>
+          <a href={siteHref(c.cta.href, pathname)} className={styles.mobileCta} onClick={close}>
             {c.cta.label}
           </a>
         </nav>
