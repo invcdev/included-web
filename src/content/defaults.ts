@@ -736,6 +736,34 @@ const homeDefaults: Omit<SiteContent, `africa${string}`> = {
     cta: ENROL,
   },
 
+  openDoor: {
+    brand: "ASCEND",
+    brandSub: "by Included VC",
+    replayLabel: "Replay the opening",
+    eyebrow: "The Global Investment Academy by Included VC",
+    messages: [
+      {
+        heading: "The door to venture capital is **open.**",
+        lede: "Learn how unicorns get backed, in fourteen live weeks with practising investors. Join from anywhere in the world.",
+      },
+      {
+        heading: "Learn how venture capital **really works.**",
+        lede: "Fourteen live weeks with practising investors. Global and Africa tracks, joined from anywhere.",
+      },
+      {
+        heading: "One live room, joined from **anywhere.**",
+        lede: "Fourteen Tuesdays with practising investors. Global and Africa tracks.",
+      },
+      {
+        heading: "Learn how unicorns get **backed.**",
+        lede: "How a fund works, how a deal gets done and how a committee decides.",
+      },
+    ],
+    rotateSeconds: 60,
+    primaryCta: { label: "Apply now", href: "/save-the-date" },
+    secondaryCta: { label: "View curriculum", href: "#curriculum" },
+  },
+
   hero: {
     kicker: { step: "01 / 05", label: "What it is" },
     eyebrow: "Ascend: the Global Investment Academy by Included VC",

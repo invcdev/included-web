@@ -34,6 +34,26 @@ export const headerSchema = z.object({
   cta: linkSchema,
 });
 
+/** The opening of the landing page: a door of light that opens onto the world. */
+export const openDoorSchema = z.object({
+  brand: z.string().describe("The word at the top left, e.g. ASCEND."),
+  brandSub: z.string().describe("The smaller words beside it (hidden on phones)."),
+  replayLabel: z.string().describe("The button that plays the door opening again."),
+  eyebrow: z.string(),
+  messages: z
+    .array(
+      z.object({
+        heading: z.string().describe("Put the words in the colour gradient between ** and **, e.g. The door is **open.**"),
+        lede: z.string(),
+      }),
+    )
+    .min(1)
+    .describe("The headline and intro take turns, fading from one to the next. The first is the one search engines read."),
+  rotateSeconds: z.number().min(5).describe("How long each message stays before the next one fades in."),
+  primaryCta: linkSchema,
+  secondaryCta: linkSchema,
+});
+
 export const heroSchema = z.object({
   kicker: kickerSchema,
   eyebrow: z.string(),
@@ -380,6 +400,7 @@ export const africaSchemas = {
 export const siteContentSchema = z.object({
   meta: metaSchema,
   header: headerSchema,
+  openDoor: openDoorSchema,
   hero: heroSchema,
   press: pressSchema,
   network: networkSchema,
