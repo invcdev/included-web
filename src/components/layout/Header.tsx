@@ -10,7 +10,7 @@ import { siteHref } from "./siteHref";
 
 export function Header({ content: c }: { content: SiteContent["header"] }) {
   const [open, setOpen] = useState(false);
-  // Section links stay on Ascend Africa when used there (see siteHref).
+  // On Ascend Africa the logo and the section links stay on Ascend Africa (see siteHref).
   const pathname = usePathname();
   const progressRef = useRef<HTMLDivElement>(null);
 
@@ -63,7 +63,7 @@ export function Header({ content: c }: { content: SiteContent["header"] }) {
   return (
     <header className={styles.header} data-open={open || undefined}>
       <div className={`container ${styles.bar}`}>
-        <Link href="/" className={styles.brand} aria-label={`${c.logo.alt || "Included VC"} home`}>
+        <Link href={pathname === "/ascend-africa" ? "/ascend-africa" : "/"} className={styles.brand} aria-label={`${c.logo.alt || "Included VC"} home`}>
           <Image
             src={c.logo.url}
             alt=""
