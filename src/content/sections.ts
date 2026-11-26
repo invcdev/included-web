@@ -4,6 +4,7 @@ import { pageSections, type PageSlug } from "./pages";
 
 const HOME: { key: SectionKey; label: string; description: string }[] = [
   { key: "header", label: "Header", description: "Logo, menu links and the header button." },
+  { key: "openDoor", label: "Opening", description: "The full-screen door at the top of the page: the headlines it rotates through and the buttons." },
   { key: "hero", label: "Hero", description: "Headline, intro, the programme at a glance and the stats." },
   { key: "press", label: "As featured in", description: "Press logos (grey, and colour on hover)." },
   { key: "network", label: "The network", description: "Partner globe: heading, groups and partner logos." },

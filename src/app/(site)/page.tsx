@@ -1,4 +1,5 @@
 import { getSiteContent } from "@/content";
+import { OpenDoor } from "@/components/home/OpenDoor";
 import { Hero } from "@/components/home/Hero";
 import { Press } from "@/components/home/Press";
 import { Network } from "@/components/home/Network";
@@ -53,7 +54,8 @@ export default async function Home() {
   return (
     <>
       <JsonLd data={courseData({ name: "Ascend by Included VC", description: c.meta.description, path: "/" })} />
-      <Hero content={c.hero} />
+      <OpenDoor content={c.openDoor} />
+      <Hero content={c.hero} headingLevel={2} />
       <Press content={c.press} />
       <Network content={c.network} />
       <FounderLetter content={c.founderLetter} />

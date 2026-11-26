@@ -3,7 +3,15 @@ import type { SiteContent } from "@/content/schema";
 import { RichText } from "../RichText";
 import styles from "./Hero.module.css";
 
-export function Hero({ content: c }: { content: SiteContent["hero"] }) {
+export function Hero({
+  content: c,
+  headingLevel = 1,
+}: {
+  content: SiteContent["hero"];
+  /** 2 when another section above it carries the page's title (the landing page's opening). */
+  headingLevel?: 1 | 2;
+}) {
+  const Heading = headingLevel === 1 ? "h1" : "h2";
   return (
     <section id="what-it-is" className={styles.hero} aria-labelledby="hero-heading">
       <div className={styles.glow} aria-hidden="true" />
@@ -18,9 +26,9 @@ export function Hero({ content: c }: { content: SiteContent["hero"] }) {
 
             <p className={styles.eyebrow}>{c.eyebrow}</p>
 
-            <h1 id="hero-heading" className={styles.heading}>
+            <Heading id="hero-heading" className={styles.heading}>
               {c.heading}
-            </h1>
+            </Heading>
 
             <p className={styles.lede}>{c.lede}</p>
 
