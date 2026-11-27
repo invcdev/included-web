@@ -37,6 +37,29 @@ export function africaDefaults(home: Home): Africa {
       description:
         "Fourteen Tuesdays inside venture capital, built for Africa: live investment education with six extra Thursday sessions on African markets.",
     },
+    africaOpenDoor: {
+      ...home.openDoor,
+      brand: "ASCEND AFRICA",
+      eyebrow: "Ascend Africa: the Global Investment Academy by Included VC",
+      messages: [
+        {
+          heading: "The door to venture capital in Africa is **open.**",
+          lede: "Learn how deals get backed across the continent, in fourteen live weeks with the investors doing it. Join from anywhere.",
+        },
+        {
+          heading: "Learn how venture capital **really works.**",
+          lede: "Fourteen live Tuesdays with practising investors, plus six Thursday sessions on African investment markets.",
+        },
+        {
+          heading: "One live room, joined from across **Africa.**",
+          lede: "Taught by people who invest for a living across Africa, and funded by our partners.",
+        },
+        {
+          heading: "Learn how African startups get **backed.**",
+          lede: "How a fund works, how a deal gets done and how a committee decides, worked through on African deals.",
+        },
+      ],
+    },
     africaHero: {
       ...home.hero,
       eyebrow: "Ascend Africa: the Global Investment Academy by Included VC",

@@ -379,6 +379,7 @@ export const africaBuiltSchema = z.object({
 
 export const africaSchemas = {
   africaMeta: pageMetaSchema,
+  africaOpenDoor: openDoorSchema,
   africaHero: heroSchema,
   africaNetwork: networkSchema,
   africaIntroducing: introducingSchema,

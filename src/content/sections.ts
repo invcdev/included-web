@@ -38,6 +38,7 @@ const HOME: { key: SectionKey; label: string; description: string }[] = [
 /** Ascend Africa: only the sections whose wording differs; the rest are shared with the landing page. */
 const AFRICA: { key: SectionKey; label: string; description: string }[] = [
   { key: "africaMeta", label: "Search & sharing", description: "Page title and description." },
+  { key: "africaOpenDoor", label: "Opening", description: "The full-screen door at the top of the page, in green: the headlines it rotates through and the buttons." },
   { key: "africaHero", label: "Hero", description: "Headline, intro, the programme at a glance and the stats." },
   { key: "africaNetwork", label: "The network", description: "Heading and intro of the partner globe (the logos are shared with Ascend)." },
   { key: "africaIntroducing", label: "Introducing Ascend Africa", description: "Intro paragraph, stats and tracks." },
@@ -46,7 +47,7 @@ const AFRICA: { key: SectionKey; label: string; description: string }[] = [
   { key: "africaMonth", label: "A month in Ascend", description: "The four example weeks (in GMT)." },
   { key: "africaTuesdays", label: "Your Tuesdays", description: "Wording of the local-time panel. The ten cities are African cities." },
   { key: "africaSessions", label: "Six Thursday sessions", description: "The Africa-only sessions." },
-  { key: "africaFaculty", label: "Faculty", description: "The Africa faculty. They also appear on the Ascend landing page, after the global faculty." },
+  { key: "africaFaculty", label: "Faculty", description: "The Africa faculty. They also appear on the Ascend landing page and the Instructors & Mentors page, after the global faculty." },
   { key: "africaBuilt", label: "Why this track exists", description: "The four reasons." },
   { key: "africaCountries", label: "Countries", description: "The 54 flags of the flag sphere." },
   { key: "africaTicket", label: "What you get", description: "The ticket, opened on the Africa track." },

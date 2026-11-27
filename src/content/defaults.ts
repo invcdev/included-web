@@ -814,7 +814,7 @@ const homeDefaults: Omit<SiteContent, `africa${string}`> = {
   },
 
   founderLetter: {
-    photo: img("/team/nikita-thakrar-placeholder.jpg", 528, 660, "Nikita Thakrar"),
+    photo: img("/team/nikita-thakrar.jpg", 819, 1024, "Nikita Thakrar"),
     name: "Nikita Thakrar",
     role: "Founder and CEO, Included VC",
     eyebrow: "A letter from the founder",

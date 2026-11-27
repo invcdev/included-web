@@ -4,9 +4,10 @@
   --ink: #f4f6ff;
   --mute: #9aa3c2;
   --line: rgba(255, 255, 255, 0.16);
-  --cyan: #00f2ff;
-  --lime: #b0ff05;
-  --grad: linear-gradient(90deg, #8f78ff 0%, #00f2ff 52%, #b0ff05 100%);
+  /* Themeable: the Ascend Africa page sets these to its greens (globals.css). */
+  --cyan: var(--door-accent, #00f2ff);
+  --lime: var(--door-button, #b0ff05);
+  --grad: var(--door-text-grad, linear-gradient(90deg, #8f78ff 0%, #00f2ff 52%, #b0ff05 100%));
 
   position: relative;
   /* The screen below the header (72px; 64px on phones). */

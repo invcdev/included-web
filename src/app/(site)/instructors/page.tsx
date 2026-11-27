@@ -15,9 +15,19 @@ export async function generateMetadata() {
 type Faculty = Awaited<ReturnType<typeof getSiteContent>>["faculty"];
 type Person = { name: string; title: string; organisation: string; fields: string[]; photo: string };
 
-/** The landing page's Faculty, as table rows: a role "Title · Organisation" is split at the last ·. */
-function peopleFrom(faculty: Faculty): Person[] {
-  return faculty.people.map((p) => {
+/**
+ * Everyone on the faculty, as table rows: the landing page's Faculty, then the
+ * Ascend Africa faculty (skipping anyone already listed, with names in capitals
+ * to match). A role "Title · Organisation" is split at the last ·.
+ */
+function peopleFrom(faculty: Faculty, africa: Faculty): Person[] {
+  const key = (n: string) => n.trim().toLowerCase().replace(/\s+/g, " ");
+  const seen = new Set(faculty.people.map((p) => key(p.name)));
+  const all = [
+    ...faculty.people,
+    ...africa.people.filter((p) => !seen.has(key(p.name))).map((p) => ({ ...p, name: p.name.toUpperCase() })),
+  ];
+  return all.map((p) => {
     const at = p.role.lastIndexOf("·");
     return {
       name: p.name.trim(),
@@ -57,7 +67,7 @@ function cardHtml(p: Person) {
 export default async function InstructorsPage() {
   const c = await getSiteContent();
   const { instructorsHero: h, instructorsIntro: intro, instructorsNetwork: net } = c;
-  const people = peopleFrom(c.faculty);
+  const people = peopleFrom(c.faculty, c.africaFaculty);
   // The Field filter offers every field given to someone, in the order they first appear.
   const fields = [...new Set(people.flatMap((p) => p.fields))];
   return (

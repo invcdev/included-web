@@ -1,4 +1,5 @@
 import { getSiteContent } from "@/content";
+import { OpenDoor } from "@/components/home/OpenDoor";
 import { Hero } from "@/components/home/Hero";
 import { Press } from "@/components/home/Press";
 import { Network } from "@/components/home/Network";
@@ -55,7 +56,8 @@ export default async function AscendAfricaPage() {
   return (
     <div className="theme-africa">
       <JsonLd data={courseData({ name: "Ascend Africa by Included VC", description: c.africaMeta.description, path: "/ascend-africa" })} />
-      <Hero content={c.africaHero} />
+      <OpenDoor content={c.africaOpenDoor} />
+      <Hero content={c.africaHero} headingLevel={2} />
       <Press content={c.press} />
       <Network content={c.africaNetwork} />
       <FounderLetter content={c.founderLetter} />
