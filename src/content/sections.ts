@@ -38,6 +38,7 @@ const HOME: { key: SectionKey; label: string; description: string }[] = [
 /** Ascend Africa: only the sections whose wording differs; the rest are shared with the landing page. */
 const AFRICA: { key: SectionKey; label: string; description: string }[] = [
   { key: "africaMeta", label: "Search & sharing", description: "Page title and description." },
+  { key: "africaOpenDoor", label: "Opening", description: "The full-screen door at the top of the page, in green: the headlines it rotates through and the buttons." },
   { key: "africaHero", label: "Hero", description: "Headline, intro, the programme at a glance and the stats." },
   { key: "africaNetwork", label: "The network", description: "Heading and intro of the partner globe (the logos are shared with Ascend)." },
   { key: "africaIntroducing", label: "Introducing Ascend Africa", description: "Intro paragraph, stats and tracks." },

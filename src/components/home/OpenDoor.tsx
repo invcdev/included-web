@@ -101,25 +101,12 @@ export function OpenDoor({ content: c }: { content: SiteContent["openDoor"] }) {
 type Pt = { sx: number; sy: number; sz: number; u: U; d: number; x: number; y: number; vx: number; vy: number; fresh: boolean };
 type U = { x: number; y: number; k: number };
 
-const S3 = [
-  [85, 51, 235],
-  [0, 242, 255],
-  [176, 255, 5],
-];
 const clamp = (v: number, a: number, b: number) => (v < a ? a : v > b ? b : v);
 const ease = (t: number) => {
   t = clamp(t, 0, 1);
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 };
 const mix = (a: number, b: number, t: number) => a + (b - a) * t;
-function rgb(t: number) {
-  t = clamp(t, 0, 1);
-  const k = t < 0.52 ? 0 : 1;
-  const u = t < 0.52 ? t / 0.52 : (t - 0.52) / 0.48;
-  const a = S3[k];
-  const b = S3[k + 1];
-  return [Math.round(mix(a[0], b[0], u)), Math.round(mix(a[1], b[1], u)), Math.round(mix(a[2], b[2], u))];
-}
 function hash(n: number) {
   const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
   return x - Math.floor(x);
@@ -211,6 +198,30 @@ function runDoor(stage: HTMLElement, cv: HTMLCanvasElement, ctx: CanvasRendering
   let dust: { a: number; d: number; s: number; ph: number }[] = [];
   let raf = 0;
   let visible = true;
+
+  /*
+   * Colours, as "r g b" CSS variables so a page can theme the door (Ascend
+   * Africa uses greens). The fallbacks are the design's purple, cyan and lime.
+   */
+  const css = getComputedStyle(stage);
+  const col = (name: string, fallback: number[]) => {
+    const v = css.getPropertyValue(name).trim().split(/[\s,]+/).map(Number);
+    return v.length === 3 && v.every((n) => Number.isFinite(n)) ? v : fallback;
+  };
+  const C1 = col("--door-c1", [85, 51, 235]);
+  const C2 = col("--door-c2", [0, 242, 255]);
+  const C3 = col("--door-c3", [176, 255, 5]);
+  const DEEP = col("--door-deep", [106, 77, 255]);
+  const FLOOR = col("--door-floor", [120, 255, 220]);
+  const S3 = [C1, C2, C3];
+  function rgb(t: number) {
+    t = clamp(t, 0, 1);
+    const k = t < 0.52 ? 0 : 1;
+    const u = t < 0.52 ? t / 0.52 : (t - 0.52) / 0.48;
+    const a = S3[k];
+    const b = S3[k + 1];
+    return [Math.round(mix(a[0], b[0], u)), Math.round(mix(a[1], b[1], u)), Math.round(mix(a[2], b[2], u))];
+  }
 
   const mob = () => W < 760;
   /*
@@ -357,7 +368,7 @@ function runDoor(stage: HTMLElement, cv: HTMLCanvasElement, ctx: CanvasRendering
       const al = mix(0.2 + 0.75 * dep, 0.92, mi);
       const sz = mix(0.7 + dep * 1.2, p.u.k === 2 ? 1.9 : 1.45, mi) * Math.max(0.8, sc);
       const cs = rgb((1 - p.sy) / 2);
-      const cu = p.u.k === 2 ? [176, 255, 5] : p.u.k === 1 ? rgb(0.12 + (p.u.y + 1) * 0.22) : [232, 238, 255];
+      const cu = p.u.k === 2 ? C3 : p.u.k === 1 ? rgb(0.12 + (p.u.y + 1) * 0.22) : [232, 238, 255];
       ctx.fillStyle =
         "rgba(" + Math.round(mix(cs[0], cu[0], mi)) + "," + Math.round(mix(cs[1], cu[1], mi)) + "," + Math.round(mix(cs[2], cu[2], mi)) + "," + al.toFixed(2) + ")";
       ctx.beginPath();
@@ -369,8 +380,8 @@ function runDoor(stage: HTMLElement, cv: HTMLCanvasElement, ctx: CanvasRendering
       const hy = ey + ((6 - 222) / 220) * S + S * 0.06;
       const tw = 0.6 + 0.4 * Math.sin(t * 5);
       const hg = ctx.createRadialGradient(hx, hy, 0, hx, hy, 50);
-      hg.addColorStop(0, "rgba(176,255,5," + (0.55 * tw * (m - 0.9) * 10).toFixed(2) + ")");
-      hg.addColorStop(1, "rgba(176,255,5,0)");
+      hg.addColorStop(0, "rgba(" + C3 + "," + (0.55 * tw * (m - 0.9) * 10).toFixed(2) + ")");
+      hg.addColorStop(1, "rgba(" + C3 + ",0)");
       ctx.fillStyle = hg;
       ctx.beginPath();
       ctx.arc(hx, hy, 50, 0, 6.283);
@@ -380,9 +391,9 @@ function runDoor(stage: HTMLElement, cv: HTMLCanvasElement, ctx: CanvasRendering
     const veil = 1 - ease(o / 0.62);
     if (veil > 0.01) {
       const dg = ctx.createLinearGradient(0, yt, 0, yb);
-      dg.addColorStop(0, "rgba(176,255,5," + veil + ")");
-      dg.addColorStop(0.48, "rgba(0,242,255," + veil + ")");
-      dg.addColorStop(1, "rgba(106,77,255," + veil + ")");
+      dg.addColorStop(0, "rgba(" + C3 + "," + veil + ")");
+      dg.addColorStop(0.48, "rgba(" + C2 + "," + veil + ")");
+      dg.addColorStop(1, "rgba(" + DEEP + "," + veil + ")");
       ctx.fillStyle = dg;
       ctx.fillRect(cx - hw, yt, hw * 2, yb - yt);
       const core = ctx.createLinearGradient(cx - hw, 0, cx + hw, 0);
@@ -402,9 +413,9 @@ function runDoor(stage: HTMLElement, cv: HTMLCanvasElement, ctx: CanvasRendering
     const wl = 1 - ease((o - 0.5) / 0.5);
     if (wl > 0.01) {
       const gl = ctx.createRadialGradient(cx, yb - dh * 0.5, hw * 0.6, cx, yb - dh * 0.5, hw + dh * 1.1);
-      gl.addColorStop(0, "rgba(0,242,255," + 0.22 * wl + ")");
-      gl.addColorStop(0.5, "rgba(85,51,235," + 0.14 * wl + ")");
-      gl.addColorStop(1, "rgba(85,51,235,0)");
+      gl.addColorStop(0, "rgba(" + C2 + "," + 0.22 * wl + ")");
+      gl.addColorStop(0.5, "rgba(" + C1 + "," + 0.14 * wl + ")");
+      gl.addColorStop(1, "rgba(" + C1 + ",0)");
       ctx.save();
       ctx.beginPath();
       ctx.rect(0, 0, W, yb);
@@ -415,9 +426,9 @@ function runDoor(stage: HTMLElement, cv: HTMLCanvasElement, ctx: CanvasRendering
       ctx.restore();
     }
     const eg = ctx.createLinearGradient(0, Math.max(0, yt), 0, yb);
-    eg.addColorStop(0, "#b0ff05");
-    eg.addColorStop(0.5, "#00f2ff");
-    eg.addColorStop(1, "#6a4dff");
+    eg.addColorStop(0, "rgb(" + C3 + ")");
+    eg.addColorStop(0.5, "rgb(" + C2 + ")");
+    eg.addColorStop(1, "rgb(" + DEEP + ")");
     ctx.strokeStyle = eg;
     ctx.lineWidth = 2;
     ctx.globalAlpha = 0.9;
@@ -434,9 +445,9 @@ function runDoor(stage: HTMLElement, cv: HTMLCanvasElement, ctx: CanvasRendering
     ctx.fillRect(0, yb, W, H - yb);
     const spread = (H - yb) * 1.5 + hw * 0.5;
     const fl = ctx.createLinearGradient(0, yb, 0, H);
-    fl.addColorStop(0, "rgba(120,255,220," + mix(0.6, 0.3, eo) + ")");
-    fl.addColorStop(0.4, "rgba(0,242,255," + mix(0.24, 0.12, eo) + ")");
-    fl.addColorStop(1, "rgba(85,51,235,0)");
+    fl.addColorStop(0, "rgba(" + FLOOR + "," + mix(0.6, 0.3, eo) + ")");
+    fl.addColorStop(0.4, "rgba(" + C2 + "," + mix(0.24, 0.12, eo) + ")");
+    fl.addColorStop(1, "rgba(" + C1 + ",0)");
     ctx.fillStyle = fl;
     ctx.beginPath();
     ctx.moveTo(cx - hw, yb);

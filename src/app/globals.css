@@ -64,6 +64,15 @@
  * .theme-africa; everything below follows from these variables.
  */
 :root:has(.theme-africa) {
+  /* The opening's door (OpenDoor): "r g b" for the drawing, plus the text and button colours. */
+  --door-c1: 47 143 67;
+  --door-c2: 109 194 75;
+  --door-c3: 201 205 53;
+  --door-deep: 63 163 77;
+  --door-floor: 170 225 120;
+  --door-accent: #9ED23A;
+  --door-button: #9ED23A;
+  --door-text-grad: linear-gradient(90deg, #5BB44F 0%, #8FC93F 52%, #C9CD35 100%);
   --brand: #2F8F43;
   --brand-rgb: 47 143 67;
   --brand-soft: #BFE3B4;
