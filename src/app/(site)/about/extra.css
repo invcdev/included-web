@@ -5,3 +5,19 @@
 .pg-about .eyebrow.ab-lilac{color:#cfd5ff}
 .pg-about .orb .head .lede.orb-lede{margin:0;max-width:420px}
 .pg-about .ab-test .btn.ab-voices-btn{margin-top:6px}
+/* Our values on phones and tablets. The original styles put the one-column rule before the
+   two-column one, so the two columns won and squeezed the text; restated here, after them.
+   The four values become a 2x2 grid of buttons under the star: around its points they run off a phone. */
+@media(max-width:900px){
+  .pg-about .spark .sg{grid-template-columns:minmax(0,1fr);gap:30px}
+  .pg-about .spark h2{max-width:none}
+  .pg-about .spark .star{aspect-ratio:auto;max-width:440px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .pg-about .spark .star svg{position:relative;inset:auto;grid-column:1/-1;justify-self:center;width:min(100%,300px);height:auto;aspect-ratio:1;margin-bottom:6px}
+  .pg-about .spark .tip.n,.pg-about .spark .tip.s,.pg-about .spark .tip.e,.pg-about .spark .tip.w{position:static;transform:none;width:100%;min-width:0;justify-self:stretch;font-size:14.5px;padding:9px 14px 9px 9px}
+  .pg-about .spark .tip.n.on,.pg-about .spark .tip.s.on,.pg-about .spark .tip.e.on,.pg-about .spark .tip.w.on{transform:none}
+}
+/* The network numbers: two across on phones (the original phone rule came before the four-across one). */
+@media(max-width:900px){
+  html body .pg-about .ab-band .abmetin .grid{grid-template-columns:1fr 1fr;gap:16px 18px}
+  html body .pg-about .ab-band .abmetin .m b{font-size:28px}
+}
