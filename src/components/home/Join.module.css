@@ -342,4 +342,21 @@
     width: 100%;
     justify-content: center;
   }
+  /* Two lines on phones: the four short ways to pay, then the Africa one. */
+  .payments {
+    gap: 8px 6px;
+  }
+  .payment {
+    height: 36px;
+    padding: 0 8px;
+    font-size: clamp(11.5px, 3.4vw, 13.5px);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 345px) {
+  .payment {
+    padding: 0 7px;
+    font-size: 11px;
+  }
 }
