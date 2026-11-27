@@ -8,3 +8,8 @@
 /* Photos in full colour (the original design showed them in black and white). */
 .pg-instructors .nw .card .pic img,
 .pg-instructors .nw .row .nm .av img{filter:none}
+/* Crop portraits nearer the top so heads aren't cut off (the photos are tall, the frames square). */
+.pg-instructors .nw .card .pic img,
+.pg-instructors .nw .row .nm .av img{object-position:50% 18%}
+/* The card's gradient top edge as a background strip: border-image ignores rounded corners, which left them looking cut. */
+.pg-instructors .nw .card{border-image:none;border:1px solid var(--line);border-radius:0 0 22px 22px;background:var(--grad) top/100% 5px no-repeat,#fff;padding-top:27px}

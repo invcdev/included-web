@@ -47,7 +47,7 @@ const AFRICA: { key: SectionKey; label: string; description: string }[] = [
   { key: "africaMonth", label: "A month in Ascend", description: "The four example weeks (in GMT)." },
   { key: "africaTuesdays", label: "Your Tuesdays", description: "Wording of the local-time panel. The ten cities are African cities." },
   { key: "africaSessions", label: "Six Thursday sessions", description: "The Africa-only sessions." },
-  { key: "africaFaculty", label: "Faculty", description: "The Africa faculty. They also appear on the Ascend landing page, after the global faculty." },
+  { key: "africaFaculty", label: "Faculty", description: "The Africa faculty. They also appear on the Ascend landing page and the Instructors & Mentors page, after the global faculty." },
   { key: "africaBuilt", label: "Why this track exists", description: "The four reasons." },
   { key: "africaCountries", label: "Countries", description: "The 54 flags of the flag sphere." },
   { key: "africaTicket", label: "What you get", description: "The ticket, opened on the Africa track." },
